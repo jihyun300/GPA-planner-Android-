@@ -32,7 +32,7 @@ import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.ExpandableListView.OnChildClickListener;
 
 public class MainActivity extends FragmentActivity implements
-		ActionBar.TabListener {
+	ActionBar.TabListener {
 
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	ViewPager mViewPager;
