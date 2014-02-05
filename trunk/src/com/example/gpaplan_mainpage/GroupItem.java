@@ -2,7 +2,6 @@ package com.example.gpaplan_mainpage;
 
 import java.util.*;
 
-
 public class GroupItem {
 	public String group_label ;
 	public List<ChildItem> items;
