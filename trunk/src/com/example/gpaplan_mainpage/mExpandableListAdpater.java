@@ -22,6 +22,9 @@ public class mExpandableListAdpater extends BaseExpandableListAdapter{
 		this.mContext=context;
 		this.mListView=ListView;
 		this.mlist= list;
+		
+		
+		
 	}
 	public void addItem(ChildItem citem, GroupItem gitem){
 		mlist.add(gitem);
