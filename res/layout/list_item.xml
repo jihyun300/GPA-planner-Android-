@@ -1,0 +1,43 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/list_selector" >
+
+    <TextView
+        android:id="@+id/list_item_label"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="7dp"
+        android:layout_alignParentTop="true"
+        android:text="AA"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/list_item_major"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textSize="8sp"
+        android:layout_toRightOf="@+id/list_item_label"
+        android:text="전공" />
+
+    <TextView
+        android:id="@+id/list_item_subjectname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/list_item_label"
+        android:layout_alignLeft="@+id/list_item_major"
+        android:text="디지털이미지" />
+
+    <TextView
+        android:id="@+id/list_item_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="14dp"
+        android:text="3.4"
+        android:textSize="21sp" />
+
+</RelativeLayout>

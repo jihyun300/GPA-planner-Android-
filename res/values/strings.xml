@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Tab_viewPagerTest</string>
+    <string name="action_settings">설정</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="action_add">Add</string>
+    <string name="title_activity_subjetct_add">SubjetctAddActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_tutorial">튜토리얼</string>
+    <string name="action_sns">SNS내보내기</string>
+
+</resources>

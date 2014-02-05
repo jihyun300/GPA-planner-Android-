@@ -1,0 +1,27 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+	<!-- 과목 추가 ADD ITEM -->
+	<item 
+	    android:id ="@+id/action_subject_add"
+	    android:icon="@drawable/add_button"
+	    android:title ="@string/action_add"
+		android:showAsAction = "ifRoom"/>
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+    	android:icon="@drawable/toggle"
+        android:title="@string/action_settings"/>
+    <item  
+        android:id="@+id/action_tutorial"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_tutorial"/>
+    <item
+        android:id="@+id/action_sns"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_sns"/>
+    
+    
+
+</menu>
