@@ -10,9 +10,6 @@ public class ChildItem {
 		this.subjectname = subjectname;
 		this.major 	= major;
 		this.score =score;
-		
-		
-		if(true){}
 	}
 	public String getScore_en() {
 		return score_en;

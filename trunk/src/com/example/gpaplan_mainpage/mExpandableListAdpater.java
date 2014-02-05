@@ -22,7 +22,7 @@ public class mExpandableListAdpater extends BaseExpandableListAdapter{
 		this.mContext=context;
 		this.mListView=ListView;
 		this.mlist= list;
-		
+		//dddddddd
 		
 		
 	}
