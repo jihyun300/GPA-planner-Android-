@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+   <EditText
+       android:id="@+id/textYear"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignBottom="@+id/textSemester"
+       android:ems="5" >
+
+     <requestFocus/>
+     </EditText>
+
+ <TextView
+    android:id="@+id/word_semester"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentTop="true"
+    android:ems="5"
+    android:text="학기" />
+
+<EditText
+    android:id="@+id/textSemester"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_toLeftOf="@+id/word_semester"
+    android:ems="5" />
+
+<TextView
+    android:id="@+id/word_year"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_toRightOf="@+id/textYear"
+    android:ems="5"
+    android:text="학년" />
+
+
+<!--  <TextView
+        android:id="@+id/textYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="3" />  -->
+
+<!-- <TextView
+    android:id="@+id/textSemester"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_toLeftOf="@+id/Semester"
+    android:ems="3" /> -->
+
+<EditText
+    android:id="@+id/textClass"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/textYear"
+    android:ems="10" />
+
+<ToggleButton
+    android:id="@+id/button_major"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/textSemester"
+    android:layout_toRightOf="@+id/textClass"
+    android:textOn="전공"
+    android:textOff="교양" />
+
+</RelativeLayout>

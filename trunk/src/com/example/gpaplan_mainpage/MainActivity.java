@@ -110,7 +110,7 @@ public class MainActivity extends FragmentActivity implements
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
 		if (item.getItemId() == R.id.action_subject_add) {
-			Intent intent = new Intent(this, SubjetctAddActivity.class);
+			Intent intent = new Intent(this, DisplayAddActivity.class);
 			startActivity(intent);
 			return true;
 		} else {
