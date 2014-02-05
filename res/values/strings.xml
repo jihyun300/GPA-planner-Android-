@@ -11,5 +11,9 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_tutorial">튜토리얼</string>
     <string name="action_sns">SNS내보내기</string>
+    <string name="text_grade">학년</string>
+    <string name="text_semester">학기</string>
+    <string name="text_addButton">추가</string>
+    <string name="hint_all">몇</string>
 
 </resources>
