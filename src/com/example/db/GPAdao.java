@@ -3,7 +3,7 @@ package com.example.db;
  * created by doyoon
  * GPAdao.java 파일과 같음
  * 
- * update delete 구현 안됨
+ * update delete 구현 안됨  (Tab뷰와 연결되야함)
  */
 import java.util.ArrayList;
 import java.util.List;
