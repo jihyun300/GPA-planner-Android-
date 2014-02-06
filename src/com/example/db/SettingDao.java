@@ -1,5 +1,5 @@
 package com.example.db;
 
-public class Settingdto {
+public class SettingDao {
 
 }

@@ -5,7 +5,7 @@ package com.example.db;
  * Settingdto 는 따로 만들어야함
  */
 
-public class GPAdto {
+public class GPADto {
 	private int id; // auto increment id
 	private int year; // 학년
 	private int semester; // 학기
@@ -14,11 +14,11 @@ public class GPAdto {
 	private String major; // 전공 교양 ///// 전공이면 true 교양이면 false
 	private String subject; // 과목명
 
-	public GPAdto() {
+	public GPADto() {
 		super();
 	}
 
-	public GPAdto(int id, int year, int semester, int credit, String grade,
+	public GPADto(int id, int year, int semester, int credit, String grade,
 			String major, String subject) {
 		super();
 		this.id = id;
@@ -30,7 +30,7 @@ public class GPAdto {
 		this.subject = subject;
 	}
 
-	public GPAdto(int year, int semester, int credit, String grade,
+	public GPADto(int year, int semester, int credit, String grade,
 			String major, String subject) {
 		super();
 		this.year = year;
