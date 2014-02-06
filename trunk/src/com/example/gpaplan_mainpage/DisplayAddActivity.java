@@ -26,6 +26,7 @@ import android.widget.ToggleButton;
 
 public class DisplayAddActivity extends Activity implements OnClickListener{
 
+	
 	private final int DYNAMIC_VIEW_ID=0xf8000;
 	private LinearLayout dynamicLayout;
 	private int num=0;
