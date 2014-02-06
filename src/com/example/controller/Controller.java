@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.service.GPAService;
 import com.example.service.SettingService;
 
+
 /*
  * created by doyoon
  * GPAservice 의 로직 Settingservice의 로직을 받아와서 액티비티에 뿌림
