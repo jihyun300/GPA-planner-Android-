@@ -1,5 +1,10 @@
 package com.example.service;
 
-public class SettingService {
+import android.content.Context;
 
+public class SettingService {
+	//생성자
+	public SettingService(Context context){
+		
+	}
 }
