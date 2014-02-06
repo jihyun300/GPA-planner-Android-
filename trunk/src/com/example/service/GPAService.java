@@ -13,7 +13,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 //dao에서 받아온 것들로 서비스로직 구현
-public class GPAservice {
+public class GPAService {
 
 	public GPAdao gpaDao;
 	// public MySetting settingDao; //만들어야함
@@ -24,7 +24,7 @@ public class GPAservice {
 	// public MySettingdbHelper settingDBhelper;
 	// public SQLiteDatabase settingDB;
 
-	public GPAservice(Context context) {
+	public GPAService(Context context) {
 		gpaDao = new GPAdao(context);
 		gpaDBhelper = gpaDao.dbHelper;
 		gpaDB = gpaDao.db;
