@@ -8,7 +8,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class GPAdbHelper extends SQLiteOpenHelper {
+public class GPADbHelper extends SQLiteOpenHelper {
 
 	public static final String TABLE_NAME = "gpa_table";
 
@@ -20,12 +20,12 @@ public class GPAdbHelper extends SQLiteOpenHelper {
 	public static final String COL_MAJOR = "major";
 	public static final String COL_SUBJECT = "subject";
 
-	private static final String DATABASE_CREATE = GPAdbHelper
+	private static final String DATABASE_CREATE = GPADbHelper
 			.dataBaseCreateSQL();
 
 	private static final String DATABASE_NAME = "gpa.db";
 
-	public GPAdbHelper(Context context) {
+	public GPADbHelper(Context context) {
 		super(context, DATABASE_NAME, null, 1);
 		// TODO Auto-generated constructor stub
 	}

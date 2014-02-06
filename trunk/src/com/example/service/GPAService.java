@@ -6,26 +6,26 @@ package com.example.service;
  * Ex) 1-1학기 정보를 빼내서(select query)  1-1학기 평점을 구한다
  */
 import java.util.*;
-import com.example.db.GPAdao;
-import com.example.db.GPAdbHelper;
-import com.example.db.GPAdto;
+import com.example.db.GPADao;
+import com.example.db.GPADbHelper;
+import com.example.db.GPADto;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 //dao에서 받아온 것들로 서비스로직 구현
 public class GPAService {
 
-	public GPAdao gpaDao;
+	public GPADao gpaDao;
 	// public MySetting settingDao; //만들어야함
 
-	public GPAdbHelper gpaDBhelper;
+	public GPADbHelper gpaDBhelper;
 	public SQLiteDatabase gpaDB;
 
 	// public MySettingdbHelper settingDBhelper;
 	// public SQLiteDatabase settingDB;
 
 	public GPAService(Context context) {
-		gpaDao = new GPAdao(context);
+		gpaDao = new GPADao(context);
 		gpaDBhelper = gpaDao.dbHelper;
 		gpaDB = gpaDao.db;
 
@@ -34,47 +34,47 @@ public class GPAService {
 	// dao 여기서부터 정보빼오기
 
 	// DB에서 전부 빼오기
-	public List<GPAdto> getAllList() {
+	public List<GPADto> getAllList() {
 		return gpaDao.getAllList();
 	}
 
 	// 1-1 성적 빼오기
-	public List<GPAdto> getList_1_1() {
+	public List<GPADto> getList_1_1() {
 		return gpaDao.getList_1_1();
 	}
 
 	// 1-2 성적 빼오기
-	public List<GPAdto> getList_1_2() {
+	public List<GPADto> getList_1_2() {
 		return gpaDao.getList_1_2();
 	}
 
 	// 2-1 성적 빼오기
-	public List<GPAdto> getList_2_1() {
+	public List<GPADto> getList_2_1() {
 		return gpaDao.getList_2_1();
 	}
 
 	// 2-2 성적 빼오기
-	public List<GPAdto> getList_2_2() {
+	public List<GPADto> getList_2_2() {
 		return gpaDao.getList_2_2();
 	}
 
 	// 3-1 성적 빼오기
-	public List<GPAdto> getList_3_1() {
+	public List<GPADto> getList_3_1() {
 		return gpaDao.getList_3_1();
 	}
 
 	// 3-2 성적 빼오기
-	public List<GPAdto> getList_3_2() {
+	public List<GPADto> getList_3_2() {
 		return gpaDao.getList_3_2();
 	}
 
 	// 4-1 성적 빼오기
-	public List<GPAdto> getList_4_1() {
+	public List<GPADto> getList_4_1() {
 		return gpaDao.getList_4_1();
 	}
 
 	// 4-2 성적 빼오기
-	public List<GPAdto> getList_4_2() {
+	public List<GPADto> getList_4_2() {
 		return gpaDao.getList_4_2();
 	}
 
@@ -91,7 +91,7 @@ public class GPAService {
 	/* 1-1학기 */
 	// 이 메소드는 1-1학기의 전체 평점을 구하자...
 	public float getGPA_1_1() {
-		List<GPAdto> dtoList = getList_1_1();
+		List<GPADto> dtoList = getList_1_1();
 		int dtoListSize = dtoList.size();
 		float gpaScore_1_1 = 0f;
 		int totalCredit_1_1 = 0;
@@ -107,8 +107,8 @@ public class GPAService {
 
 	// 이 메소드는 1-1학기의 전공 평점을 구하자 문제점:전공 교양의 구분을 어떻게 할지 true false or String
 	public float getMajorGPA_1_1() {
-		List<GPAdto> dtoList = getList_1_1();
-		List<GPAdto> newList = new ArrayList<GPAdto>();
+		List<GPADto> dtoList = getList_1_1();
+		List<GPADto> newList = new ArrayList<GPADto>();
 
 		int dtoListSize = dtoList.size();
 		int majorNum_1_1 = 0;
@@ -136,8 +136,8 @@ public class GPAService {
 
 	// 1-1 교양 학점 구하기 메소드
 	public float getLiberalArt_1_1() {
-		List<GPAdto> dtoList = getList_1_1();
-		List<GPAdto> newList = new ArrayList<GPAdto>();
+		List<GPADto> dtoList = getList_1_1();
+		List<GPADto> newList = new ArrayList<GPADto>();
 
 		int dtoListSize = dtoList.size();
 		int majorNum_1_1 = 0;
@@ -166,7 +166,7 @@ public class GPAService {
 	/* 1-2학기 */
 	// 이 메소드는 1-2학기의 전체 평점을 구하자...
 	public float getGPA_1_2() {
-		List<GPAdto> dtoList = getList_1_2();
+		List<GPADto> dtoList = getList_1_2();
 		int dtoListSize = dtoList.size();
 		float gpaScore_1_2 = 0f;
 		int totalCredit_1_2 = 0;
@@ -182,8 +182,8 @@ public class GPAService {
 
 	// 이 메소드는 1-1학기의 전공 평점을 구하자 문제점:전공 교양의 구분을 어떻게 할지 true false or String
 	public float getMajorGPA_1_2() {
-		List<GPAdto> dtoList = getList_1_2();
-		List<GPAdto> newList = new ArrayList<GPAdto>();
+		List<GPADto> dtoList = getList_1_2();
+		List<GPADto> newList = new ArrayList<GPADto>();
 
 		int dtoListSize = dtoList.size();
 		int majorNum_1_2 = 0;
@@ -211,8 +211,8 @@ public class GPAService {
 
 	// 1-2 교양 학점 구하기 메소드
 	public float getLiberalArt_1_2() {
-		List<GPAdto> dtoList = getList_1_2();
-		List<GPAdto> newList = new ArrayList<GPAdto>();
+		List<GPADto> dtoList = getList_1_2();
+		List<GPADto> newList = new ArrayList<GPADto>();
 
 		int dtoListSize = dtoList.size();
 		int majorNum_1_2 = 0;
@@ -241,7 +241,7 @@ public class GPAService {
 	// 2-1학기
 	// 이 메소드는 2-1학기의 전체 평점을 구하자...
 	public float getGPA_2_1() {
-		List<GPAdto> dtoList = getList_2_1();
+		List<GPADto> dtoList = getList_2_1();
 		int dtoListSize = dtoList.size();
 		float gpaScore_2_1 = 0f;
 		int totalCredit_2_1 = 0;
@@ -257,8 +257,8 @@ public class GPAService {
 
 	// 이 메소드는 2-1학기의 전공 평점을 구하자 문제점:전공 교양의 구분을 어떻게 할지 true false or String
 	public float getMajorGPA_2_1() {
-		List<GPAdto> dtoList = getList_2_1();
-		List<GPAdto> newList = new ArrayList<GPAdto>();
+		List<GPADto> dtoList = getList_2_1();
+		List<GPADto> newList = new ArrayList<GPADto>();
 
 		int dtoListSize = dtoList.size();
 		int majorNum_2_1 = 0;
@@ -286,8 +286,8 @@ public class GPAService {
 
 	// 2-1 교양 학점 구하기 메소드
 	public float getLiberalArt_2_1() {
-		List<GPAdto> dtoList = getList_2_1();
-		List<GPAdto> newList = new ArrayList<GPAdto>();
+		List<GPADto> dtoList = getList_2_1();
+		List<GPADto> newList = new ArrayList<GPADto>();
 
 		int dtoListSize = dtoList.size();
 		int majorNum_2_1 = 0;
@@ -316,7 +316,7 @@ public class GPAService {
 	// 2-2학기
 	// 이 메소드는 2-2학기의 전체 평점을 구하자...
 	public float getGPA_2_2() {
-		List<GPAdto> dtoList = getList_2_2();
+		List<GPADto> dtoList = getList_2_2();
 		int dtoListSize = dtoList.size();
 		float gpaScore_2_2 = 0f;
 		int totalCredit_2_2 = 0;
@@ -332,8 +332,8 @@ public class GPAService {
 
 	// 이 메소드는 2-1학기의 전공 평점을 구하자 문제점:전공 교양의 구분을 어떻게 할지 true false or String
 	public float getMajorGPA_2_2() {
-		List<GPAdto> dtoList = getList_2_2();
-		List<GPAdto> newList = new ArrayList<GPAdto>();
+		List<GPADto> dtoList = getList_2_2();
+		List<GPADto> newList = new ArrayList<GPADto>();
 
 		int dtoListSize = dtoList.size();
 		int majorNum_2_2 = 0;
@@ -361,8 +361,8 @@ public class GPAService {
 
 	// 2-2 교양 학점 구하기 메소드
 	public float getLiberalArt_2_2() {
-		List<GPAdto> dtoList = getList_2_2();
-		List<GPAdto> newList = new ArrayList<GPAdto>();
+		List<GPADto> dtoList = getList_2_2();
+		List<GPADto> newList = new ArrayList<GPADto>();
 
 		int dtoListSize = dtoList.size();
 		int majorNum_2_2 = 0;
@@ -391,7 +391,7 @@ public class GPAService {
 	// 3-1학기
 	// 이 메소드는 3-1학기의 전체 평점을 구하자...
 	public float getGPA_3_1() {
-		List<GPAdto> dtoList = getList_3_1();
+		List<GPADto> dtoList = getList_3_1();
 		int dtoListSize = dtoList.size();
 		float gpaScore_3_1 = 0f;
 		int totalCredit_3_1 = 0;
@@ -407,8 +407,8 @@ public class GPAService {
 
 	// 이 메소드는 3-1학기의 전공 평점을 구하자 문제점:전공 교양의 구분을 어떻게 할지 true false or String
 	public float getMajorGPA_3_1() {
-		List<GPAdto> dtoList = getList_3_1();
-		List<GPAdto> newList = new ArrayList<GPAdto>();
+		List<GPADto> dtoList = getList_3_1();
+		List<GPADto> newList = new ArrayList<GPADto>();
 
 		int dtoListSize = dtoList.size();
 		int majorNum_3_1 = 0;
@@ -436,8 +436,8 @@ public class GPAService {
 
 	// 3-1 교양 학점 구하기 메소드
 	public float getLiberalArt_3_1() {
-		List<GPAdto> dtoList = getList_3_1();
-		List<GPAdto> newList = new ArrayList<GPAdto>();
+		List<GPADto> dtoList = getList_3_1();
+		List<GPADto> newList = new ArrayList<GPADto>();
 
 		int dtoListSize = dtoList.size();
 		int majorNum_3_1 = 0;
@@ -466,7 +466,7 @@ public class GPAService {
 	// 3-2학기
 	// 이 메소드는 3-2학기의 전체 평점을 구하자...
 	public float getGPA_3_2() {
-		List<GPAdto> dtoList = getList_3_2();
+		List<GPADto> dtoList = getList_3_2();
 		int dtoListSize = dtoList.size();
 		float gpaScore_3_2 = 0f;
 		int totalCredit_3_2 = 0;
@@ -482,8 +482,8 @@ public class GPAService {
 
 	// 이 메소드는 3-2학기의 전공 평점을 구하자 문제점:전공 교양의 구분을 어떻게 할지 true false or String
 	public float getMajorGPA_3_2() {
-		List<GPAdto> dtoList = getList_3_2();
-		List<GPAdto> newList = new ArrayList<GPAdto>();
+		List<GPADto> dtoList = getList_3_2();
+		List<GPADto> newList = new ArrayList<GPADto>();
 
 		int dtoListSize = dtoList.size();
 		int majorNum_3_2 = 0;
@@ -511,8 +511,8 @@ public class GPAService {
 
 	// 3-2 교양 학점 구하기 메소드
 	public float getLiberalArt_3_2() {
-		List<GPAdto> dtoList = getList_3_2();
-		List<GPAdto> newList = new ArrayList<GPAdto>();
+		List<GPADto> dtoList = getList_3_2();
+		List<GPADto> newList = new ArrayList<GPADto>();
 
 		int dtoListSize = dtoList.size();
 		int majorNum_3_2 = 0;
@@ -541,7 +541,7 @@ public class GPAService {
 	// 4-1학기
 	// 이 메소드는 4-1학기의 전체 평점을 구하자...
 	public float getGPA_4_1() {
-		List<GPAdto> dtoList = getList_4_1();
+		List<GPADto> dtoList = getList_4_1();
 		int dtoListSize = dtoList.size();
 		float gpaScore_4_1 = 0f;
 		int totalCredit_4_1 = 0;
@@ -557,8 +557,8 @@ public class GPAService {
 
 	// 이 메소드는 4-1학기의 전공 평점을 구하자 문제점:전공 교양의 구분을 어떻게 할지 true false or String
 	public float getMajorGPA_4_1() {
-		List<GPAdto> dtoList = getList_4_1();
-		List<GPAdto> newList = new ArrayList<GPAdto>();
+		List<GPADto> dtoList = getList_4_1();
+		List<GPADto> newList = new ArrayList<GPADto>();
 
 		int dtoListSize = dtoList.size();
 		int majorNum_4_1 = 0;
@@ -586,8 +586,8 @@ public class GPAService {
 
 	// 4-1 교양 학점 구하기 메소드
 	public float getLiberalArt_4_1() {
-		List<GPAdto> dtoList = getList_4_1();
-		List<GPAdto> newList = new ArrayList<GPAdto>();
+		List<GPADto> dtoList = getList_4_1();
+		List<GPADto> newList = new ArrayList<GPADto>();
 
 		int dtoListSize = dtoList.size();
 		int majorNum_4_1 = 0;
@@ -616,7 +616,7 @@ public class GPAService {
 	// 4-1학기
 	// 이 메소드는 4-1학기의 전체 평점을 구하자...
 	public float getGPA_4_2() {
-		List<GPAdto> dtoList = getList_4_2();
+		List<GPADto> dtoList = getList_4_2();
 		int dtoListSize = dtoList.size();
 		float gpaScore_4_2 = 0f;
 		int totalCredit_4_2 = 0;
@@ -632,8 +632,8 @@ public class GPAService {
 
 	// 이 메소드는 4-1학기의 전공 평점을 구하자 문제점:전공 교양의 구분을 어떻게 할지 true false or String
 	public float getMajorGPA_4_2() {
-		List<GPAdto> dtoList = getList_4_2();
-		List<GPAdto> newList = new ArrayList<GPAdto>();
+		List<GPADto> dtoList = getList_4_2();
+		List<GPADto> newList = new ArrayList<GPADto>();
 
 		int dtoListSize = dtoList.size();
 		int majorNum_4_2 = 0;
@@ -661,8 +661,8 @@ public class GPAService {
 
 	// 4-2 교양 학점 구하기 메소드
 	public float getLiberalArt_4_2() {
-		List<GPAdto> dtoList = getList_4_2();
-		List<GPAdto> newList = new ArrayList<GPAdto>();
+		List<GPADto> dtoList = getList_4_2();
+		List<GPADto> newList = new ArrayList<GPADto>();
 
 		int dtoListSize = dtoList.size();
 		int majorNum_4_2 = 0;
