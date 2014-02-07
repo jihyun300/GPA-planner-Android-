@@ -16,23 +16,34 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class DisplayAddActivity extends Activity implements OnClickListener{
-
 	
-	private final int DYNAMIC_VIEW_ID=0xf8000;
 	private LinearLayout dynamicLayout;
-	private int num=0;
+
+	private String[] spinCategory_Year={"1","2","3","4"};
+	private String[] spinCategory_Semester={"1","2","여름","겨울"}; 
 	
 	
 	MyAdpater adap;
+	
+	Spinner spinYear;
+	Spinner spinSemester;
+	TextView selVersionYear;
+	TextView selVersionSemester;
+	
 	ArrayList<Class_info> classInfo;
 	public ListView listview;
 
@@ -46,36 +57,70 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 	
 		dynamicLayout=(LinearLayout)findViewById(R.id.dynamicArea);
 		
-/*		DBManager dManager=new DBManager(this,"myMember.db",null,1);
-		
-		SQLiteDatabase db=dManager.getWritableDatabase();*/
-		
-/*		findViewById(R.id.addButton).setOnClickListener(this);
-		findViewById(R.id.delButton).setOnClickListener(this);
-*/
-		//�߰���ư �κ�
+
 		  View footView = getLayoutInflater().inflate(R.layout.button_view, null);
 		     footView.findViewById(R.id.addButton).setOnClickListener(this);
 		     footView.findViewById(R.id.delButton).setOnClickListener(this);
 		
 		classInfo = new ArrayList<Class_info>();
 		adap = new MyAdpater(this,classInfo);
-
 		
 		listview = (ListView) findViewById(R.id.listview1);
 	   
-	    
 	    listview.addFooterView(footView);
 		listview.setAdapter(adap);
-		//�߰� ���� ����
-//		listview.setOnItemClickListener(mItemClickListener);
-		 
-//		Class_info cl1 = new Class_info("","");
-//		classInfo.add(cl1);
-//		addLayout(); //�ʱ��
+	
+		ArrayAdapter<String> adpSpin=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,spinCategory_Year);
+		ArrayAdapter<String> adpSpin_semester=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,spinCategory_Semester);
+		adpSpin.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		adpSpin.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		
-	}
+		 spinYear=(Spinner)findViewById(R.id.spinner_Year);
+		 spinSemester=(Spinner)findViewById(R.id.spinner_Semester);
+		
+		spinYear.setAdapter(adpSpin);
+		spinYear.setOnItemSelectedListener(new OnItemSelectedListener(){
 
+			@Override
+			public void onItemSelected(AdapterView<?> adapterView, View view,
+					int i, long l) {
+				// TODO Auto-generated method stub
+				spinYear.setSelection(i);
+				String selYear=(String)spinYear.getSelectedItem();
+//				selVersionYear.setText("Selected Android OS:"+selYear);
+				
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
+		
+		spinSemester.setAdapter(adpSpin_semester);
+		spinSemester.setOnItemSelectedListener(new OnItemSelectedListener(){
+		
+			@Override
+			public void onItemSelected(AdapterView<?> adapterView, View view,
+					int i, long l) {
+				// TODO Auto-generated method stub
+				spinSemester.setSelection(i);
+				String selSemster=(String)spinSemester.getSelectedItem();
+//				selVersionYear.setText("Selected Android OS:"+selYear);
+				
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+	});
+
+	}
 	/**
 	 * Set up the {@link android.app.ActionBar}.
 	 */
@@ -123,9 +168,7 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 	 */
 	public void addLayout(){		
 		
-/*		EditText editText1=(EditText)findViewById(R.id.editText1);
-		EditText editText2=(EditText)findViewById(R.id.editText2); */	
-		
+
 		EditText editText1=(EditText)findViewById(R.id.editYear);
 		EditText editText2=(EditText)findViewById(R.id.editSemester);
 		EditText editText3=(EditText)findViewById(R.id.editClass);
@@ -145,55 +188,7 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 	}
 
 	private void refresh(String inputValue1, String inputValue2,String inputValue3,boolean inputValue4) {
-		
-		//if(classInfo.size()>1){
-//			int firstPos=listview.getFirstVisiblePosition();
-		
-/*		for(int position=firstPos;position<=firstPos+classInfo.size()-1;position++){
-		View clickedView=(View)listview.getAdapter().getView(position,null,listview);
-
-		EditText edit1=(EditText)clickedView.findViewById(R.id.textYear);
-	
-
-		String edit1_changed=edit1.getText().toString();
-		Class_info cl2 = new Class_info(edit1_changed,"1");
-		//��̸���Ʈ ���� ����
-		classInfo.set(position, cl2);
-		}*/
-			//classInfo = new ArrayList<Class_info>();
-		/*	System.out.println(listview.getChildCount());
-			for(int position=0;position<classInfo.size()-1;position++){
-				System.out.println("i;m here");
-				View clickedView=(View)listview.getChildAt(position);
-				
-				System.out.println(position);
-				String edit1_changed="";
-				String edit2_changed="";
-				String edit3_changed="";
-				boolean edit4_changed=true;
-				if(null==clickedView)
-					Log.i("DEMO_TAG", position+"//"+classInfo.size());
-				EditText edit1=(EditText)clickedView.findViewById(R.id.textYear);
-				EditText edit2=(EditText)clickedView.findViewById(R.id.textSemester);
-				EditText edit3=(EditText)clickedView.findViewById(R.id.textClass);
-				ToggleButton edit4=(ToggleButton)clickedView.findViewById(R.id.button_major);
-
-				if(null!=edit1)
-					edit1_changed=edit1.getText().toString();
-				if(null!=edit2)
-					edit2_changed=edit2.getText().toString();
-				if(null!=edit3)
-					edit3_changed=edit3.getText().toString();
-				if(null!=edit4)
-				edit4_changed=edit4.isChecked();
-				Class_info cl2 = new Class_info(edit1_changed,edit2_changed,edit3_changed,edit4_changed);
-				//��̸���Ʈ ���� ����
-				classInfo.set(position,cl2);
-				
 			
-				}
-		//}
-*/		
 		// TODO Auto-generated method stub
 		Class_info cl1 = new Class_info(inputValue1,inputValue2,inputValue3,inputValue4);
 		this.classInfo.add(cl1);
@@ -216,19 +211,11 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 		}
 	}
 
-/*	AdapterView.OnItemClickListener mItemClickListener=new AdapterView.OnItemClickListener() {
-
-		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position,	long id) {
-			View clickedView=(View)listview.getAdapter().getItem(position);
-			EditText edit1=(EditText)clickedView.findViewById(R.id.textYear);
-	//		EditText edit1=(EditText)findViewById(R.id.editYear);
-			String edit1_changed=edit1.getText().toString();
-			Class_info cl1 = new Class_info(edit1_changed,"1");
-			//��̸���Ʈ ���� ����
-			classInfo.set(position, cl1);
-			// TODO Auto-generated method stub
-			
-		}
-	};*/
+/*	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		// TODO Auto-generated method stub
+		spinYear.setSelection(position);
+		String selYear=(String)spinYear.getSelectedItem();
+		selVersionYear.setText("Selected Android OS:"+selYear);
+	}*/
 }
