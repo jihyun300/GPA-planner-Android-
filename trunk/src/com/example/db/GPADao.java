@@ -40,7 +40,10 @@ public class GPADao {
 			System.out.println("SQL오류");
 			e.printStackTrace();
 		} finally {
-			db.close();
+			if (db != null) {
+				db.close();
+			}
+			dbHelper.close();
 		}
 
 		return dtoList;
@@ -64,7 +67,10 @@ public class GPADao {
 			System.out.println("SQL오류");
 			e.printStackTrace();
 		} finally {
-			db.close();
+			if (db != null) {
+				db.close();
+			}
+			dbHelper.close();
 		}
 
 		return dtoList;
@@ -88,7 +94,10 @@ public class GPADao {
 			System.out.println("SQL오류");
 			e.printStackTrace();
 		} finally {
-			db.close();
+			if (db != null) {
+				db.close();
+			}
+			dbHelper.close();
 		}
 
 		return dtoList;
@@ -112,7 +121,10 @@ public class GPADao {
 			System.out.println("SQL오류");
 			e.printStackTrace();
 		} finally {
-			db.close();
+			if (db != null) {
+				db.close();
+			}
+			dbHelper.close();
 		}
 
 		return dtoList;
@@ -136,7 +148,10 @@ public class GPADao {
 			System.out.println("SQL오류");
 			e.printStackTrace();
 		} finally {
-			db.close();
+			if (db != null) {
+				db.close();
+			}
+			dbHelper.close();
 		}
 
 		return dtoList;
@@ -160,7 +175,10 @@ public class GPADao {
 			System.out.println("SQL오류");
 			e.printStackTrace();
 		} finally {
-			db.close();
+			if (db != null) {
+				db.close();
+			}
+			dbHelper.close();
 		}
 
 		return dtoList;
@@ -184,7 +202,10 @@ public class GPADao {
 			System.out.println("SQL오류");
 			e.printStackTrace();
 		} finally {
-			db.close();
+			if (db != null) {
+				db.close();
+			}
+			dbHelper.close();
 		}
 
 		return dtoList;
@@ -208,7 +229,10 @@ public class GPADao {
 			System.out.println("SQL오류");
 			e.printStackTrace();
 		} finally {
-			db.close();
+			if (db != null) {
+				db.close();
+			}
+			dbHelper.close();
 		}
 
 		return dtoList;
@@ -232,7 +256,10 @@ public class GPADao {
 			System.out.println("SQL오류");
 			e.printStackTrace();
 		} finally {
-			db.close();
+			if (db != null) {
+				db.close();
+			}
+			dbHelper.close();
 		}
 
 		return dtoList;
@@ -250,7 +277,10 @@ public class GPADao {
 			System.out.println("SQL오류");
 			e.printStackTrace();
 		} finally {
-			db.close();
+			if (db != null) {
+				db.close();
+			}
+			dbHelper.close();
 		}
 	}
 
