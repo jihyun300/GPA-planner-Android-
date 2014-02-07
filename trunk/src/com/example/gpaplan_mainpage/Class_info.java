@@ -20,19 +20,21 @@ public class Class_info {
 		public void setYear(String year) {
 			this.year = year;
 		}
+		
 		public String getSemester() {
 			return semester;
 		}
 		public void setSemester(String semester) {
 			this.semester = semester;
 		}
+		
 		public String getClassName() {
 			return className;
 		}
-		
 		public void setClassName(String className) {
 			this.className = className;
 		}
+		
 		public boolean getMajorOrNot() {
 			return MajorOrNot;
 		}
