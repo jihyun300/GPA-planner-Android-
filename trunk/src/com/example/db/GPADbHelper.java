@@ -37,6 +37,10 @@ public class GPADbHelper extends SQLiteOpenHelper {
 		db.execSQL(DATABASE_CREATE);
 	}
 
+	public void close() {
+		super.close();
+	}
+
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// TODO Auto-generated method stub
