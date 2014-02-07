@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ToggleButton;
 
@@ -69,7 +70,7 @@ public class MyAdpater extends BaseAdapter {
 		edit_year.addTextChangedListener(new TextWacherImpl(ci, TextWacherImpl.YEAR));
 		edit_semester.addTextChangedListener(new TextWacherImpl(ci,TextWacherImpl.SEMASTER));
 		edit_class.addTextChangedListener(new TextWacherImpl(ci,TextWacherImpl.CLASS_NAME));
-		
+		edit_major.setOnCheckedChangeListener(new ButtonCheakImpl(ci));
 		
 		
 /*		TextView textYear = (TextView)convertView.findViewById(R.id.textYear);
@@ -116,14 +117,14 @@ public class MyAdpater extends BaseAdapter {
 				int count) {
 			switch (type) {
 			case YEAR:
-				System.out.println(ci.getYear());
 				ci.setYear(s.toString());
 				break;
 			case SEMASTER:
 				ci.setSemester(s.toString());
+				break;
 			case CLASS_NAME:
 				ci.setClassName(s.toString());
-			
+				break;
 			default:
 				break;
 			}
@@ -131,4 +132,20 @@ public class MyAdpater extends BaseAdapter {
 		
 	}
 
+	class ButtonCheakImpl implements CompoundButton.OnCheckedChangeListener{
+
+		Class_info ci;
+		
+		public ButtonCheakImpl(Class_info ci){
+			this.ci=ci;
+		}
+		
+		@Override
+		public void onCheckedChanged(CompoundButton buttonView,
+				boolean isChecked) {
+			// TODO Auto-generated method stub
+			ci.setMajorOrNot(isChecked);
+		}
+		
+	}
 }
