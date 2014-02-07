@@ -37,7 +37,7 @@ public class GPADbHelper extends SQLiteOpenHelper {
 		db.execSQL(DATABASE_CREATE);
 	}
 
-	public void close() {
+	public synchronized void close() {
 		super.close();
 	}
 
