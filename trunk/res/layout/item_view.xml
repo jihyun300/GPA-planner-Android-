@@ -1,73 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
-   <EditText
-       android:id="@+id/textYear"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_alignBottom="@+id/textSemester"
-       android:ems="5" >
-
-     <requestFocus/>
-     </EditText>
-
- <TextView
-    android:id="@+id/word_semester"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    >
+<RelativeLayout 
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentRight="true"
-    android:layout_alignParentTop="true"
-    android:ems="5"
-    android:text="학기" />
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal">
 
-<EditText
-    android:id="@+id/textSemester"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentTop="true"
-    android:layout_toLeftOf="@+id/word_semester"
-    android:ems="5" />
-
-<TextView
-    android:id="@+id/word_year"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentTop="true"
-    android:layout_toRightOf="@+id/textYear"
-    android:ems="5"
-    android:text="학년" />
-
-
-<!--  <TextView
-        android:id="@+id/textYear"
+  
+    <TextView
+        android:id="@+id/txtgrade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="3" />  -->
+        android:layout_alignLeft="@+id/editSubject"
+        android:layout_below="@+id/editSubject"
+        android:layout_marginTop="24dp"
+        android:text="성적" />
 
-<!-- <TextView
-    android:id="@+id/textSemester"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentTop="true"
-    android:layout_toLeftOf="@+id/Semester"
-    android:ems="3" /> -->
+    <EditText
+        android:id="@+id/editCredit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/editGrade"
+        android:layout_alignLeft="@+id/txtCredit"
+        android:ems="3" />
 
-<EditText
-    android:id="@+id/textClass"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/textYear"
-    android:ems="10" />
+    <EditText
+        android:id="@+id/editGrade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtgrade"
+        android:layout_below="@+id/txtgrade"
+        android:ems="3" >
+    </EditText>
 
-<ToggleButton
-    android:id="@+id/button_major"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/textSemester"
-    android:layout_toRightOf="@+id/textClass"
-    android:textOn="전공"
-    android:textOff="교양" />
+    <TextView
+        android:id="@+id/txtCredit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/editCredit"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/editGrade"
+        android:text="학점" />
+
+    <TextView
+        android:id="@+id/txtsubject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editSubject"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="18dp"
+        android:text="과목명" />
+
+    <Button
+        android:id="@+id/delButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/txtsubject"
+        android:layout_toRightOf="@+id/editSubject"
+        android:layout_weight="1"
+        android:text="삭제" />
+
+    <ToggleButton
+        android:id="@+id/button_MajorOr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/editCredit"
+        android:layout_alignRight="@+id/delButton"
+        android:layout_alignTop="@+id/editCredit"
+        android:layout_marginRight="18dp"
+        android:textOff="교양"
+        android:textOn="전공" />
+
+    <TextView
+        android:id="@+id/txtmajor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button_MajorOr"
+        android:layout_alignLeft="@+id/button_MajorOr"
+        android:text="이수" />
+
+    <EditText
+        android:id="@+id/editSubject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/txtsubject"
+        
+        android:ems="10">
+        <requestFocus /> 
+        </EditText>
 
 </RelativeLayout>
+</LinearLayout>

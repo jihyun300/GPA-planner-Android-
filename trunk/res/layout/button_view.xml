@@ -1,81 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal" >
+<LinearLayout android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        
+        android:text="@string/text_addButton" />
 
-		<EditText
-		    android:id="@+id/editSemester"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_alignLeft="@+id/delButton"
-		    android:layout_alignParentTop="true"
-		    android:ems="3" />
 
-		<EditText
-		    android:id="@+id/editYear"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_alignBottom="@+id/editSemester"
-		    android:layout_alignParentLeft="true"
-		    android:layout_alignParentTop="true"
-		    android:ems="3" />
-
-		<TextView
-		    android:id="@+id/buttonText_year"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_alignBaseline="@+id/editYear"
-		    android:layout_alignBottom="@+id/editYear"
-		    android:layout_toRightOf="@+id/editYear"
-		    android:text="학년" />
-
-		<TextView
-		    android:id="@+id/buttonText_semester"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_alignBaseline="@+id/editSemester"
-		    android:layout_alignBottom="@+id/editSemester"
-		    android:layout_toRightOf="@+id/editSemester"
-		    android:text="학기" />
-
-		<EditText
-		    android:id="@+id/editClass"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_alignParentLeft="true"
-		    android:layout_below="@+id/editYear"
-		    android:ems="10" >
-
-		    <requestFocus />
-		</EditText>
-
-		<ToggleButton
-		    android:id="@+id/button_MajorOr"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_below="@+id/editSemester"
-		    android:layout_toRightOf="@+id/buttonText_semester"
-		    android:textOn="전공"
-		    android:textOff="교양" />
-
-		<Button
-		    android:id="@+id/delButton"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_below="@+id/button_MajorOr"
-		    android:layout_centerHorizontal="true"
-		    android:layout_weight="1"
-		    android:text="삭제" />
-
-		<Button
-		    android:id="@+id/addButton"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_alignBaseline="@+id/delButton"
-		    android:layout_alignBottom="@+id/delButton"
-		    android:layout_toLeftOf="@+id/delButton"
-		    android:layout_weight="1"
-		    android:text="@string/text_addButton" />
-
-</RelativeLayout>
+</LinearLayout>
