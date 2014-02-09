@@ -51,27 +51,29 @@ public class MyAdpater extends BaseAdapter {
 		// TODO Auto-generated method stub
 		final int pos = position;	
 		//if(convertView == null){
-			convertView = inflater.inflate(R.layout.item_view,parent, false);
+			convertView = inflater.inflate(R.layout.item_view,null);
 		//}
-		
-		EditText edit_year = (EditText)convertView.findViewById(R.id.textYear);
-		EditText edit_semester = (EditText)convertView.findViewById(R.id.textSemester);
-		EditText edit_class=(EditText)convertView.findViewById(R.id.textClass);
-		ToggleButton edit_major=(ToggleButton)convertView.findViewById(R.id.button_major);
-		
-		Class_info ci = this.Class_info_array.get(position);
-		edit_year.setText(ci.getYear());
-		edit_semester.setText(ci.getSemester());
-		edit_class.setText(ci.getClassName());
-		
-		edit_major.setChecked(ci.getMajorOrNot());
-		
+	
+			EditText edit_Grade = (EditText)convertView.findViewById(R.id.editGrade);
+			EditText edit_Credit = (EditText)convertView.findViewById(R.id.editCredit);
+			EditText edit_Subject=(EditText)convertView.findViewById(R.id.editSubject);
+			ToggleButton edit_major=(ToggleButton)convertView.findViewById(R.id.button_MajorOr);
+			
+			Class_info ci = this.Class_info_array.get(position);
+			edit_Grade.setText(ci.getGrade());
+			edit_Credit.setText(ci.getCredit());
+			edit_Subject.setText(ci.getSubject());
+			
+			edit_major.setChecked(ci.isMajor());
+			
 
-		edit_year.addTextChangedListener(new TextWacherImpl(ci, TextWacherImpl.YEAR));
-		edit_semester.addTextChangedListener(new TextWacherImpl(ci,TextWacherImpl.SEMASTER));
-		edit_class.addTextChangedListener(new TextWacherImpl(ci,TextWacherImpl.CLASS_NAME));
-		edit_major.setOnCheckedChangeListener(new ButtonCheakImpl(ci));
-		
+			edit_Grade.addTextChangedListener(new TextWacherImpl(ci, TextWacherImpl.Grade));
+			edit_Credit.addTextChangedListener(new TextWacherImpl(ci,TextWacherImpl.Credit));
+			edit_Subject.addTextChangedListener(new TextWacherImpl(ci,TextWacherImpl.Subject));
+			edit_major.setOnCheckedChangeListener(new ButtonCheakImpl(ci));
+			
+			
+			
 		
 /*		TextView textYear = (TextView)convertView.findViewById(R.id.textYear);
 		TextView textSemester = (TextView)convertView.findViewById(R.id.textSemester);
@@ -90,9 +92,9 @@ public class MyAdpater extends BaseAdapter {
 		Class_info ci;
 		int type;
 		
-		static final int YEAR = 0;
-		static final int SEMASTER = 1;
-		static final int CLASS_NAME = 2;
+		static final int Grade = 0;
+		static final int Credit = 1;
+		static final int Subject = 2;
 		static final int MAJOR = 3;
 		
 		public TextWacherImpl(Class_info ci, int type){
@@ -116,14 +118,14 @@ public class MyAdpater extends BaseAdapter {
 		public void onTextChanged(CharSequence s, int start, int before,
 				int count) {
 			switch (type) {
-			case YEAR:
-				ci.setYear(s.toString());
+			case Grade:
+				ci.setGrade(s.toString());
 				break;
-			case SEMASTER:
-				ci.setSemester(s.toString());
+			case Credit:
+				ci.setCredit(s.toString());
 				break;
-			case CLASS_NAME:
-				ci.setClassName(s.toString());
+			case Subject:
+				ci.setSubject(s.toString());
 				break;
 			default:
 				break;
@@ -144,7 +146,7 @@ public class MyAdpater extends BaseAdapter {
 		public void onCheckedChanged(CompoundButton buttonView,
 				boolean isChecked) {
 			// TODO Auto-generated method stub
-			ci.setMajorOrNot(isChecked);
+			ci.setMajor(isChecked);
 		}
 		
 	}

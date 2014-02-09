@@ -235,7 +235,7 @@ public class MainActivity extends FragmentActivity implements
 						int groupPosition, int childPosition, long id) {
 					// TODO Auto-generated method stub
 					Intent intent = new Intent(getActivity(),
-							SubjetctAddActivity.class);
+						EditSubjectActivity.class);
 					startActivity(intent);
 					return false;
 				}

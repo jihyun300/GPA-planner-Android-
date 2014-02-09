@@ -58,18 +58,24 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 		dynamicLayout=(LinearLayout)findViewById(R.id.dynamicArea);
 		
 
-		  View footView = getLayoutInflater().inflate(R.layout.button_view, null);
+		View footView = getLayoutInflater().inflate(R.layout.button_view, null);
 		     footView.findViewById(R.id.addButton).setOnClickListener(this);
-		     footView.findViewById(R.id.delButton).setOnClickListener(this);
+		   
+		     
+		     //  footView.findViewById(R.id.delButton).setOnClickListener(this);
 		
 		classInfo = new ArrayList<Class_info>();
 		adap = new MyAdpater(this,classInfo);
-		
 		listview = (ListView) findViewById(R.id.listview1);
-	   
-	    listview.addFooterView(footView);
+		listview.addFooterView(footView);
 		listview.setAdapter(adap);
+		//ListView 초기화
+		Class_info init_cli = new Class_info("","", "", false);
+		classInfo.add(init_cli);
 	
+		
+		
+		
 		ArrayAdapter<String> adpSpin=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,spinCategory_Year);
 		ArrayAdapter<String> adpSpin_semester=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,spinCategory_Semester);
 		adpSpin.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -169,25 +175,25 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 	public void addLayout(){		
 		
 
-		EditText editText1=(EditText)findViewById(R.id.editYear);
-		EditText editText2=(EditText)findViewById(R.id.editSemester);
-		EditText editText3=(EditText)findViewById(R.id.editClass);
+		EditText editgrade=(EditText)findViewById(R.id.editGrade);
+		EditText editcredit=(EditText)findViewById(R.id.editCredit);
+		EditText editsubject=(EditText)findViewById(R.id.editSubject);
 		ToggleButton editMajor=(ToggleButton)findViewById(R.id.button_MajorOr);
 		
-		String inputValue1=editText1.getText().toString();
-		String inputValue2=editText2.getText().toString();
-		String inputValue3=editText3.getText().toString();
+		String inputValue1=editsubject.getText().toString();
+		String inputValue2=editgrade.getText().toString();
+		String inputValue3=editcredit.getText().toString();
 		boolean inputValue4=editMajor.isChecked();
 		
 		refresh(inputValue1,inputValue2,inputValue3,inputValue4);
-		editText1.setText("");
-		editText2.setText("");
-		editText3.setText("");
-		editMajor.setChecked(true);
+		editgrade.setText("");
+		editcredit.setText("");
+		editsubject.setText("");
+		editMajor.setChecked(false);
 		
 	}
 
-	private void refresh(String inputValue1, String inputValue2,String inputValue3,boolean inputValue4) {
+	private void refresh(String inputValue1,String inputValue2,String inputValue3,boolean inputValue4) {
 			
 		// TODO Auto-generated method stub
 		Class_info cl1 = new Class_info(inputValue1,inputValue2,inputValue3,inputValue4);

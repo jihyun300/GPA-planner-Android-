@@ -61,7 +61,7 @@ public class mExpandableListAdpater extends BaseExpandableListAdapter{
 		((TextView)convertView.findViewById(R.id.list_item_subjectname)).setText(citem.getSubjectname());
 		((TextView)convertView.findViewById(R.id.list_item_major)).setText(citem.getMajor());
 		((TextView)convertView.findViewById(R.id.list_item_score)).setText(Double.toString(citem.getScore()));
-		
+
 		return convertView;
 	}
 
