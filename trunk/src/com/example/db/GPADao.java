@@ -272,9 +272,7 @@ public class GPADao {
 
 			db.execSQL("INSERT INTO " + GPADbHelper.TABLE_NAME + " VALUES ("
 					+ "null, " + dto.getYear() + "," + dto.getSemester() + ","
-
 					+ dto.getCredit() + ",'" + dto.getGrade() + "'," + "'"
-
 					+ dto.getMajor() + "','" + dto.getSubject() + "' );");
 
 		} catch (Exception e) {
