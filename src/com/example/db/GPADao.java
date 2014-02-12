@@ -269,10 +269,10 @@ public class GPADao {
 	public void insertOneGPA(Object obj) {
 		GPADto dto = (GPADto) obj;
 		try {
-			db.execSQL("INSERT INTO " + GPADbHelper.TABLE_NAME + "VALUES ("
-					+ null + dto.getYear() + "," + dto.getSemester() + ","
+			db.execSQL("INSERT INTO " + GPADbHelper.TABLE_NAME + " VALUES ("
+					+ " null " +","+ dto.getYear() + "," + dto.getSemester() + ","
 					+ dto.getCredit() + ",'" + dto.getGrade() + "'," + "'"
-					+ dto.getMajor() + "'" + dto.getSubject() + "' );");
+					+ dto.getMajor() + "',"+"'" + dto.getSubject() + "' );");
 		} catch (Exception e) {
 			System.out.println("SQL오류");
 			e.printStackTrace();

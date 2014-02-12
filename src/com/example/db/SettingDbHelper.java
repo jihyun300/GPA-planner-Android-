@@ -6,10 +6,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SettingDbHelper extends SQLiteOpenHelper {
 	public static final String TABLE_NAME = "setting_table";
-//	private int settingId;  //auto increment
-//	private float gpaSystem;  //성적체계 4.5 or 4.3
-//	private float gpaTarget; //목표성적
-//	private int creditForGraduate; // 졸업요구 학점
 	public static final String ID = "settingId";
 	public static final String COL_GPASYSTEM = "gpaSystem";
 	public static final String COL_GPATARGET = "gpaTarget";
@@ -28,9 +24,9 @@ public class SettingDbHelper extends SQLiteOpenHelper {
 		sd.append("CREATE TABLE ");
 		sd.append(TABLE_NAME);
 		sd.append("( ");
-		sd.append(ID+"INTEGER AUTOINCREMENT,");
+		sd.append(ID+"INTEGER PRIMARY KEY AUTOINCREMENT,");
 		sd.append(COL_GPASYSTEM); //0 or 1
-		sd.append(" INTEGER,");
+		sd.append(" FLOAT,");
 		sd.append(COL_GPATARGET);
 		sd.append(" FLOAT,");
 		sd.append(COL_CREDITFORGRADU);
