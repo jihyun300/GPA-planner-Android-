@@ -182,8 +182,8 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 	 */
 	public void addLayout(){		
 		
-	//	gpdb.db.execSQL("DELETE FROM gpa_table;"); DB내용 지우는 테스트
-	//	gpdb.dbHelper.close();
+		//gpdb.db.execSQL("DELETE FROM gpa_table;"); DB지우는거 테스트 
+		//gpdb.dbHelper.close();
 		EditText editgrade=(EditText)findViewById(R.id.editGrade);
 		EditText editcredit=(EditText)findViewById(R.id.editCredit);
 		EditText editsubject=(EditText)findViewById(R.id.editSubject);

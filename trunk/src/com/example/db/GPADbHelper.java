@@ -23,7 +23,7 @@ public class GPADbHelper extends SQLiteOpenHelper {
 	private static final String DATABASE_CREATE = GPADbHelper
 			.dataBaseCreateSQL();
 
-	private static final String DATABASE_NAME = "gpa1.db";
+	private static final String DATABASE_NAME = "gpa.db";
 
 	public GPADbHelper(Context context) {
 		super(context, DATABASE_NAME, null, 1);
