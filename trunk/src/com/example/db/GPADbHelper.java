@@ -51,7 +51,7 @@ public class GPADbHelper extends SQLiteOpenHelper {
 		StringBuilder sd = new StringBuilder();
 		sd.append("CREATE TABLE ");
 		sd.append(TABLE_NAME);
-		sd.append(" ( ID INTEGER AUTOINCREMENT, ");
+		sd.append(" ("+ ID+" INTEGER AUTOINCREMENT, ");
 		sd.append(COL_YEAR + " INTEGER,");
 		sd.append(COL_SEMESTER + "INTEGER,");
 		sd.append(COL_CREDIT + "INTEGER,");
