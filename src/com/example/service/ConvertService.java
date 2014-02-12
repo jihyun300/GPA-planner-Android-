@@ -4,9 +4,9 @@ public class ConvertService {
 
 	public static float convertToScore(String str) {
 		if (SettingService.gpaSys == 0) {
-			return convertToScore(str);
+			return convertToScore43(str);
 		} else {
-			return convertToScore(str);
+			return convertToScore45(str);
 		}
 	}
 
