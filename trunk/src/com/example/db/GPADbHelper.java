@@ -33,7 +33,6 @@ public class GPADbHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
-
 		db.execSQL(DATABASE_CREATE);
 	}
 
@@ -51,13 +50,13 @@ public class GPADbHelper extends SQLiteOpenHelper {
 		StringBuilder sd = new StringBuilder();
 		sd.append("CREATE TABLE ");
 		sd.append(TABLE_NAME);
-		sd.append(" ("+ ID+" INTEGER AUTOINCREMENT, ");
+		sd.append(" ("+ ID+" INTEGER PRIMARY KEY AUTOINCREMENT, ");
 		sd.append(COL_YEAR + " INTEGER,");
-		sd.append(COL_SEMESTER + "INTEGER,");
-		sd.append(COL_CREDIT + "INTEGER,");
-		sd.append(COL_GRADE + "TEXT,");
-		sd.append(COL_MAJOR + "TEXT,");
-		sd.append(COL_SUBJECT + "TEXT");
+		sd.append(COL_SEMESTER + " INTEGER,");
+		sd.append(COL_CREDIT + " INTEGER,");
+		sd.append(COL_GRADE + " TEXT,");
+		sd.append(COL_MAJOR + " TEXT,");
+		sd.append(COL_SUBJECT + " TEXT");
 		sd.append(");");
 		return sd.toString();
 	}
