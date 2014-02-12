@@ -23,7 +23,7 @@ public class GPADbHelper extends SQLiteOpenHelper {
 	private static final String DATABASE_CREATE = GPADbHelper
 			.dataBaseCreateSQL();
 
-	private static final String DATABASE_NAME = "gpa.db";
+	private static final String DATABASE_NAME = "gpa1.db";
 
 	public GPADbHelper(Context context) {
 		super(context, DATABASE_NAME, null, 1);
@@ -33,6 +33,7 @@ public class GPADbHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
+		//db.execSQL("CREATE TABLE gpa_table ( id INTEGER, year INTEGER, major TEXT);");
 		db.execSQL(DATABASE_CREATE);
 	}
 

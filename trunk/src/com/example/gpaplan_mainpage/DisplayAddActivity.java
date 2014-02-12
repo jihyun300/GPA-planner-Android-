@@ -2,10 +2,15 @@ package com.example.gpaplan_mainpage;
 
 import java.util.ArrayList;
 
+import com.example.db.GPADao;
+import com.example.db.GPADbHelper;
+import com.example.db.GPADto;
+
 
 
 import android.app.Activity;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
@@ -32,7 +37,7 @@ import android.widget.ToggleButton;
 public class DisplayAddActivity extends Activity implements OnClickListener{
 	
 	private LinearLayout dynamicLayout;
-
+	GPADao gpdb;
 	private String[] spinCategory_Year={"1","2","3","4"};
 	private String[] spinCategory_Semester={"1","2","여름","겨울"}; 
 	
@@ -52,6 +57,7 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_display_add);
+		gpdb = new GPADao(getApplicationContext());
 		// Show the Up button in the action bar.
 		setupActionBar();
 	
@@ -165,8 +171,10 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 
 	private void openOK() {
 		// TODO Auto-generated method stub
+	Toast.makeText(this, "DB에 내용을 추가합니다.", Toast.LENGTH_SHORT).show();
+	GPADto temp = new GPADto( 1, 1, 3, "3.2", "전공", "통신이론");
+	gpdb.insertOneGPA(temp);
 	
-		onBackPressed();
 	}
 	
 	/**
@@ -174,7 +182,8 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 	 */
 	public void addLayout(){		
 		
-
+	//	gpdb.db.execSQL("DELETE FROM gpa_table;"); DB내용 지우는 테스트
+	//	gpdb.dbHelper.close();
 		EditText editgrade=(EditText)findViewById(R.id.editGrade);
 		EditText editcredit=(EditText)findViewById(R.id.editCredit);
 		EditText editsubject=(EditText)findViewById(R.id.editSubject);

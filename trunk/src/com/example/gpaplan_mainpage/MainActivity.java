@@ -9,6 +9,7 @@ import com.echo.holographlibrary.LineGraph;
 import com.echo.holographlibrary.LinePoint;
 import com.echo.holographlibrary.PieGraph;
 import com.echo.holographlibrary.PieSlice;
+import com.example.db.GPADao;
 import com.example.gpaplan_mainpage.R;
 
 import android.R.drawable;
@@ -39,7 +40,7 @@ import android.widget.ExpandableListView.OnChildClickListener;
 
 public class MainActivity extends FragmentActivity implements
 		ActionBar.TabListener {
-
+	
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	ViewPager mViewPager;
 
@@ -47,6 +48,7 @@ public class MainActivity extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
