@@ -96,7 +96,7 @@ public class GPAService {
 		float gpaScore_1_1 = 0f;
 		int totalCredit_1_1 = 0;
 		for (int i = 0; i < dtoListSize; i++) {
-			gpaScore_1_1 += convertToScore(dtoList.get(i).getGrade())
+			gpaScore_1_1 += ConvertService.convertToScore(dtoList.get(i).getGrade())
 					* (dtoList.get(i).getCredit());
 			totalCredit_1_1 += dtoList.get(i).getCredit();
 		}
@@ -124,7 +124,7 @@ public class GPAService {
 		int totalMajorCredit_1_1 = 0;
 
 		for (int i = 0; i < majorNum_1_1; i++) {
-			gpaMajorScore_1_1 += convertToScore(newList.get(i).getGrade())
+			gpaMajorScore_1_1 += ConvertService.convertToScore(newList.get(i).getGrade())
 					* (newList.get(i).getCredit());
 			totalMajorCredit_1_1 += newList.get(i).getCredit();
 		}
@@ -153,7 +153,7 @@ public class GPAService {
 		int totalMajorCredit_1_1 = 0;
 
 		for (int i = 0; i < majorNum_1_1; i++) {
-			gpaMajorScore_1_1 += convertToScore(newList.get(i).getGrade())
+			gpaMajorScore_1_1 += ConvertService.convertToScore(newList.get(i).getGrade())
 					* (newList.get(i).getCredit());
 			totalMajorCredit_1_1 += newList.get(i).getCredit();
 		}
@@ -171,7 +171,7 @@ public class GPAService {
 		float gpaScore_1_2 = 0f;
 		int totalCredit_1_2 = 0;
 		for (int i = 0; i < dtoListSize; i++) {
-			gpaScore_1_2 += convertToScore(dtoList.get(i).getGrade())
+			gpaScore_1_2 += ConvertService.convertToScore(dtoList.get(i).getGrade())
 					* (dtoList.get(i).getCredit());
 			totalCredit_1_2 += dtoList.get(i).getCredit();
 		}
@@ -199,7 +199,7 @@ public class GPAService {
 		int totalMajorCredit_1_2 = 0;
 
 		for (int i = 0; i < majorNum_1_2; i++) {
-			gpaMajorScore_1_2 += convertToScore(newList.get(i).getGrade())
+			gpaMajorScore_1_2 += ConvertService.convertToScore(newList.get(i).getGrade())
 					* (newList.get(i).getCredit());
 			totalMajorCredit_1_2 += newList.get(i).getCredit();
 		}
@@ -228,7 +228,7 @@ public class GPAService {
 		int totalMajorCredit_1_2 = 0;
 
 		for (int i = 0; i < majorNum_1_2; i++) {
-			gpaMajorScore_1_2 += convertToScore(newList.get(i).getGrade())
+			gpaMajorScore_1_2 += ConvertService.convertToScore(newList.get(i).getGrade())
 					* (newList.get(i).getCredit());
 			totalMajorCredit_1_2 += newList.get(i).getCredit();
 		}
@@ -246,7 +246,7 @@ public class GPAService {
 		float gpaScore_2_1 = 0f;
 		int totalCredit_2_1 = 0;
 		for (int i = 0; i < dtoListSize; i++) {
-			gpaScore_2_1 += convertToScore(dtoList.get(i).getGrade())
+			gpaScore_2_1 += ConvertService.convertToScore(dtoList.get(i).getGrade())
 					* (dtoList.get(i).getCredit());
 			totalCredit_2_1 += dtoList.get(i).getCredit();
 		}
@@ -274,7 +274,7 @@ public class GPAService {
 		int totalMajorCredit_2_1 = 0;
 
 		for (int i = 0; i < majorNum_2_1; i++) {
-			gpaMajorScore_2_1 += convertToScore(newList.get(i).getGrade())
+			gpaMajorScore_2_1 += ConvertService.convertToScore(newList.get(i).getGrade())
 					* (newList.get(i).getCredit());
 			totalMajorCredit_2_1 += newList.get(i).getCredit();
 		}
@@ -303,7 +303,7 @@ public class GPAService {
 		int totalMajorCredit_2_1 = 0;
 
 		for (int i = 0; i < majorNum_2_1; i++) {
-			gpaMajorScore_2_1 += convertToScore(newList.get(i).getGrade())
+			gpaMajorScore_2_1 += ConvertService.convertToScore(newList.get(i).getGrade())
 					* (newList.get(i).getCredit());
 			totalMajorCredit_2_1 += newList.get(i).getCredit();
 		}
@@ -321,7 +321,7 @@ public class GPAService {
 		float gpaScore_2_2 = 0f;
 		int totalCredit_2_2 = 0;
 		for (int i = 0; i < dtoListSize; i++) {
-			gpaScore_2_2 += convertToScore(dtoList.get(i).getGrade())
+			gpaScore_2_2 += ConvertService.convertToScore(dtoList.get(i).getGrade())
 					* (dtoList.get(i).getCredit());
 			totalCredit_2_2 += dtoList.get(i).getCredit();
 		}
@@ -349,7 +349,7 @@ public class GPAService {
 		int totalMajorCredit_2_2 = 0;
 
 		for (int i = 0; i < majorNum_2_2; i++) {
-			gpaMajorScore_2_2 += convertToScore(newList.get(i).getGrade())
+			gpaMajorScore_2_2 += ConvertService.convertToScore(newList.get(i).getGrade())
 					* (newList.get(i).getCredit());
 			totalMajorCredit_2_2 += newList.get(i).getCredit();
 		}
@@ -378,7 +378,7 @@ public class GPAService {
 		int totalMajorCredit_2_2 = 0;
 
 		for (int i = 0; i < majorNum_2_2; i++) {
-			gpaMajorScore_2_2 += convertToScore(newList.get(i).getGrade())
+			gpaMajorScore_2_2 += ConvertService.convertToScore(newList.get(i).getGrade())
 					* (newList.get(i).getCredit());
 			totalMajorCredit_2_2 += newList.get(i).getCredit();
 		}
@@ -396,7 +396,7 @@ public class GPAService {
 		float gpaScore_3_1 = 0f;
 		int totalCredit_3_1 = 0;
 		for (int i = 0; i < dtoListSize; i++) {
-			gpaScore_3_1 += convertToScore(dtoList.get(i).getGrade())
+			gpaScore_3_1 += ConvertService.convertToScore(dtoList.get(i).getGrade())
 					* (dtoList.get(i).getCredit());
 			totalCredit_3_1 += dtoList.get(i).getCredit();
 		}
@@ -424,7 +424,7 @@ public class GPAService {
 		int totalMajorCredit_3_1 = 0;
 
 		for (int i = 0; i < majorNum_3_1; i++) {
-			gpaMajorScore_3_1 += convertToScore(newList.get(i).getGrade())
+			gpaMajorScore_3_1 += ConvertService.convertToScore(newList.get(i).getGrade())
 					* (newList.get(i).getCredit());
 			totalMajorCredit_3_1 += newList.get(i).getCredit();
 		}
@@ -453,7 +453,7 @@ public class GPAService {
 		int totalMajorCredit_3_1 = 0;
 
 		for (int i = 0; i < majorNum_3_1; i++) {
-			gpaMajorScore_3_1 += convertToScore(newList.get(i).getGrade())
+			gpaMajorScore_3_1 += ConvertService.convertToScore(newList.get(i).getGrade())
 					* (newList.get(i).getCredit());
 			totalMajorCredit_3_1 += newList.get(i).getCredit();
 		}
@@ -471,7 +471,7 @@ public class GPAService {
 		float gpaScore_3_2 = 0f;
 		int totalCredit_3_2 = 0;
 		for (int i = 0; i < dtoListSize; i++) {
-			gpaScore_3_2 += convertToScore(dtoList.get(i).getGrade())
+			gpaScore_3_2 += ConvertService.convertToScore(dtoList.get(i).getGrade())
 					* (dtoList.get(i).getCredit());
 			totalCredit_3_2 += dtoList.get(i).getCredit();
 		}
@@ -499,7 +499,7 @@ public class GPAService {
 		int totalMajorCredit_3_2 = 0;
 
 		for (int i = 0; i < majorNum_3_2; i++) {
-			gpaMajorScore_3_2 += convertToScore(newList.get(i).getGrade())
+			gpaMajorScore_3_2 += ConvertService.convertToScore(newList.get(i).getGrade())
 					* (newList.get(i).getCredit());
 			totalMajorCredit_3_2 += newList.get(i).getCredit();
 		}
@@ -528,7 +528,7 @@ public class GPAService {
 		int totalMajorCredit_3_2 = 0;
 
 		for (int i = 0; i < majorNum_3_2; i++) {
-			gpaMajorScore_3_2 += convertToScore(newList.get(i).getGrade())
+			gpaMajorScore_3_2 += ConvertService.convertToScore(newList.get(i).getGrade())
 					* (newList.get(i).getCredit());
 			totalMajorCredit_3_2 += newList.get(i).getCredit();
 		}
@@ -546,7 +546,7 @@ public class GPAService {
 		float gpaScore_4_1 = 0f;
 		int totalCredit_4_1 = 0;
 		for (int i = 0; i < dtoListSize; i++) {
-			gpaScore_4_1 += convertToScore(dtoList.get(i).getGrade())
+			gpaScore_4_1 += ConvertService.convertToScore(dtoList.get(i).getGrade())
 					* (dtoList.get(i).getCredit());
 			totalCredit_4_1 += dtoList.get(i).getCredit();
 		}
@@ -574,7 +574,7 @@ public class GPAService {
 		int totalMajorCredit_4_1 = 0;
 
 		for (int i = 0; i < majorNum_4_1; i++) {
-			gpaMajorScore_4_1 += convertToScore(newList.get(i).getGrade())
+			gpaMajorScore_4_1 += ConvertService.convertToScore(newList.get(i).getGrade())
 					* (newList.get(i).getCredit());
 			totalMajorCredit_4_1 += newList.get(i).getCredit();
 		}
@@ -603,7 +603,7 @@ public class GPAService {
 		int totalMajorCredit_4_1 = 0;
 
 		for (int i = 0; i < majorNum_4_1; i++) {
-			gpaMajorScore_4_1 += convertToScore(newList.get(i).getGrade())
+			gpaMajorScore_4_1 += ConvertService.convertToScore(newList.get(i).getGrade())
 					* (newList.get(i).getCredit());
 			totalMajorCredit_4_1 += newList.get(i).getCredit();
 		}
@@ -621,7 +621,7 @@ public class GPAService {
 		float gpaScore_4_2 = 0f;
 		int totalCredit_4_2 = 0;
 		for (int i = 0; i < dtoListSize; i++) {
-			gpaScore_4_2 += convertToScore(dtoList.get(i).getGrade())
+			gpaScore_4_2 += ConvertService.convertToScore(dtoList.get(i).getGrade())
 					* (dtoList.get(i).getCredit());
 			totalCredit_4_2 += dtoList.get(i).getCredit();
 		}
@@ -649,7 +649,7 @@ public class GPAService {
 		int totalMajorCredit_4_2 = 0;
 
 		for (int i = 0; i < majorNum_4_2; i++) {
-			gpaMajorScore_4_2 += convertToScore(newList.get(i).getGrade())
+			gpaMajorScore_4_2 += ConvertService.convertToScore(newList.get(i).getGrade())
 					* (newList.get(i).getCredit());
 			totalMajorCredit_4_2 += newList.get(i).getCredit();
 		}
@@ -678,8 +678,8 @@ public class GPAService {
 		int totalMajorCredit_4_2 = 0;
 
 		for (int i = 0; i < majorNum_4_2; i++) {
-			gpaMajorScore_4_2 += convertToScore(newList.get(i).getGrade())
-					* (newList.get(i).getCredit());
+			gpaMajorScore_4_2 +=ConvertService.convertToScore(newList.get(i)
+					.getGrade()) * (newList.get(i).getCredit());
 			totalMajorCredit_4_2 += newList.get(i).getCredit();
 		}
 
@@ -694,25 +694,25 @@ public class GPAService {
 	}
 
 	// 학점을 점수로 바꿔주는 메소드?? EX] A+ --> 4.5 다른 클래스로 뺄수잇으면 빼자!
-	public float convertToScore(String str) {
-		if (str.equals("A+")) {
-			return 4.5f;
-		} else if (str.equals("A")) {
-			return 4.0f;
-		} else if (str.equals("B+")) {
-			return 3.5f;
-		} else if (str.equals("B")) {
-			return 3.0f;
-		} else if (str.equals("C+")) {
-			return 2.5f;
-		} else if (str.equals("C")) {
-			return 2.0f;
-		} else if (str.equals("D+")) {
-			return 1.5f;
-		} else if (str.equals("D")) {
-			return 1.0f;
-		} else {
-			return 0f;
-		}
-	}
+	// public float ConvertService.ConvertService.convertToScore(String str) {
+	// if (str.equals("A+")) {
+	// return 4.5f;
+	// } else if (str.equals("A")) {
+	// return 4.0f;
+	// } else if (str.equals("B+")) {
+	// return 3.5f;
+	// } else if (str.equals("B")) {
+	// return 3.0f;
+	// } else if (str.equals("C+")) {
+	// return 2.5f;
+	// } else if (str.equals("C")) {
+	// return 2.0f;
+	// } else if (str.equals("D+")) {
+	// return 1.5f;
+	// } else if (str.equals("D")) {
+	// return 1.0f;
+	// } else {
+	// return 0f;
+	// }
+	// }
 }

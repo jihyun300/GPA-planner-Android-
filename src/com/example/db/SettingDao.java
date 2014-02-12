@@ -1,6 +1,7 @@
 package com.example.db;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 public class SettingDao {
@@ -13,6 +14,18 @@ public class SettingDao {
 	}
 	
 	public SettingDto getSettingInfo(){
-		return null;
+		Cursor cs = db.rawQuery("SELECT * FROM setting_table LIMIT 1;",null);
+		SettingDto settingDto = null;
+		do{
+			settingDto = new SettingDto(cs.getInt(0),cs.getInt(1),cs.getFloat(2),cs.getInt(3));
+		}while(!cs.isLast());
+		return settingDto; 
+	}
+	
+	public void updateSetting(){
+		//
+	}
+	public void deleteSetting(){
+		//
 	}
 }

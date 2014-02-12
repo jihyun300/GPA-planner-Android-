@@ -2,11 +2,11 @@ package com.example.db;
 
 public class SettingDto {
 	private int settingId; // auto increment
-	private float gpaSystem; // 성적체계 4.5 or 4.3
+	private int gpaSystem; // 성적체계 4.5 or 4.3    0이면 4.3  1이면 4.5
 	private float gpaTarget; // 목표성적
 	private int creditForGraduate; // 졸업요구 학점
 
-	public SettingDto(int settingId, float gpaSystem, float gpaTarget,
+	public SettingDto(int settingId, int gpaSystem, float gpaTarget,
 			int creditForGraduate) {
 		super();
 		this.settingId = settingId;
@@ -14,6 +14,15 @@ public class SettingDto {
 		this.gpaTarget = gpaTarget;
 		this.creditForGraduate = creditForGraduate;
 	}
+	
+
+	public SettingDto(int gpaSystem, float gpaTarget, int creditForGraduate) {
+		super();
+		this.gpaSystem = gpaSystem;
+		this.gpaTarget = gpaTarget;
+		this.creditForGraduate = creditForGraduate;
+	}
+
 
 	public int getSettingId() {
 		return settingId;
@@ -23,11 +32,11 @@ public class SettingDto {
 		this.settingId = settingId;
 	}
 
-	public float getGpaSystem() {
+	public int getGpaSystem() {
 		return gpaSystem;
 	}
 
-	public void setGpaSystem(float gpaSystem) {
+	public void setGpaSystem(int gpaSystem) {
 		this.gpaSystem = gpaSystem;
 	}
 
