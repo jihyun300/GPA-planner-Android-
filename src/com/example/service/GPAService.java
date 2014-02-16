@@ -21,14 +21,10 @@ public class GPAService {
 	public GPADbHelper gpaDBhelper;
 	public SQLiteDatabase gpaDB;
 
-	// public MySettingdbHelper settingDBhelper;
-	// public SQLiteDatabase settingDB;
-
 	public GPAService(Context context) {
 		gpaDao = new GPADao(context);
-		gpaDBhelper = gpaDao.dbHelper;
-		gpaDB = gpaDao.db;
-
+		//gpaDBhelper = gpaDao.dbHelper;
+		//gpaDB = gpaDao.db;
 	}
 
 	// dao 여기서부터 정보빼오기

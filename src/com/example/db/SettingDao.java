@@ -10,10 +10,11 @@ public class SettingDao {
 
 	public SettingDao(Context context) {
 		dbHelper = new SettingDbHelper(context);
-		db = dbHelper.getWritableDatabase();
+		//db = dbHelper.getWritableDatabase();
 	}
 
 	public SettingDto getSettingInfo() {
+		db = dbHelper.getWritableDatabase();
 		Cursor cs = db.rawQuery("SELECT * FROM setting_table LIMIT 1;", null);
 		SettingDto settingDto = null;
 		try {
@@ -28,7 +29,7 @@ public class SettingDao {
 			if(db!=null){
 				db.close();
 			}
-			dbHelper.close();
+			//dbHelper.close();
 		}
 		return settingDto;
 	}

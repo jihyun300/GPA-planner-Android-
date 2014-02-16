@@ -16,15 +16,16 @@ import android.database.sqlite.SQLiteDatabase;
 public class GPADao {
 
 	public GPADbHelper dbHelper;
-	public SQLiteDatabase db;
+    public SQLiteDatabase db;
 
 	public GPADao(Context context) {
 		dbHelper = new GPADbHelper(context);
-		db = dbHelper.getWritableDatabase();
+	//	db = dbHelper.getWritableDatabase();
 	}
 
 	// 전체
 	public List<GPADto> getAllList() {
+		db = dbHelper.getWritableDatabase();
 		List<GPADto> dtoList = new ArrayList<GPADto>();
 		try {
 			Cursor cs = db.rawQuery("SELECT id, year, semester,"
@@ -43,7 +44,7 @@ public class GPADao {
 			if (db != null) {
 				db.close();
 			}
-			dbHelper.close();
+			//dbHelper.close();
 		}
 
 		return dtoList;
@@ -51,6 +52,7 @@ public class GPADao {
 
 	// 1-1 성적
 	public List<GPADto> getList_1_1() {
+		db = dbHelper.getWritableDatabase();
 		List<GPADto> dtoList = new ArrayList<GPADto>();
 		try {
 			Cursor cs = db.rawQuery("SELECT id, year, semester,"
@@ -70,7 +72,7 @@ public class GPADao {
 			if (db != null) {
 				db.close();
 			}
-			dbHelper.close();
+			//dbHelper.close();
 		}
 
 		return dtoList;
@@ -78,6 +80,7 @@ public class GPADao {
 
 	// 1-2 성적
 	public List<GPADto> getList_1_2() {
+		db = dbHelper.getWritableDatabase();
 		List<GPADto> dtoList = new ArrayList<GPADto>();
 		try {
 			Cursor cs = db.rawQuery("SELECT id, year, semester,"
@@ -97,7 +100,7 @@ public class GPADao {
 			if (db != null) {
 				db.close();
 			}
-			dbHelper.close();
+			//dbHelper.close();
 		}
 
 		return dtoList;
@@ -105,6 +108,7 @@ public class GPADao {
 
 	// 2-1 성적
 	public List<GPADto> getList_2_1() {
+		db = dbHelper.getWritableDatabase();
 		List<GPADto> dtoList = new ArrayList<GPADto>();
 		try {
 			Cursor cs = db.rawQuery("SELECT id, year, semester,"
@@ -124,7 +128,7 @@ public class GPADao {
 			if (db != null) {
 				db.close();
 			}
-			dbHelper.close();
+			//dbHelper.close();
 		}
 
 		return dtoList;
@@ -132,6 +136,7 @@ public class GPADao {
 
 	// 2-2 성적
 	public List<GPADto> getList_2_2() {
+		db = dbHelper.getWritableDatabase();
 		List<GPADto> dtoList = new ArrayList<GPADto>();
 		try {
 			Cursor cs = db.rawQuery("SELECT id, year, semester,"
@@ -151,7 +156,7 @@ public class GPADao {
 			if (db != null) {
 				db.close();
 			}
-			dbHelper.close();
+			//dbHelper.close();
 		}
 
 		return dtoList;
@@ -159,6 +164,7 @@ public class GPADao {
 
 	// 3-1 성적
 	public List<GPADto> getList_3_1() {
+		db = dbHelper.getWritableDatabase();
 		List<GPADto> dtoList = new ArrayList<GPADto>();
 		try {
 			Cursor cs = db.rawQuery("SELECT id, year, semester,"
@@ -178,7 +184,7 @@ public class GPADao {
 			if (db != null) {
 				db.close();
 			}
-			dbHelper.close();
+			//dbHelper.close();
 		}
 
 		return dtoList;
@@ -186,6 +192,7 @@ public class GPADao {
 
 	// 3-2 성적
 	public List<GPADto> getList_3_2() {
+		db = dbHelper.getWritableDatabase();
 		List<GPADto> dtoList = new ArrayList<GPADto>();
 		try {
 			Cursor cs = db.rawQuery("SELECT id, year, semester,"
@@ -205,7 +212,7 @@ public class GPADao {
 			if (db != null) {
 				db.close();
 			}
-			dbHelper.close();
+			//dbHelper.close();
 		}
 
 		return dtoList;
@@ -213,6 +220,7 @@ public class GPADao {
 
 	// 4-1 성적
 	public List<GPADto> getList_4_1() {
+		db = dbHelper.getWritableDatabase();
 		List<GPADto> dtoList = new ArrayList<GPADto>();
 		try {
 			Cursor cs = db.rawQuery("SELECT id, year, semester,"
@@ -232,7 +240,7 @@ public class GPADao {
 			if (db != null) {
 				db.close();
 			}
-			dbHelper.close();
+			//dbHelper.close();
 		}
 
 		return dtoList;
@@ -240,6 +248,7 @@ public class GPADao {
 
 	// 4-2 성적
 	public List<GPADto> getList_4_2() {
+		db = dbHelper.getWritableDatabase();
 		List<GPADto> dtoList = new ArrayList<GPADto>();
 		try {
 			Cursor cs = db.rawQuery("SELECT id, year, semester,"
@@ -259,7 +268,7 @@ public class GPADao {
 			if (db != null) {
 				db.close();
 			}
-			dbHelper.close();
+			//dbHelper.close();
 		}
 
 		return dtoList;
@@ -267,6 +276,7 @@ public class GPADao {
 
 	// INSERT 하는 로직 지현이꺼에 쓰일 로직
 	public void insertOneGPA(Object obj) {
+		db = dbHelper.getWritableDatabase();
 		GPADto dto = (GPADto) obj;
 		try {
 
@@ -282,7 +292,7 @@ public class GPADao {
 			if (db != null) {
 				db.close();
 			}
-			dbHelper.close();
+			//dbHelper.close();
 		}
 	}
 
