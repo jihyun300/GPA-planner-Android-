@@ -34,17 +34,17 @@ public class GPAService {
 	// dao 여기서부터 정보빼오기
 
 	// DB에서 전부 빼오기
-	public List<GPADto> getAllList() {
+	private List<GPADto> getAllList() {
 		return gpaDao.getAllList();
 	}
 
 	// 학년 학기별 성적
-	public List<GPADto> getGPADtoList(int year, int semester) {
+	private List<GPADto> getGPADtoList(int year, int semester) {
 		return gpaDao.getGPADtoList(year, semester);
 	}
 
 	// 성적입력하기 (성적입력 액티비티에서 for문 돌려가면서 이 함수를 반복 수행한다)
-	public void insertOneGPA(Object obj) {
+	private void insertOneGPA(Object obj) {
 		gpaDao.insertOneGPA(obj);
 	}
 
