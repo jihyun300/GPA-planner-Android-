@@ -4,39 +4,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import com.echo.holographlibrary.Line;
-import com.echo.holographlibrary.LineGraph;
-import com.echo.holographlibrary.LinePoint;
-import com.echo.holographlibrary.PieGraph;
-import com.echo.holographlibrary.PieSlice;
-import com.example.db.GPADao;
-import com.example.gpaplan_mainpage.R;
-
-import android.R.drawable;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListView;
-import android.widget.Toast;
 import android.widget.AbsListView.MultiChoiceModeListener;
+import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
+
+import com.echo.holographlibrary.Line;
+import com.echo.holographlibrary.LineGraph;
+import com.echo.holographlibrary.LinePoint;
+import com.echo.holographlibrary.PieGraph;
+import com.echo.holographlibrary.PieSlice;
+import com.example.controller.Controller;
+import com.example.service.GPAService;
 
 public class MainActivity extends FragmentActivity implements
 		ActionBar.TabListener {
@@ -353,6 +348,8 @@ public class MainActivity extends FragmentActivity implements
 		 * The fragment argument representing the section number for this
 		 * fragment.
 		 */
+		private Controller controller;
+		
 		public static final String ARG_SECTION_NUMBER = "section_number";
 
 		public SecondSectionFragment() {
@@ -364,45 +361,46 @@ public class MainActivity extends FragmentActivity implements
 			View rootView = inflater.inflate(R.layout.fragment_second,
 					container, false);
 			//////////--------------------그래프시작
+			controller = new Controller(rootView.getContext());
 			Line l = new Line();
 			LinePoint p = new LinePoint();
 			p.setX(0);
-			p.setY(3.5f);
+			p.setY(controller.getGPA(GPAService.TOTAL_SCORE,1,1));
 			l.addPoint(p);
 			
 			p = new LinePoint();
 			p.setX(2);
-			p.setY(3.7f);
+			p.setY(controller.getGPA(GPAService.TOTAL_SCORE,1,2));
 			l.addPoint(p);
 			
 			p = new LinePoint();
 			p.setX(4);
-			p.setY(4.0f);
+			p.setY(controller.getGPA(GPAService.TOTAL_SCORE,2,1));
 			l.addPoint(p);
 			
 			p = new LinePoint();
 			p.setX(6);
-			p.setY(3.8f);
+			p.setY(controller.getGPA(GPAService.TOTAL_SCORE,2,2));
 			l.addPoint(p);
 			
 			p = new LinePoint();
 			p.setX(8);
-			p.setY(4.2f);
+			p.setY(controller.getGPA(GPAService.TOTAL_SCORE,3,1));
 			l.addPoint(p);
 			
 			p = new LinePoint();
 			p.setX(10);
-			p.setY(4.3f);
+			p.setY(controller.getGPA(GPAService.TOTAL_SCORE,3,2));
 			l.addPoint(p);
 			
 			p = new LinePoint();
 			p.setX(12);
-			p.setY(2.6f);
+			p.setY(controller.getGPA(GPAService.TOTAL_SCORE,4,1));
 			l.addPoint(p);
 			
 			p = new LinePoint();
 			p.setX(14);
-			p.setY(4.4f);
+			p.setY(controller.getGPA(GPAService.TOTAL_SCORE,4,2));
 			l.addPoint(p);
 			l.setColor(Color.parseColor("#FFBB33"));
 
