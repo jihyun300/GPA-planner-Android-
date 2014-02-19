@@ -1,7 +1,8 @@
 <ScrollView xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:background="#e9cfd0" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,44 +14,59 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context=".MainActivity" >
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="34dp"
+            android:layout_weight="0.06"
+            android:background="#E6E6E6"
             android:orientation="vertical" >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Statistics"
-                android:textSize="25dp" />
-        </LinearLayout>
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:text="전체성적"
+                android:textColor="#4d4d4d"
+                android:textSize="30px" />
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="70dp"
+            android:layout_height="18px" >
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_weight="0.30"
+            android:background="#E6E6E6"
             android:orientation="horizontal" >
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:id="@+id/textView1"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="55dp"
+                android:background="@drawable/st_pup_circle_dy"
                 android:text="GPA"
                 android:textSize="20dp" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TargetGPA"
+                android:id="@+id/textView2"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="55dp"
+                android:background="@drawable/st_pup_circle_dy"
+                android:text="GPA"
+                android:textColor="#ffffff"
                 android:textSize="20dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="백분위"
-                android:textSize="20dp"
-                android:layout_weight="1" />
-        </LinearLayout>
+        </RelativeLayout>
 
         <!-- <LinearLayout -->
         <!-- android:layout_width="wrap_content" -->
@@ -67,9 +83,13 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#e7eff4"
+            android:background="#E6E6E6"
             android:orientation="vertical" >
 
+            <LinearLayout 
+                android:layout_width="match_parent"
+                android:layout_height="54px"
+                android:background="#e9cfd0"></LinearLayout>
             <com.echo.holographlibrary.LineGraph
                 android:id="@+id/graph3"
                 android:layout_width="match_parent"
