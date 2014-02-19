@@ -23,14 +23,14 @@ public class SettingDbHelper extends SQLiteOpenHelper {
 		StringBuilder sd = new StringBuilder();
 		sd.append("CREATE TABLE ");
 		sd.append(TABLE_NAME);
-		sd.append("( ");
-		sd.append(ID+"INTEGER PRIMARY KEY AUTOINCREMENT,");
+		sd.append(" ( ");
+		sd.append(ID+" INTEGER PRIMARY KEY AUTOINCREMENT,");
 		sd.append(COL_GPASYSTEM); //0 or 1
 		sd.append(" FLOAT,");
 		sd.append(COL_GPATARGET);
 		sd.append(" FLOAT,");
 		sd.append(COL_CREDITFORGRADU);
-		sd.append("INTEGER );");
+		sd.append(" INTEGER );");
 		return sd.toString();
 	} 
 
