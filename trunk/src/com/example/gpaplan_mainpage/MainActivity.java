@@ -32,7 +32,6 @@ import com.echo.holographlibrary.PieGraph;
 import com.echo.holographlibrary.PieSlice;
 import com.example.controller.Controller;
 import com.example.service.GPAService;
-
 public class MainActivity extends FragmentActivity implements
 		ActionBar.TabListener {
 	
@@ -402,7 +401,7 @@ public class MainActivity extends FragmentActivity implements
 			p.setX(14);
 			p.setY(controller.getGPA(GPAService.TOTAL_SCORE,4,2));
 			l.addPoint(p);
-			l.setColor(Color.parseColor("#FFBB33"));
+			l.setColor(Color.parseColor("#0099CC"));
 
 			LineGraph li = (LineGraph)rootView.findViewById(R.id.graph3);
 			li.addLine(l);
@@ -451,7 +450,7 @@ public class MainActivity extends FragmentActivity implements
 			p2.setX(14);
 			p2.setY(3.4f);
 			l2.addPoint(p2);
-			l2.setColor(Color.parseColor("#77AA00"));
+			l2.setColor(Color.parseColor("#823EB6"));
 
 			LineGraph li2 = (LineGraph)rootView.findViewById(R.id.graph3);
 			li2.addLine(l2);
@@ -501,7 +500,7 @@ public class MainActivity extends FragmentActivity implements
 			p3.setX(14);
 			p3.setY(3.9f);
 			l3.addPoint(p3);
-			l3.setColor(Color.parseColor("#BBDD55"));
+			l3.setColor(Color.parseColor("#CBADE3"));
 
 			LineGraph li3 = (LineGraph)rootView.findViewById(R.id.graph3);
 			li3.addLine(l3);
