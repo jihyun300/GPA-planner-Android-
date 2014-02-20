@@ -1,7 +1,7 @@
 package com.example.gpaplan_mainpage;
 
 public class Class_info {
-	private int year;;
+	private int year;
 	private int semester;
 	private String grade;
 	private String credit;
