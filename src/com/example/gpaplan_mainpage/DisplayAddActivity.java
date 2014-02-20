@@ -138,7 +138,6 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
 				// TODO Auto-generated method stub
-				
 			}
 	});
 
