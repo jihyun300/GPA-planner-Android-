@@ -199,7 +199,7 @@ ActionBar.TabListener {
 		 */
 		public void onResume() {
 			super.onResume();
-			LoadGroupData();
+		
 		};
 		public static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -233,6 +233,7 @@ ActionBar.TabListener {
 			adpt = new mExpandableListAdpater(rootView.getContext(), lstView,
 					lst_group);
 			lstView.setAdapter(adpt);
+			LoadGroupData();
 			final ExpandableListView.OnChildClickListener mChildClickListener = new OnChildClickListener() {
 
 				@Override
@@ -409,6 +410,7 @@ ActionBar.TabListener {
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_second,
 					container, false);
+			rootView.
 			//////////--------------------그래프시작
 			controller = new Controller(rootView.getContext());
 			Line l = new Line();
@@ -592,6 +594,8 @@ ActionBar.TabListener {
 			pg.addSlice(slice);
 			////------------------------------------------------------
 			return rootView;
+			
+			
 		}
 	}
 

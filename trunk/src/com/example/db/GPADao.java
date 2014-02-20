@@ -21,7 +21,6 @@ public class GPADao {
 	public GPADao(Context context) {
 		dbHelper = new GPADbHelper(context);
 	}
-
 	// 전체
 	public List<GPADto> getAllList() {
 		db = dbHelper.getWritableDatabase();
@@ -48,7 +47,6 @@ public class GPADao {
 		}
 		return dtoList;
 	}
-	
 	//학년 학기별 
 	public List<GPADto> getGPADtoList(int year, int semester){
 		db = dbHelper.getWritableDatabase();
@@ -77,13 +75,11 @@ public class GPADao {
 		}
 		return dtoList;
 	}
-
 	// INSERT 하는 로직 지현이꺼에 쓰일 로직
 	public void insertGPADto(Object obj) {
 		db = dbHelper.getWritableDatabase();
 		GPADto dto = (GPADto) obj;
 		try {
-
 			db.execSQL("INSERT INTO " + GPADbHelper.TABLE_NAME + 
 								" VALUES ("+ " null, " + 
 												dto.getYear() + "," +
@@ -109,7 +105,6 @@ public class GPADao {
 			Cursor cs = db.rawQuery("SELECT * FROM "
 					+ GPADbHelper.TABLE_NAME
 					+ " WHERE id like "+DBid+" ;", null);
-
 			while (cs.moveToNext()) {
 				dto_temp = new GPADto(cs.getInt(0), cs.getInt(1),
 						cs.getInt(2), cs.getInt(3), cs.getString(4), cs
@@ -124,7 +119,6 @@ public class GPADao {
 			}
 			//dbHelper.close();
 		}
-
 		return dto_temp;
 	}
 	// MainView에 보여져야함
