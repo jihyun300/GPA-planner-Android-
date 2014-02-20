@@ -3,6 +3,7 @@ package com.example.gpaplan_mainpage;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import com.example.controller.Controller;
 import com.example.db.GPADao;
 import com.example.db.GPADbHelper;
 import com.example.db.GPADto;
@@ -37,6 +38,7 @@ import android.widget.ToggleButton;
 
 public class DisplayAddActivity extends Activity implements OnClickListener{
 	
+	private Controller controller  ;
 	private LinearLayout dynamicLayout;
 	GPADao gpdb;
 	private String[] spinCategory_Year={"1","2","3","4"};
@@ -62,7 +64,7 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_display_add);
 		gpdb = new GPADao(getApplicationContext());
-		
+		controller = new Controller(getApplicationContext());
 		// Show the Up button in the action bar.
 		setupActionBar();
 	
@@ -190,10 +192,9 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 		GPADto dto_temp= new GPADto(Year_from_spinYear,Semeseter_from_spinSemester,
 				Integer.parseInt(ci_temp.getCredit()),ci_temp.getGrade(),
 				ci_temp.getMajorString(),ci_temp.getSubject());
-		gpdb.insertOneGPA(dto_temp);
+		controller.insertGPADto(dto_temp);
 //		
 		}
-	
 	}
 	
 	/**
