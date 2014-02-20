@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
@@ -20,7 +19,6 @@ import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView.MultiChoiceModeListener;
@@ -33,11 +31,10 @@ import com.echo.holographlibrary.LinePoint;
 import com.echo.holographlibrary.PieGraph;
 import com.echo.holographlibrary.PieSlice;
 import com.example.controller.Controller;
-import com.example.db.GPADto;
 import com.example.service.GPAService;
 public class MainActivity extends FragmentActivity implements
-ActionBar.TabListener {
-
+		ActionBar.TabListener {
+	
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	ViewPager mViewPager;
 
@@ -45,7 +42,7 @@ ActionBar.TabListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -63,12 +60,12 @@ ActionBar.TabListener {
 		// tab. We can also use ActionBar.Tab#select() to do this if we have
 		// a reference to the Tab.
 		mViewPager
-		.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-			@Override
-			public void onPageSelected(int position) {
-				actionBar.setSelectedNavigationItem(position);
-			}
-		});
+				.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+					@Override
+					public void onPageSelected(int position) {
+						actionBar.setSelectedNavigationItem(position);
+					}
+				});
 
 		// For each of the sections in the app, add a tab to the action bar.
 		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
@@ -197,18 +194,13 @@ ActionBar.TabListener {
 		 * The fragment argument representing the section number for this
 		 * fragment.
 		 */
-		public void onResume() {
-			super.onResume();
-			LoadGroupData();
-		};
 		public static final String ARG_SECTION_NUMBER = "section_number";
 
 		// Expandable listView
 		mExpandableListAdpater adpt;
 		ExpandableListView lstView;
 		List<GroupItem> lst_group;
-		GPAService gservice;
-		List<GPADto> dtoList;
+
 		public FirstSectionFragment() {
 		}
 
@@ -217,7 +209,6 @@ ActionBar.TabListener {
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_main_dummy,
 					container, false);
-			gservice = new GPAService(getActivity());
 			/*
 			 * TextView dummyTextView = (TextView) rootView
 			 * .findViewById(R.id.section_label);
@@ -228,7 +219,7 @@ ActionBar.TabListener {
 			lstView = (ExpandableListView) rootView.findViewById(R.id.explist);
 			lst_group = new ArrayList<GroupItem>();
 			// Loading Data;
-
+			LoadGroupData();
 
 			adpt = new mExpandableListAdpater(rootView.getContext(), lstView,
 					lst_group);
@@ -240,7 +231,7 @@ ActionBar.TabListener {
 						int groupPosition, int childPosition, long id) {
 					// TODO Auto-generated method stub
 					Intent intent = new Intent(getActivity(),
-							EditSubjectActivity.class);
+						EditSubjectActivity.class);
 					startActivity(intent);
 					return false;
 				}
@@ -317,45 +308,14 @@ ActionBar.TabListener {
 		}
 
 		private void LoadGroupData() {
-			
-			try{
-
-				dtoList = gservice.getAllList();
-			}
-			catch(Exception e){
-				e.printStackTrace();
-			}
-			finally{
-				List<ChildItem> lstchd ;
-				Log.i("1",dtoList.size()+"");
-				for(GPADto dto_temp:  dtoList){
-					ChildItem ci = new ChildItem();
-					ci.setSubData(dto_temp.getGrade(),dto_temp.getSubject(),
-							dto_temp.getMajor(), dto_temp.getCredit());
-					// First DB占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占싶몌옙 占쌨아와쇽옙 占십깍옙화占쏙옙占쏙옙占쏙옙.		
-
-					GroupItem gitem = new GroupItem();
-					gitem.setData(dto_temp.getYear()
-							+"-"+dto_temp.getSemester());
-					int index = 0;
-					if(checkgitem(gitem.getData(),index)){
-	
-						gitem =lst_group.get(index);  
-						lstchd =  gitem.getItems();
-						lstchd.add(ci);
-					}
-					else{
-						lstchd = new ArrayList<ChildItem>();
-						lstchd.add(ci);
-						gitem.setItems(lstchd);
-						lst_group.add(gitem);
-					}
-					adpt.notifyDataSetChanged();
-
-					// First DB占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占싶몌옙 占쌨아와쇽옙 占십깍옙화占쏙옙占쏙옙占쏙옙.		
-
-
-					/*ci = new ChildItem();
+			GroupItem gitem = new GroupItem();
+			List<ChildItem> lstchd = new ArrayList<ChildItem>();
+			ChildItem ci = new ChildItem();
+			// First DB占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占싶몌옙 占쌨아와쇽옙 占십깍옙화占쏙옙占쏙옙占쏙옙.
+			gitem.setData("1학년 1학기");
+			ci.setSubData("A+", "한글", "전공", 3.2);
+			lstchd.add(ci);
+			ci = new ChildItem();
 			ci.setSubData("C", "디지털영상처리 ", "전공", 3.3);
 			lstchd.add(ci);
 			ci = new ChildItem();
@@ -378,26 +338,17 @@ ActionBar.TabListener {
 			lstchd.add(ci);
 			gitem.setItems(lstchd);
 			lst_group.add(gitem);
-					 */	}
 
-			}
-		}
-		private boolean checkgitem(String name,int index){
-			for(GroupItem g:lst_group){
-				if(g.getData().equals(name))
-					index = lst_group.indexOf(g);
-					return true;
-			}
-			return false;
 		}
 	}
+
 	public static class SecondSectionFragment extends Fragment {
 		/**
 		 * The fragment argument representing the section number for this
 		 * fragment.
 		 */
 		private Controller controller;
-
+		
 		public static final String ARG_SECTION_NUMBER = "section_number";
 
 		public SecondSectionFragment() {
@@ -415,37 +366,37 @@ ActionBar.TabListener {
 			p.setX(0);
 			p.setY(controller.getGPA(GPAService.TOTAL_SCORE,1,1));
 			l.addPoint(p);
-
+			
 			p = new LinePoint();
 			p.setX(2);
 			p.setY(controller.getGPA(GPAService.TOTAL_SCORE,1,2));
 			l.addPoint(p);
-
+			
 			p = new LinePoint();
 			p.setX(4);
 			p.setY(controller.getGPA(GPAService.TOTAL_SCORE,2,1));
 			l.addPoint(p);
-
+			
 			p = new LinePoint();
 			p.setX(6);
 			p.setY(controller.getGPA(GPAService.TOTAL_SCORE,2,2));
 			l.addPoint(p);
-
+			
 			p = new LinePoint();
 			p.setX(8);
 			p.setY(controller.getGPA(GPAService.TOTAL_SCORE,3,1));
 			l.addPoint(p);
-
+			
 			p = new LinePoint();
 			p.setX(10);
 			p.setY(controller.getGPA(GPAService.TOTAL_SCORE,3,2));
 			l.addPoint(p);
-
+			
 			p = new LinePoint();
 			p.setX(12);
 			p.setY(controller.getGPA(GPAService.TOTAL_SCORE,4,1));
 			l.addPoint(p);
-
+			
 			p = new LinePoint();
 			p.setX(14);
 			p.setY(controller.getGPA(GPAService.TOTAL_SCORE,4,2));
@@ -456,45 +407,45 @@ ActionBar.TabListener {
 			li.addLine(l);
 			li.setRangeY(0, 4.6f);
 			li.setLineToFill(0);
-
+			
 			///////////
-
+			
 			Line l2 = new Line();
 			LinePoint p2 = new LinePoint();
 			p2.setX(0);
 			p2.setY(2.5f);
 			l2.addPoint(p2);
-
+			
 			p2 = new LinePoint();
 			p2.setX(2);
 			p2.setY(3.8f);
 			l2.addPoint(p2);
-
+			
 			p2 = new LinePoint();
 			p2.setX(4);
 			p2.setY(0f);
 			l2.addPoint(p2);
-
+			
 			p2 = new LinePoint();
 			p2.setX(6);
 			p2.setY(2.8f);
 			l2.addPoint(p2);
-
+			
 			p2 = new LinePoint();
 			p2.setX(8);
 			p2.setY(3.2f);
 			l2.addPoint(p2);
-
+			
 			p2 = new LinePoint();
 			p2.setX(10);
 			p2.setY(4.5f);
 			l2.addPoint(p2);
-
+			
 			p2 = new LinePoint();
 			p2.setX(12);
 			p2.setY(2.9f);
 			l2.addPoint(p2);
-
+			
 			p2 = new LinePoint();
 			p2.setX(14);
 			p2.setY(3.4f);
@@ -505,46 +456,46 @@ ActionBar.TabListener {
 			li2.addLine(l2);
 			li2.setRangeY(0, 4.6f);
 			li2.setLineToFill(0);
-
+			
 			///////////////////////////
-
-
+			
+			
 			Line l3 = new Line();
 			LinePoint p3 = new LinePoint();
 			p3.setX(0);
 			p3.setY(3.0f);
 			l3.addPoint(p3);
-
+			
 			p3 = new LinePoint();
 			p3.setX(2);
 			p3.setY(2.5f);
 			l3.addPoint(p3);
-
+			
 			p3 = new LinePoint();
 			p3.setX(4);
 			p3.setY(4.5f);
 			l3.addPoint(p3);
-
+			
 			p3 = new LinePoint();
 			p3.setX(6);
 			p3.setY(3.9f);
 			l3.addPoint(p3);
-
+			
 			p3 = new LinePoint();
 			p3.setX(8);
 			p3.setY(3.0f);
 			l3.addPoint(p3);
-
+			
 			p3 = new LinePoint();
 			p3.setX(10);
 			p3.setY(2.3f);
 			l3.addPoint(p3);
-
+			
 			p3 = new LinePoint();
 			p3.setX(12);
 			p3.setY(1.5f);
 			l3.addPoint(p3);
-
+			
 			p3 = new LinePoint();
 			p3.setX(14);
 			p3.setY(3.9f);
@@ -555,26 +506,26 @@ ActionBar.TabListener {
 			li3.addLine(l3);
 			li3.setRangeY(0, 4.6f);
 			li3.setLineToFill(0);
-
-
-
-			//			ArrayList<Bar> points = new ArrayList<Bar>();
-			//			Bar d = new Bar();
-			//			d.setColor(Color.parseColor("#99CC00"));
-			//			d.setName("Test1");
-			//			d.setValue(10);
-			//			Bar d2 = new Bar();
-			//			d2.setColor(Color.parseColor("#FFBB33"));
-			//			d2.setName("Test2");
-			//			d2.setValue(20);
-			//			points.add(d);
-			//			points.add(d2);
-			//
-			//			BarGraph g = (BarGraph)findViewById(R.id.graph);
-			//			g.setBars(points);
-
-
-
+			
+			
+			
+//			ArrayList<Bar> points = new ArrayList<Bar>();
+//			Bar d = new Bar();
+//			d.setColor(Color.parseColor("#99CC00"));
+//			d.setName("Test1");
+//			d.setValue(10);
+//			Bar d2 = new Bar();
+//			d2.setColor(Color.parseColor("#FFBB33"));
+//			d2.setName("Test2");
+//			d2.setValue(20);
+//			points.add(d);
+//			points.add(d2);
+	//
+//			BarGraph g = (BarGraph)findViewById(R.id.graph);
+//			g.setBars(points);
+			
+			
+			
 			//////////
 			PieGraph pg = (PieGraph)rootView.findViewById(R.id.graph2);
 			PieSlice slice = new PieSlice();

@@ -19,7 +19,7 @@ public class MyAdpater extends BaseAdapter {
 	private Context c;
 	private LayoutInflater inflater;
 	
-	public ArrayList<Class_info> Class_info_array; 
+	private ArrayList<Class_info> Class_info_array; 
 	public MyAdpater(Context c,ArrayList<Class_info> Class_info_Array){
 		this.c =c;
 	
@@ -67,10 +67,10 @@ public class MyAdpater extends BaseAdapter {
 			edit_major.setChecked(ci.isMajor());
 			
 
-			edit_Grade.addTextChangedListener(new TextWacherImpl2(pos, TextWacherImpl.Grade));
-			edit_Credit.addTextChangedListener(new TextWacherImpl2(pos,TextWacherImpl.Credit));
-			edit_Subject.addTextChangedListener(new TextWacherImpl2(pos,TextWacherImpl.Subject));
-			edit_major.setOnCheckedChangeListener(new ButtonCheakImpl2(pos));
+			edit_Grade.addTextChangedListener(new TextWacherImpl(ci, TextWacherImpl.Grade));
+			edit_Credit.addTextChangedListener(new TextWacherImpl(ci,TextWacherImpl.Credit));
+			edit_Subject.addTextChangedListener(new TextWacherImpl(ci,TextWacherImpl.Subject));
+			edit_major.setOnCheckedChangeListener(new ButtonCheakImpl(ci));
 			
 			
 			
@@ -147,70 +147,6 @@ public class MyAdpater extends BaseAdapter {
 				boolean isChecked) {
 			// TODO Auto-generated method stub
 			ci.setMajor(isChecked);
-		}
-		
-	}
-
-	class TextWacherImpl2 implements TextWatcher{
-
-		int position;
-		int type;
-		
-		static final int Grade = 0;
-		static final int Credit = 1;
-		static final int Subject = 2;
-		static final int MAJOR = 3;
-		
-		public TextWacherImpl2(int position, int type){
-			this.position = position;
-			this.type = type;
-			
-		}
-		
-		@Override
-		public void afterTextChanged(Editable s) {
-			
-		}
-
-		@Override
-		public void beforeTextChanged(CharSequence s, int start, int count,
-				int after) {
-			
-		}
-
-		@Override
-		public void onTextChanged(CharSequence s, int start, int before,
-				int count) {
-			switch (type) {
-			case Grade:
-				Class_info_array.get(position).setGrade(s.toString());
-				break;
-			case Credit:
-				Class_info_array.get(position).setCredit(s.toString());
-				break;
-			case Subject:
-				Class_info_array.get(position).setSubject(s.toString());
-				break;
-			default:
-				break;
-			}
-		}
-		
-	}
-
-	class ButtonCheakImpl2 implements CompoundButton.OnCheckedChangeListener{
-
-		int pos;
-		
-		public ButtonCheakImpl2(int pos){
-			this.pos=pos;
-		}
-		
-		@Override
-		public void onCheckedChanged(CompoundButton buttonView,
-				boolean isChecked) {
-			// TODO Auto-generated method stub
-			Class_info_array.get(pos).setMajor(isChecked);
 		}
 		
 	}

@@ -34,7 +34,7 @@ public class GPAService {
 	// dao 여기서부터 정보빼오기
 
 	// DB에서 전부 빼오기
-	public List<GPADto> getAllList() {
+	private List<GPADto> getAllList() {
 		return gpaDao.getAllList();
 	}
 
