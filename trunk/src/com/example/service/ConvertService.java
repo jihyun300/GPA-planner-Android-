@@ -1,5 +1,9 @@
 package com.example.service;
-
+/**
+ * 
+ * @author Doyoon
+ *
+ */
 public class ConvertService {
 
 	public static float convertToScore(String str) {
@@ -56,6 +60,4 @@ public class ConvertService {
 			return 0f;
 		}
 	}
-
-	// if(settingService.)
 }

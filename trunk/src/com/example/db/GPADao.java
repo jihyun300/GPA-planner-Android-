@@ -20,7 +20,6 @@ public class GPADao {
 
 	public GPADao(Context context) {
 		dbHelper = new GPADbHelper(context);
-
 	}
 
 	// 전체
@@ -46,7 +45,6 @@ public class GPADao {
 			if (db != null) {
 				db.close();
 			}
-			//dbHelper.close();
 		}
 		return dtoList;
 	}
@@ -54,10 +52,9 @@ public class GPADao {
 	//학년 학기별 
 	public List<GPADto> getGPADtoList(int year, int semester){
 		db = dbHelper.getWritableDatabase();
-		db = dbHelper.getWritableDatabase();
 		List<GPADto> dtoList = new ArrayList<GPADto>();
 		String query = "SELECT id, year, semester, credit, grade, major, subject"
-								+" FROM"+GPADbHelper.TABLE_NAME
+								+" FROM "+GPADbHelper.TABLE_NAME
 								+" WHERE year LIKE '"+year+"%'"
 								+" AND semester LIKE '"+semester+"%';";
 		try{
@@ -77,23 +74,24 @@ public class GPADao {
 			if(db!=null){
 				db.close();
 			}
-
 		}
 		return dtoList;
 	}
 
-
 	// INSERT 하는 로직 지현이꺼에 쓰일 로직
-	public void insertOneGPA(Object obj) {
+	public void insertGPADto(Object obj) {
 		db = dbHelper.getWritableDatabase();
 		GPADto dto = (GPADto) obj;
 		try {
 
-			db.execSQL("INSERT INTO " + GPADbHelper.TABLE_NAME + " VALUES ("
-					+ "null, " + dto.getYear() + "," + dto.getSemester() + ","
-					+ dto.getCredit() + ",'" + dto.getGrade() + "'," + "'"
-					+ dto.getMajor() + "','" + dto.getSubject() + "' );");
-
+			db.execSQL("INSERT INTO " + GPADbHelper.TABLE_NAME + 
+								" VALUES ("+ " null, " + 
+												dto.getYear() + "," +
+												dto.getSemester() + ","+ 
+												dto.getCredit() + ",'" + 
+												dto.getGrade() + "'," + "'"	+
+												dto.getMajor() + "','" + 
+												dto.getSubject() + "' );");
 		} catch (Exception e) {
 			System.out.println("SQL오류");
 			e.printStackTrace();
@@ -101,7 +99,6 @@ public class GPADao {
 			if (db != null) {
 				db.close();
 			}
-
 		}
 	}
 	//ID 값으로 과목 정보만 불러오기 made by 대현

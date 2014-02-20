@@ -44,8 +44,8 @@ public class GPAService {
 	}
 
 	// 성적입력하기 (성적입력 액티비티에서 for문 돌려가면서 이 함수를 반복 수행한다)
-	private void insertOneGPA(Object obj) {
-		gpaDao.insertOneGPA(obj);
+	public void insertGPADto(Object gpaDto) {
+		gpaDao.insertGPADto(gpaDto);
 	}
 
 	// 여기서 부터 dao 에서 뺴온 정보로 비즈니스 로직 담장하는 부분

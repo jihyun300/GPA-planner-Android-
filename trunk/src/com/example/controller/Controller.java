@@ -2,6 +2,7 @@ package com.example.controller;
 
 import android.content.Context;
 
+import com.example.db.GPADto;
 import com.example.service.GPAService;
 import com.example.service.SettingService;
 
@@ -22,5 +23,10 @@ public class Controller {
 	
 	public float getGPA(int type, int year, int semester){
 		return gpaService.getGPA(type, year, semester);
+	}
+	public void insertGPADto(Object gpaDto){
+		if( gpaDto instanceof GPADto){
+			gpaService.insertGPADto(gpaDto);
+		}
 	}
 }
