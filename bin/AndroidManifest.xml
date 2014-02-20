@@ -16,6 +16,7 @@
             <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.example.gpaplan_mainpage.MainActivity"/>
         </activity>
         <!--created by User at 2014-02-08 12:52:32-->
-        <activity android:name=".EditSubjectActivity"/>
+        <activity android:name="com.example.gpaplan_mainpage.EditSubjectActivity" 
+            android:label="@string/title_edit_subject"/>
     </application>
 </manifest>
