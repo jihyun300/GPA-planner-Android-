@@ -1,6 +1,7 @@
 package com.example.gpaplan_mainpage;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.example.db.GPADao;
 import com.example.db.GPADbHelper;
@@ -44,6 +45,9 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 	
 	MyAdpater adap;
 	
+	int Year_from_spinYear;
+	int Semeseter_from_spinSemester;
+	
 	Spinner spinYear;
 	Spinner spinSemester;
 	TextView selVersionYear;
@@ -58,6 +62,7 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_display_add);
 		gpdb = new GPADao(getApplicationContext());
+		
 		// Show the Up button in the action bar.
 		setupActionBar();
 	
@@ -74,8 +79,9 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 		adap = new MyAdpater(this,classInfo);
 		listview = (ListView) findViewById(R.id.listview1);
 		listview.addFooterView(footView);
+		
 		listview.setAdapter(adap);
-		//ListView 초기화
+		//ListView 珥덇린��
 		Class_info init_cli = new Class_info("","", "", false);
 		classInfo.add(init_cli);
 	
@@ -98,7 +104,9 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 					int i, long l) {
 				// TODO Auto-generated method stub
 				spinYear.setSelection(i);
+				Year_from_spinYear =i+1;
 				String selYear=(String)spinYear.getSelectedItem();
+				
 //				selVersionYear.setText("Selected Android OS:"+selYear);
 				
 			}
@@ -106,7 +114,6 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
 				// TODO Auto-generated method stub
-				
 			}
 			
 		});
@@ -120,6 +127,7 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 					int i, long l) {
 				// TODO Auto-generated method stub
 				spinSemester.setSelection(i);
+				Semeseter_from_spinSemester=i+1;
 				String selSemster=(String)spinSemester.getSelectedItem();
 //				selVersionYear.setText("Selected Android OS:"+selYear);
 				
@@ -171,20 +179,35 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 
 	private void openOK() {
 		// TODO Auto-generated method stub
-	Toast.makeText(this, "DB에 내용을 추가합니다.", Toast.LENGTH_SHORT).show();
-	GPADto temp = new GPADto( 1, 1, 3, "3.2", "전공", "통신이론");
-	gpdb.insertOneGPA(temp);
+
+		
+		Toast.makeText(this, "DB에 내용을 추가합니다.", Toast.LENGTH_SHORT).show();
+	//GPADto temp = new GPADto( 1, 1, 3, "3.2", "�꾧났", "�듭떊�대줎");
+	
+	//Iterator iter= classInfo.iterator();
+	for(int i =0; i<classInfo.size();i++){
+		Class_info ci_temp = classInfo.get(i);
+		GPADto dto_temp= new GPADto(Year_from_spinYear,Semeseter_from_spinSemester,
+				Integer.parseInt(ci_temp.getCredit()),ci_temp.getGrade(),
+				ci_temp.getMajorString(),ci_temp.getSubject());
+		gpdb.insertOneGPA(dto_temp);
+//		
+		}
 	
 	}
 	
 	/**
-	 * ���г� ���б� �Է��ϴ� �Լ�
+	 * 占쏙옙占싻놂옙 占쏙옙占싻깍옙 占쌉뤄옙占싹댐옙 占쌉쇽옙
 	 */
 	public void addLayout(){		
 		
-		//gpdb.db.execSQL("DELETE FROM gpa_table;"); DB지우는거 테스트 
-		//gpdb.dbHelper.close();
-		EditText editgrade=(EditText)findViewById(R.id.editGrade);
+		Class_info cl_temp = new Class_info("", "", "", false);
+		classInfo.add(cl_temp);
+		adap.notifyDataSetChanged();
+		
+//	gpdb.db.execSQL("DELETE FROM gpa_table;"); //db吏�슦��硫붿냼��
+
+		/*EditText editgrade=(EditText)findViewById(R.id.editGrade);
 		EditText editcredit=(EditText)findViewById(R.id.editCredit);
 		EditText editsubject=(EditText)findViewById(R.id.editSubject);
 		ToggleButton editMajor=(ToggleButton)findViewById(R.id.button_MajorOr);
@@ -194,23 +217,22 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 		String inputValue3=editcredit.getText().toString();
 		boolean inputValue4=editMajor.isChecked();
 		
-		refresh(inputValue1,inputValue2,inputValue3,inputValue4);
-		editgrade.setText("");
-		editcredit.setText("");
-		editsubject.setText("");
-		editMajor.setChecked(false);
+		refresh(inputValue1,inputValue2,inputValue3,inputValue4);*/
+//		editgrade.setText("");
+//		editcredit.setText("");
+//		editsubject.setText("");
+//		editMajor.setChecked(false);
 		
 	}
 
-	private void refresh(String inputValue1,String inputValue2,String inputValue3,boolean inputValue4) {
+	/*private void refresh(String inputValue1,String inputValue2,String inputValue3,boolean inputValue4) {
 			
 		// TODO Auto-generated method stub
 		Class_info cl1 = new Class_info(inputValue1,inputValue2,inputValue3,inputValue4);
 		this.classInfo.add(cl1);
-				
-				
 		adap.notifyDataSetChanged();
-	}
+		
+	}*/
 
 	@Override
 	public void onClick(View v) {
