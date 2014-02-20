@@ -1,43 +1,47 @@
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:orientation="horizontal"
     android:background="@drawable/list_selector" >
 
     <TextView
         android:id="@+id/list_item_label"
-        android:layout_width="40dp"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+      
+         android:gravity="center_horizontal"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="7dp"
-        android:layout_alignParentTop="true"
         android:text="AA"
         android:textSize="22sp" />
 
     <TextView
-        android:id="@+id/list_item_major"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:textSize="8sp"
-        android:layout_toRightOf="@+id/list_item_label"
-        android:text="전공" />
-
-    <TextView
         android:id="@+id/list_item_subjectname"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight ="4.8"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/list_item_label"
-        android:layout_alignLeft="@+id/list_item_major"
+
         android:text="디지털이미지" />
-
-    <TextView
-        android:id="@+id/list_item_score"
-        android:layout_width="wrap_content"
+  <TextView
+        android:id="@+id/list_item_credit"
+        android:layout_width="0dp"
+        android:layout_weight="1.6"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="14dp"
-        android:text="3.4"
-        android:textSize="21sp" />
+        android:text="3"
+        android:gravity="center_horizontal"
+        android:textSize="18sp" />
+    
+    <TextView
+ 	    android:id="@+id/list_item_major"
+ 	    android:layout_width="0dp"
+ 	    android:layout_weight="1.5"
+        android:layout_height="wrap_content"
+ 	    android:gravity="center_horizontal"
+ 	    android:text="전공"
+        android:textSize="18sp"
+ 	    />
+  
+ 	
 
-</RelativeLayout>
+
+</LinearLayout>

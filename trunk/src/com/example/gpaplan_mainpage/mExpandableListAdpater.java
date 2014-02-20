@@ -18,11 +18,12 @@ public class mExpandableListAdpater extends BaseExpandableListAdapter{
 	public Context mContext;
 	public ExpandableListView mListView;
 	public List mlist;
+	public LayoutInflater inflater;
 	public mExpandableListAdpater(Context context, ExpandableListView ListView, List list){
 		this.mContext=context;
 		this.mListView=ListView;
 		this.mlist= list;
-		//dddddddd
+		this.inflater=(LayoutInflater)mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
 		
 		
 	}
@@ -53,14 +54,11 @@ public class mExpandableListAdpater extends BaseExpandableListAdapter{
 			boolean isLastChild, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		ChildItem citem = (ChildItem)getChild(groupPosition,childPosition);
-		if(convertView==null){
-			LayoutInflater inflater= (LayoutInflater)mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
-			convertView= inflater.inflate(R.layout.list_item, null);
-		}
+		convertView= inflater.inflate(R.layout.list_item, null);
 		((TextView)convertView.findViewById(R.id.list_item_label)).setText(citem.getScore_en());
 		((TextView)convertView.findViewById(R.id.list_item_subjectname)).setText(citem.getSubjectname());
 		((TextView)convertView.findViewById(R.id.list_item_major)).setText(citem.getMajor());
-		((TextView)convertView.findViewById(R.id.list_item_score)).setText(Double.toString(citem.getScore()));
+		((TextView)convertView.findViewById(R.id.list_item_credit)).setText(Integer.toString(citem.getCredit()));
 
 		return convertView;
 	}

@@ -199,7 +199,6 @@ ActionBar.TabListener {
 		 */
 		public void onResume() {
 			super.onResume();
-		
 		};
 		public static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -228,7 +227,7 @@ ActionBar.TabListener {
 			lstView = (ExpandableListView) rootView.findViewById(R.id.explist);
 			lst_group = new ArrayList<GroupItem>();
 			// Loading Data;
-
+			
 
 			adpt = new mExpandableListAdpater(rootView.getContext(), lstView,
 					lst_group);
@@ -242,7 +241,8 @@ ActionBar.TabListener {
 					// TODO Auto-generated method stub
 					Intent intent = new Intent(getActivity(),
 							EditSubjectActivity.class);
-					intent.putExtra("DBid", lst_group.get(groupPosition).getItems().get(childPosition).getDBid());
+					int DBid = lst_group.get(groupPosition).getItems().get(childPosition).getDBid();
+					intent.putExtra("DBid", DBid);
 					startActivity(intent);
 					return false;
 				}
@@ -338,7 +338,7 @@ ActionBar.TabListener {
 
 					GroupItem gitem = new GroupItem();
 					gitem.setData(dto_temp.getYear()
-							+"-"+dto_temp.getSemester());
+							+"학년 "+dto_temp.getSemester()+"학기");
 					int index = 0;
 					if(checkgitem(gitem.getData(),index)){
 	
@@ -386,10 +386,12 @@ ActionBar.TabListener {
 		}
 		private boolean checkgitem(String name,int index){
 			for(GroupItem g:lst_group){
-				if(g.getData().equals(name))
+				if(name.equals(g.getData())){
 					index = lst_group.indexOf(g);
 					return true;
+				}
 			}
+			
 			return false;
 		}
 	}

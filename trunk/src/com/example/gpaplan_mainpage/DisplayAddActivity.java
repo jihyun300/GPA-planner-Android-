@@ -1,40 +1,26 @@
 package com.example.gpaplan_mainpage;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-
-import com.example.controller.Controller;
-import com.example.db.GPADao;
-import com.example.db.GPADbHelper;
-import com.example.db.GPADto;
-
-
 
 import android.app.Activity;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
+
+import com.example.controller.Controller;
+import com.example.db.GPADao;
+import com.example.db.GPADto;
 
 public class DisplayAddActivity extends Activity implements OnClickListener{
 	
@@ -191,7 +177,9 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 		GPADto dto_temp= new GPADto(Year_from_spinYear,Semeseter_from_spinSemester,
 				Integer.parseInt(ci_temp.getCredit()),ci_temp.getGrade(),
 				ci_temp.getMajorString(),ci_temp.getSubject());
+
 		controller.insertGPADto(dto_temp);
+
 //		
 		}
 	}
@@ -204,6 +192,13 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 		Class_info cl_temp = new Class_info("", "", "", false);
 		classInfo.add(cl_temp);
 		adap.notifyDataSetChanged();
+		
+		
+/*
+		gpdb.db  = gpdb.dbHelper.getWritableDatabase();
+		gpdb.db.execSQL("DELETE FROM gpa_table;"); //db없애는 명령어
+		gpdb.db.close();
+
 		/*
 	gpdb.db = gpdb.dbHelper.getWritableDatabase();
 	gpdb.db.execSQL("DELETE FROM gpa_table;"); //db없애기
