@@ -410,7 +410,6 @@ ActionBar.TabListener {
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_second,
 					container, false);
-			rootView.
 			//////////--------------------그래프시작
 			controller = new Controller(rootView.getContext());
 			Line l = new Line();
