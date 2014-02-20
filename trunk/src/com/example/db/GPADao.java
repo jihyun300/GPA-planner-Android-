@@ -20,6 +20,7 @@ public class GPADao {
 
 	public GPADao(Context context) {
 		dbHelper = new GPADbHelper(context);
+
 	}
 
 	// 전체
@@ -27,8 +28,7 @@ public class GPADao {
 		db = dbHelper.getWritableDatabase();
 		List<GPADto> dtoList = new ArrayList<GPADto>();
 		try {
-			Cursor cs = db.rawQuery("SELECT id, year, semester,"
-					+ "credit, grade, major, subject FROM"
+			Cursor cs = db.rawQuery("SELECT * FROM "
 					+ GPADbHelper.TABLE_NAME + ";", null);
 			while (cs.moveToNext()) {
 				dtoList.add(new GPADto(cs.getInt(0), 
@@ -54,6 +54,7 @@ public class GPADao {
 	//학년 학기별 
 	public List<GPADto> getGPADtoList(int year, int semester){
 		db = dbHelper.getWritableDatabase();
+		db = dbHelper.getWritableDatabase();
 		List<GPADto> dtoList = new ArrayList<GPADto>();
 		String query = "SELECT id, year, semester, credit, grade, major, subject"
 								+"FROM"+GPADbHelper.TABLE_NAME
@@ -76,9 +77,207 @@ public class GPADao {
 			if(db!=null){
 				db.close();
 			}
+
 		}
 		return dtoList;
 	}
+
+	// 1-2 성적
+	public List<GPADto> getList_1_2() {
+		db = dbHelper.getWritableDatabase();
+		List<GPADto> dtoList = new ArrayList<GPADto>();
+		try {
+			Cursor cs = db.rawQuery("SELECT id, year, semester,"
+					+ "credit, grade, major, subject FROM"
+					+ GPADbHelper.TABLE_NAME
+					+ " WHERE year like '1 %' AND semester like '2 %' ;", null);
+
+			while (cs.moveToNext()) {
+				dtoList.add(new GPADto(cs.getInt(0), cs.getInt(1),
+						cs.getInt(2), cs.getInt(3), cs.getString(4), cs
+								.getString(5), cs.getString(6)));
+			}
+		} catch (Exception e) {
+			System.out.println("SQL오류");
+			e.printStackTrace();
+		} finally {
+			if (db != null) {
+				db.close();
+			}
+			//dbHelper.close();
+		}
+
+		return dtoList;
+	}
+
+	// 2-1 성적
+	public List<GPADto> getList_2_1() {
+		db = dbHelper.getWritableDatabase();
+		List<GPADto> dtoList = new ArrayList<GPADto>();
+		try {
+			Cursor cs = db.rawQuery("SELECT id, year, semester,"
+					+ "credit, grade, major, subject FROM"
+					+ GPADbHelper.TABLE_NAME
+					+ " WHERE year like '2 %' AND semester like '1 %' ;", null);
+
+			while (cs.moveToNext()) {
+				dtoList.add(new GPADto(cs.getInt(0), cs.getInt(1),
+						cs.getInt(2), cs.getInt(3), cs.getString(4), cs
+								.getString(5), cs.getString(6)));
+			}
+		} catch (Exception e) {
+			System.out.println("SQL오류");
+			e.printStackTrace();
+		} finally {
+			if (db != null) {
+				db.close();
+			}
+			//dbHelper.close();
+		}
+
+		return dtoList;
+	}
+
+	// 2-2 성적
+	public List<GPADto> getList_2_2() {
+		db = dbHelper.getWritableDatabase();
+		List<GPADto> dtoList = new ArrayList<GPADto>();
+		try {
+			Cursor cs = db.rawQuery("SELECT id, year, semester,"
+					+ "credit, grade, major, subject FROM"
+					+ GPADbHelper.TABLE_NAME + " WHERE year like '" + "2 "
+					+ "%' AND semester like '2 %' ;", null);
+
+			while (cs.moveToNext()) {
+				dtoList.add(new GPADto(cs.getInt(0), cs.getInt(1),
+						cs.getInt(2), cs.getInt(3), cs.getString(4), cs
+								.getString(5), cs.getString(6)));
+			}
+		} catch (Exception e) {
+			System.out.println("SQL오류");
+			e.printStackTrace();
+		} finally {
+			if (db != null) {
+				db.close();
+			}
+			//dbHelper.close();
+		}
+
+		return dtoList;
+	}
+
+	// 3-1 성적
+	public List<GPADto> getList_3_1() {
+		db = dbHelper.getWritableDatabase();
+		List<GPADto> dtoList = new ArrayList<GPADto>();
+		try {
+			Cursor cs = db.rawQuery("SELECT id, year, semester,"
+					+ "credit, grade, major, subject FROM"
+					+ GPADbHelper.TABLE_NAME
+					+ " WHERE year like '3 %' AND semester like '1 %' ;", null);
+
+			while (cs.moveToNext()) {
+				dtoList.add(new GPADto(cs.getInt(0), cs.getInt(1),
+						cs.getInt(2), cs.getInt(3), cs.getString(4), cs
+								.getString(5), cs.getString(6)));
+			}
+		} catch (Exception e) {
+			System.out.println("SQL오류");
+			e.printStackTrace();
+		} finally {
+			if (db != null) {
+				db.close();
+			}
+			//dbHelper.close();
+		}
+
+		return dtoList;
+	}
+
+	// 3-2 성적
+	public List<GPADto> getList_3_2() {
+		db = dbHelper.getWritableDatabase();
+		List<GPADto> dtoList = new ArrayList<GPADto>();
+		try {
+			Cursor cs = db.rawQuery("SELECT id, year, semester,"
+					+ "credit, grade, major, subject FROM"
+					+ GPADbHelper.TABLE_NAME
+					+ " WHERE year like '3 %' AND semester like '2 %' ;", null);
+
+			while (cs.moveToNext()) {
+				dtoList.add(new GPADto(cs.getInt(0), cs.getInt(1),
+						cs.getInt(2), cs.getInt(3), cs.getString(4), cs
+								.getString(5), cs.getString(6)));
+			}
+		} catch (Exception e) {
+			System.out.println("SQL오류");
+			e.printStackTrace();
+		} finally {
+			if (db != null) {
+				db.close();
+			}
+			//dbHelper.close();
+		}
+
+		return dtoList;
+	}
+
+	// 4-1 성적
+	public List<GPADto> getList_4_1() {
+		db = dbHelper.getWritableDatabase();
+		List<GPADto> dtoList = new ArrayList<GPADto>();
+		try {
+			Cursor cs = db.rawQuery("SELECT id, year, semester,"
+					+ "credit, grade, major, subject FROM"
+					+ GPADbHelper.TABLE_NAME
+					+ " WHERE year like '4 %' AND semester like '1 %' ;", null);
+
+			while (cs.moveToNext()) {
+				dtoList.add(new GPADto(cs.getInt(0), cs.getInt(1),
+						cs.getInt(2), cs.getInt(3), cs.getString(4), cs
+								.getString(5), cs.getString(6)));
+			}
+		} catch (Exception e) {
+			System.out.println("SQL오류");
+			e.printStackTrace();
+		} finally {
+			if (db != null) {
+				db.close();
+			}
+			//dbHelper.close();
+		}
+
+		return dtoList;
+	}
+
+	// 4-2 성적
+	public List<GPADto> getList_4_2() {
+		db = dbHelper.getWritableDatabase();
+		List<GPADto> dtoList = new ArrayList<GPADto>();
+		try {
+			Cursor cs = db.rawQuery("SELECT id, year, semester,"
+					+ "credit, grade, major, subject FROM"
+					+ GPADbHelper.TABLE_NAME
+					+ " WHERE year like '4 %' AND semester like '2 %' ;", null);
+
+			while (cs.moveToNext()) {
+				dtoList.add(new GPADto(cs.getInt(0), cs.getInt(1),
+						cs.getInt(2), cs.getInt(3), cs.getString(4), cs
+								.getString(5), cs.getString(6)));
+			}
+		} catch (Exception e) {
+			System.out.println("SQL오류");
+			e.printStackTrace();
+		} finally {
+			if (db != null) {
+				db.close();
+			}
+			//dbHelper.close();
+		}
+
+		return dtoList;
+	}
+
 
 	// INSERT 하는 로직 지현이꺼에 쓰일 로직
 	public void insertOneGPA(Object obj) {
@@ -98,6 +297,7 @@ public class GPADao {
 			if (db != null) {
 				db.close();
 			}
+
 		}
 	}
 
