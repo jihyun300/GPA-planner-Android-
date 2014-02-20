@@ -204,9 +204,11 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 		Class_info cl_temp = new Class_info("", "", "", false);
 		classInfo.add(cl_temp);
 		adap.notifyDataSetChanged();
-		
-//	gpdb.db.execSQL("DELETE FROM gpa_table;"); //db吏�슦��硫붿냼��
-
+		/*
+	gpdb.db = gpdb.dbHelper.getWritableDatabase();
+	gpdb.db.execSQL("DELETE FROM gpa_table;"); //db없애기
+	gpdb.db.close();
+	*/
 		/*EditText editgrade=(EditText)findViewById(R.id.editGrade);
 		EditText editcredit=(EditText)findViewById(R.id.editCredit);
 		EditText editsubject=(EditText)findViewById(R.id.editSubject);

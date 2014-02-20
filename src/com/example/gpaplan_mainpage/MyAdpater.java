@@ -9,8 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 
@@ -54,10 +56,13 @@ public class MyAdpater extends BaseAdapter {
 			convertView = inflater.inflate(R.layout.item_view,null);
 		//}
 	
+			
 			EditText edit_Grade = (EditText)convertView.findViewById(R.id.editGrade);
 			EditText edit_Credit = (EditText)convertView.findViewById(R.id.editCredit);
 			EditText edit_Subject=(EditText)convertView.findViewById(R.id.editSubject);
 			ToggleButton edit_major=(ToggleButton)convertView.findViewById(R.id.button_MajorOr);
+			Button edit_Delete=(Button)convertView.findViewById(R.id.delButton);
+			
 			
 			Class_info ci = this.Class_info_array.get(position);
 			edit_Grade.setText(ci.getGrade());
@@ -66,12 +71,27 @@ public class MyAdpater extends BaseAdapter {
 			
 			edit_major.setChecked(ci.isMajor());
 			
+			edit_Delete.setTag(position);
 
 			edit_Grade.addTextChangedListener(new TextWacherImpl(ci, TextWacherImpl.Grade));
 			edit_Credit.addTextChangedListener(new TextWacherImpl(ci,TextWacherImpl.Credit));
 			edit_Subject.addTextChangedListener(new TextWacherImpl(ci,TextWacherImpl.Subject));
 			edit_major.setOnCheckedChangeListener(new ButtonCheakImpl(ci));
 			
+	
+
+			edit_Delete.setOnClickListener(new View.OnClickListener() {
+				
+			
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					Toast.makeText(c,"위치:"+pos, Toast.LENGTH_SHORT).show();
+					Class_info_array.remove(pos);
+					notifyDataSetChanged();
+					
+				}
+			});
 			
 			
 		
@@ -81,6 +101,21 @@ public class MyAdpater extends BaseAdapter {
 		textSemester.setText(this.Class_info_array.get(position).getSemester());*/
 		return convertView;
 	}
+	
+	/*private View.OnClickListener buttonClickListener=new View.OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			switch(v.getId()){
+			case R.id.delButton:
+				Toast.makeText(c,"몇번째일까", Toast.LENGTH_SHORT).show();
+				break;
+				default:
+					break;
+			}
+		}
+	};*/
 	
 	/**
 	 * �ؽ�Ʈ �Է� ��ȭ�� üũ�ϴ� Ŭ����
