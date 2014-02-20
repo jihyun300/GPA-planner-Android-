@@ -28,7 +28,7 @@ public class GPADao {
 		List<GPADto> dtoList = new ArrayList<GPADto>();
 		try {
 			Cursor cs = db.rawQuery("SELECT id, year, semester,"
-					+ "credit, grade, major, subject FROM"
+					+ "credit, grade, major, subject FROM "
 					+ GPADbHelper.TABLE_NAME + ";", null);
 			while (cs.moveToNext()) {
 				dtoList.add(new GPADto(cs.getInt(0), 
@@ -56,9 +56,9 @@ public class GPADao {
 		db = dbHelper.getWritableDatabase();
 		List<GPADto> dtoList = new ArrayList<GPADto>();
 		String query = "SELECT id, year, semester, credit, grade, major, subject"
-								+"FROM"+GPADbHelper.TABLE_NAME
-								+"WHERE year LIKE '"+year+"%'"
-								+"AND semester LIKE '"+semester+"%';";
+								+" FROM"+GPADbHelper.TABLE_NAME
+								+" WHERE year LIKE '"+year+"%'"
+								+" AND semester LIKE '"+semester+"%';";
 		try{
 			Cursor cs = db.rawQuery(query, null);
 			while(cs.moveToNext()){
