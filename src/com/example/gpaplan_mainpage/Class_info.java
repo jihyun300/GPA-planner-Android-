@@ -1,7 +1,7 @@
 package com.example.gpaplan_mainpage;
 
 public class Class_info {
-	private int year;;
+	private int year;
 	private int semester;
 	private String grade;
 	private String credit;
@@ -56,7 +56,15 @@ public class Class_info {
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
-		
+	public String getMajorString(){
+		if(this.isMajor()){
+			return "전공";
+		}
+		else{
+			return "교양";
+		}
+			
+	}
 	
 		
 }
