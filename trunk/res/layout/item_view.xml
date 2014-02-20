@@ -91,7 +91,7 @@
         android:layout_below="@+id/txtsubject"
         
         android:ems="10">
-        <requestFocus /> 
+        
         </EditText>
 
 </RelativeLayout>
