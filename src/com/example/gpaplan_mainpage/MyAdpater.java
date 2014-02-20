@@ -12,7 +12,11 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+
+import android.widget.NumberPicker;
+
 import android.widget.Toast;
+
 import android.widget.ToggleButton;
 
 
@@ -55,7 +59,7 @@ public class MyAdpater extends BaseAdapter {
 		//if(convertView == null){
 			convertView = inflater.inflate(R.layout.item_view,null);
 		//}
-	
+			
 			
 			EditText edit_Grade = (EditText)convertView.findViewById(R.id.editGrade);
 			EditText edit_Credit = (EditText)convertView.findViewById(R.id.editCredit);

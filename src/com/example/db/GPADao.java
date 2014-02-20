@@ -27,7 +27,7 @@ public class GPADao {
 		List<GPADto> dtoList = new ArrayList<GPADto>();
 		try {
 			Cursor cs = db.rawQuery("SELECT * FROM "
-					+ GPADbHelper.TABLE_NAME + ";", null);
+					+ GPADbHelper.TABLE_NAME + " ORDER BY year, semester ASC ;", null);
 			while (cs.moveToNext()) {
 				dtoList.add(new GPADto(cs.getInt(0), 
 													cs.getInt(1),
@@ -104,7 +104,7 @@ public class GPADao {
 		try {
 			Cursor cs = db.rawQuery("SELECT * FROM "
 					+ GPADbHelper.TABLE_NAME
-					+ " WHERE id like "+DBid+" ;", null);
+					+ " WHERE id like '"+DBid+"%' ;", null);
 			while (cs.moveToNext()) {
 				dto_temp = new GPADto(cs.getInt(0), cs.getInt(1),
 						cs.getInt(2), cs.getInt(3), cs.getString(4), cs
@@ -121,8 +121,29 @@ public class GPADao {
 		}
 		return dto_temp;
 	}
+	
 	// MainView에 보여져야함
+	
 	// UPDATE
+	public void updateOneGpa(int DBid){
+		db = dbHelper.getWritableDatabase();
+		
+		try {
+			Cursor cs = db.rawQuery("UPDATE FROM "
+					+ GPADbHelper.TABLE_NAME
+					+ " SET id = WHERE id like '"+DBid+"%' ;", null);
+		} catch (Exception e) {
+			System.out.println("SQL오류");
+			e.printStackTrace();
+		} finally {
+			if (db != null) {
+				db.close();
+			}
+			//dbHelper.close();
+		}
 
+	}
+		
+	
 	//
 }
