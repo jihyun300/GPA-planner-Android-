@@ -190,6 +190,7 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 		Class_info cl_temp = new Class_info("", "A+", "0", false);
 		classInfo.add(cl_temp);
 		adap.notifyDataSetChanged();
+	
 	/*	
 		gpdb.db  = gpdb.dbHelper.getWritableDatabase();
 		gpdb.db.execSQL("DELETE FROM gpa_table;"); //db없애는 명령어

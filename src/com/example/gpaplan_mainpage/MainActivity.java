@@ -17,14 +17,21 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.ActionMode;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView.MultiChoiceModeListener;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ExpandableListView.OnGroupClickListener;
+import android.widget.ListView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
@@ -37,6 +44,8 @@ import com.echo.holographlibrary.PieGraph;
 import com.echo.holographlibrary.PieSlice;
 import com.example.controller.Controller;
 import com.example.db.GPADto;
+
+
 import com.example.service.GPAService;
 public class MainActivity extends FragmentActivity implements
 ActionBar.TabListener {
@@ -208,9 +217,11 @@ ActionBar.TabListener {
 		// Expandable listView
 		mExpandableListAdpater adpt;
 		ExpandableListView lstView;
-		List<GroupItem> lst_group;
+		ArrayList<GroupItem> lst_group;
 		GPAService gservice;
 		List<GPADto> dtoList;
+		private ActionMode mActionMode;
+		int expandableListSelectionType = ExpandableListView.PACKED_POSITION_TYPE_NULL;
 		public FirstSectionFragment() {
 		}
 
@@ -230,29 +241,43 @@ ActionBar.TabListener {
 			lstView = (ExpandableListView) rootView.findViewById(R.id.explist);
 			lst_group = new ArrayList<GroupItem>();
 			// Loading Data;
-			
+
 
 			adpt = new mExpandableListAdpater(rootView.getContext(), lstView,
-					lst_group);
+					(ArrayList<GroupItem>) lst_group);
 			lstView.setAdapter(adpt);
 			LoadGroupData();
-			final ExpandableListView.OnChildClickListener mChildClickListener = new OnChildClickListener() {
+
+		 ExpandableListView.OnChildClickListener mChildClickListener = new OnChildClickListener() {
 
 				@Override
 				public boolean onChildClick(ExpandableListView parent, View v,
 						int groupPosition, int childPosition, long id) {
 					// TODO Auto-generated method stub
-					Intent intent = new Intent(getActivity(),
-							EditSubjectActivity.class);
-					int DBid = lst_group.get(groupPosition).getItems().get(childPosition).getDBid();
-					intent.putExtra("DBid", DBid);
-					startActivity(intent);
-					return false;
+					if (mActionMode != null)  {
+						if (expandableListSelectionType == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
+							int flatPosition = parent.getFlatListPosition(
+									ExpandableListView.getPackedPositionForChild(groupPosition,childPosition));
+							parent.setItemChecked(
+									flatPosition,
+									!parent.isItemChecked(flatPosition));
+						}
+						return true;
+					}
+					else{
+						Intent intent = new Intent(getActivity(),
+								EditSubjectActivity.class);
+						int DBid = lst_group.get(groupPosition).getItems().get(childPosition).getDBid();
+						intent.putExtra("DBid", DBid);
+						startActivity(intent);
+						return true;
+					}
+
 				}
 			};
 
 			lstView.setOnChildClickListener(mChildClickListener);
-			lstView.setChoiceMode(ExpandableListView.CHOICE_MODE_MULTIPLE_MODAL);
+			lstView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
 			/*lstView.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 				@Override
@@ -262,86 +287,123 @@ ActionBar.TabListener {
 					return false;
 				}
 			});*/
-			lstView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
+
+			////여기여기;;
+			lstView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
 
 				@Override
-				public boolean onActionItemClicked(ActionMode mode,
-						MenuItem item) {
-					// TODO Auto-generated method stub
-					return false;
+				public void onItemCheckedStateChanged(ActionMode mode, int position,
+						long id, boolean checked) {
+					int count = lstView.getCheckedItemCount();
+
+					if (count == 1) {
+						expandableListSelectionType = ExpandableListView.getPackedPositionType(
+								lstView.getExpandableListPosition(position));
+					}
+					mode.setTitle(String.valueOf(count));
+					configureMenu(mode.getMenu(), count);
 				}
 
 				@Override
 				public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-					// TODO Auto-generated method stub
-					ExpandableListView.OnChildClickListener m2ChildClickListener = new OnChildClickListener() {
+					//After orientation change,
+					//setting expandableListSelectionType, as tried in setExpandableListSelectionType
+					//does not work, because getExpandableListPosition does not return the correct value
+					//probably because the adapter has not yet been set up correctly
+					//thus we default to PACKED_POSITION_TYPE_GROUP
+					//this workaround works because orientation change collapses the groups
+					//so we never restore the CAB for PACKED_POSITION_TYPE_CHILD
+					expandableListSelectionType = ExpandableListView.PACKED_POSITION_TYPE_GROUP;
+					MenuInflater in=mode.getMenuInflater();
+					in.inflate(R.menu.action_mode,menu);
+					mode.setTitle(String.valueOf(lstView.getCheckedItemCount()));
+					mActionMode = mode;
+					return true;
+				}
 
-						@Override
-						public boolean onChildClick(ExpandableListView parent,
-								View v, int groupPosition, int childPosition,
-								long id) {
-							// TODO Auto-generated method stub
-							int index = lstView
-									.getFlatListPosition(ExpandableListView
-											.getPackedPositionForChild(
-													groupPosition,
-													childPosition));
-							if (lstView.getCheckedItemPositions().get(index) == true)
-								lstView.setItemChecked(index, false);
-							else
-								lstView.setItemChecked(index, true);
-							// Toast.makeText(getApplicationContext(),
-							// lstView.getCheckedItemPositions().toString(),
-							// Toast.LENGTH_SHORT).show();
-							/*
-							 * SparseBooleanArray item_check =
-							 * lstView.getCheckedItemPositions(); for(int i
-							 * =0;i<item_check.size();i++){
-							 * lstView.setItemChecked(i,item_check.get(i)); }
-							 * item_check.clear();
-							 */
-							return false;
+				@Override
+				public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+					configureMenu(menu, lstView.getCheckedItemCount());
+					return false;
+				}
+
+				@Override
+				public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+					int itemId = item.getItemId();
+					SparseBooleanArray checkedItemPositions = lstView.getCheckedItemPositions();
+					int checkedItemCount = checkedItemPositions.size();
+					String msgAction="";
+					ArrayList<String> msgObject = new ArrayList<String>();
+					if (checkedItemPositions != null) {
+						for (int i=0; i<checkedItemCount; i++) {
+							if (checkedItemPositions.valueAt(i)) {
+								int position = checkedItemPositions.keyAt(i);
+								ContextMenu.ContextMenuInfo info;
+								long pos = lstView.getExpandableListPosition(position);
+								int groupPos = ExpandableListView.getPackedPositionGroup(pos);
+								if (ExpandableListView.getPackedPositionType(pos) == ExpandableListView.PACKED_POSITION_TYPE_GROUP) {
+									msgObject.add("Group " + groupPos);
+								} else {
+									int childPos = ExpandableListView.getPackedPositionChild(pos);
+									msgObject.add("Child " + childPos + " in group " + groupPos);
+								}
+							}
 						}
+					}
+					
+					switch(itemId) {
+					
+					case R.id.action_delete_item:
+					//	for()
+						//gservice.gpaDao.DeleteOneGpa(DBid);
+						
+						Toast.makeText(getActivity(),"삭제한당", Toast.LENGTH_SHORT).show();
+						
+						break;
+					}
 
-					};
-					lstView.setOnChildClickListener(m2ChildClickListener);
+					mode.finish();
 					return true;
 				}
 
 				@Override
 				public void onDestroyActionMode(ActionMode mode) {
-					// TODO Auto-generated method stub
-					lstView.setOnChildClickListener(mChildClickListener);
+					mActionMode = null;
 				}
-
+			});
+			lstView.setOnGroupClickListener(new OnGroupClickListener() {
 				@Override
-				public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-					// TODO Auto-generated method stub
+				public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+					if (mActionMode != null)  {
+						if (expandableListSelectionType == ExpandableListView.PACKED_POSITION_TYPE_GROUP) {
+							int flatPosition = parent.getFlatListPosition(ExpandableListView.getPackedPositionForGroup(groupPosition));
+							parent.setItemChecked(
+									flatPosition,
+									!parent.isItemChecked(flatPosition));
+							return true;
+						}
+					}
 					return false;
-				}
-
-				@Override
-				public void onItemCheckedStateChanged(ActionMode mode,
-						int position, long id, boolean checked) {
-					// TODO Auto-generated method stub
-
 				}
 			});
 			return rootView;
+		}
+		protected void configureMenu(Menu menu, int count) {
+			boolean inGroup = expandableListSelectionType == ExpandableListView.PACKED_POSITION_TYPE_GROUP;			
 		}
 		int index ;
 		private void LoadGroupData() {
 
 			try{
-				
+
 				dtoList = gservice.getAllList();
 			}
 			catch(Exception e){
 				e.printStackTrace();
 			}
 			finally{
-				
-				List<ChildItem> lstchd ;
+
+				ArrayList<ChildItem> lstchd ;
 				Log.i("1",dtoList.size()+"");
 				for(GPADto dto_temp:  dtoList){
 					ChildItem ci = new ChildItem();
@@ -352,9 +414,9 @@ ActionBar.TabListener {
 					GroupItem gitem = new GroupItem();
 					gitem.setData(dto_temp.getYear()
 							+"학년 "+dto_temp.getSemester()+"학기");
-					
+
 					if(checkgitem(gitem.getData())){
-	
+
 						gitem =lst_group.get(index);  
 						lstchd =  gitem.getItems();
 						lstchd.add(ci);
@@ -377,7 +439,7 @@ ActionBar.TabListener {
 					return true;
 				}
 			}
-			
+
 			return false;
 		}
 	}
@@ -578,23 +640,23 @@ ActionBar.TabListener {
 
 
 			//////////
-//			PieGraph pg = (PieGraph)rootView.findViewById(R.id.graph2);
-//			PieSlice slice = new PieSlice();
-//			slice.setColor(Color.parseColor("#99CC00"));
-//			slice.setValue(17);
-//			pg.addSlice(slice);
-//			slice = new PieSlice();
-//			slice.setColor(Color.parseColor("#FFBB33"));
-//			slice.setValue(3);
-//			pg.addSlice(slice);
-//			slice = new PieSlice();
-//			slice.setColor(Color.parseColor("#AA66CC"));
-//			slice.setValue(80f);
-//			pg.addSlice(slice);
+			//			PieGraph pg = (PieGraph)rootView.findViewById(R.id.graph2);
+			//			PieSlice slice = new PieSlice();
+			//			slice.setColor(Color.parseColor("#99CC00"));
+			//			slice.setValue(17);
+			//			pg.addSlice(slice);
+			//			slice = new PieSlice();
+			//			slice.setColor(Color.parseColor("#FFBB33"));
+			//			slice.setValue(3);
+			//			pg.addSlice(slice);
+			//			slice = new PieSlice();
+			//			slice.setColor(Color.parseColor("#AA66CC"));
+			//			slice.setValue(80f);
+			//			pg.addSlice(slice);
 			////------------------------------------------------------
 			return rootView;
-			
-			
+
+
 		}
 	}
 

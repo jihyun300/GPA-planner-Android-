@@ -4,17 +4,17 @@ import java.util.*;
 
 public class GroupItem {
 	public String group_label ;
-	public List<ChildItem> items;
+	public ArrayList<ChildItem> items;
 	public void setData(String label){
 		this.group_label=label;
 	}
 	public String getData(){
 		return this.group_label;
 	}
-	public void setItems(List<ChildItem> items){
+	public void setItems(ArrayList<ChildItem> items){
 		this.items=items;
 	}
-	public List<ChildItem> getItems(){
+	public ArrayList<ChildItem> getItems(){
 		return this.items;
 	}	
 }
