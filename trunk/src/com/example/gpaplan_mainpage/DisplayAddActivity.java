@@ -69,7 +69,7 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 		
 		listview.setAdapter(adap);
 		//ListView 珥덇린��
-		Class_info init_cli = new Class_info("","A+", "", false);
+		Class_info init_cli = new Class_info("","A+", "0", false);
 		classInfo.add(init_cli);
 	
 		
@@ -187,7 +187,7 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 	 */
 	public void addLayout(){		
 		
-		Class_info cl_temp = new Class_info("", "A+", "", false);
+		Class_info cl_temp = new Class_info("", "A+", "0", false);
 		classInfo.add(cl_temp);
 		adap.notifyDataSetChanged();
 
