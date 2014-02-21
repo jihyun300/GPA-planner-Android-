@@ -141,9 +141,6 @@ public class GPADao {
 			}
 			//dbHelper.close();
 		}
-
 	}
-		
-	
 	//
 }

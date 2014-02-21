@@ -14,7 +14,7 @@ import com.example.service.SettingService;
 public class Controller {
 	public GPAService gpaService;
 	public SettingService settingService;
-
+    
 	// 논의 해보기
 	public Controller(Context context) {
 		gpaService = new GPAService(context);
@@ -29,4 +29,4 @@ public class Controller {
 			gpaService.insertGPADto(gpaDto);
 		}
 	}
-}
+}   
