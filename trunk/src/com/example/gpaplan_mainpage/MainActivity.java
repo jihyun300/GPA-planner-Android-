@@ -451,42 +451,42 @@ ActionBar.TabListener {
 			Line l2 = new Line();
 			LinePoint p2 = new LinePoint();
 			p2.setX(0);
-			p2.setY(2.5f);
+			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,1,1));
 			l2.addPoint(p2);
 
 			p2 = new LinePoint();
 			p2.setX(2);
-			p2.setY(3.8f);
+			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,1,2));
 			l2.addPoint(p2);
 
 			p2 = new LinePoint();
 			p2.setX(4);
-			p2.setY(0f);
+			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,2,1));
 			l2.addPoint(p2);
 
 			p2 = new LinePoint();
 			p2.setX(6);
-			p2.setY(2.8f);
+			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,2,2));
 			l2.addPoint(p2);
 
 			p2 = new LinePoint();
 			p2.setX(8);
-			p2.setY(3.2f);
+			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,3,1));
 			l2.addPoint(p2);
 
 			p2 = new LinePoint();
 			p2.setX(10);
-			p2.setY(4.5f);
+			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,3,2));
 			l2.addPoint(p2);
 
 			p2 = new LinePoint();
 			p2.setX(12);
-			p2.setY(2.9f);
+			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,4,1));
 			l2.addPoint(p2);
 
 			p2 = new LinePoint();
 			p2.setX(14);
-			p2.setY(3.4f);
+			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,4,1));
 			l2.addPoint(p2);
 			l2.setColor(Color.parseColor("#823EB6"));
 
@@ -501,42 +501,42 @@ ActionBar.TabListener {
 			Line l3 = new Line();
 			LinePoint p3 = new LinePoint();
 			p3.setX(0);
-			p3.setY(3.0f);
+			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,1,1));
 			l3.addPoint(p3);
 
 			p3 = new LinePoint();
 			p3.setX(2);
-			p3.setY(2.5f);
+			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,1,2));
 			l3.addPoint(p3);
 
 			p3 = new LinePoint();
 			p3.setX(4);
-			p3.setY(4.5f);
+			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,2,1));
 			l3.addPoint(p3);
 
 			p3 = new LinePoint();
 			p3.setX(6);
-			p3.setY(3.9f);
+			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,2,2));
 			l3.addPoint(p3);
 
 			p3 = new LinePoint();
 			p3.setX(8);
-			p3.setY(3.0f);
+			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,3,1));
 			l3.addPoint(p3);
 
 			p3 = new LinePoint();
 			p3.setX(10);
-			p3.setY(2.3f);
+			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,3,2));
 			l3.addPoint(p3);
 
 			p3 = new LinePoint();
 			p3.setX(12);
-			p3.setY(1.5f);
+			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,4,1));
 			l3.addPoint(p3);
 
 			p3 = new LinePoint();
 			p3.setX(14);
-			p3.setY(3.9f);
+			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,4,2));
 			l3.addPoint(p3);
 			l3.setColor(Color.parseColor("#CBADE3"));
 
@@ -565,19 +565,19 @@ ActionBar.TabListener {
 
 
 			//////////
-			PieGraph pg = (PieGraph)rootView.findViewById(R.id.graph2);
-			PieSlice slice = new PieSlice();
-			slice.setColor(Color.parseColor("#99CC00"));
-			slice.setValue(17);
-			pg.addSlice(slice);
-			slice = new PieSlice();
-			slice.setColor(Color.parseColor("#FFBB33"));
-			slice.setValue(3);
-			pg.addSlice(slice);
-			slice = new PieSlice();
-			slice.setColor(Color.parseColor("#AA66CC"));
-			slice.setValue(80f);
-			pg.addSlice(slice);
+//			PieGraph pg = (PieGraph)rootView.findViewById(R.id.graph2);
+//			PieSlice slice = new PieSlice();
+//			slice.setColor(Color.parseColor("#99CC00"));
+//			slice.setValue(17);
+//			pg.addSlice(slice);
+//			slice = new PieSlice();
+//			slice.setColor(Color.parseColor("#FFBB33"));
+//			slice.setValue(3);
+//			pg.addSlice(slice);
+//			slice = new PieSlice();
+//			slice.setColor(Color.parseColor("#AA66CC"));
+//			slice.setValue(80f);
+//			pg.addSlice(slice);
 			////------------------------------------------------------
 			return rootView;
 			
