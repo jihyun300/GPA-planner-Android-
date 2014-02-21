@@ -125,13 +125,17 @@ public class GPADao {
 	// MainView에 보여져야함
 	
 	// UPDATE
-	public void updateOneGpa(int DBid){
+	public void updateOneGpa(int DBid,Object obj){
 		db = dbHelper.getWritableDatabase();
-		
+		GPADto dto = (GPADto) obj;
+		String updatesql =  "UPDATE "+GPADbHelper.TABLE_NAME+" SET "
+						+ "year = "+ dto.getYear() +", semester = "+ dto.getSemester()
+						+ ", credit = "+ dto.getCredit() +", grade = '"+dto.getGrade() 
+						+"', major = '"+dto.getMajor()+"', subject = '"+dto.getSubject()
+						+ "' WHERE id ="+DBid+";";
 		try {
-			Cursor cs = db.rawQuery("UPDATE FROM "
-					+ GPADbHelper.TABLE_NAME
-					+ " SET id = WHERE id like '"+DBid+"%' ;", null);
+			
+			db.execSQL(updatesql);
 		} catch (Exception e) {
 			System.out.println("SQL오류");
 			e.printStackTrace();
@@ -143,4 +147,23 @@ public class GPADao {
 		}
 	}
 	//
+	//DELETE
+	public void DeleteOneGpa(int DBid){
+		db = dbHelper.getWritableDatabase();
+		String deletesql =  "DELETE FROM "+GPADbHelper.TABLE_NAME+ 
+							" WHERE id = '"+DBid+"' ;";						
+		try {
+			
+			db.rawQuery(deletesql, null);
+		} catch (Exception e) {
+			System.out.println("SQL오류");
+			e.printStackTrace();
+		} finally {
+			if (db != null) {
+				db.close();
+			}
+			//dbHelper.close();
+		}
+
+	}
 }
