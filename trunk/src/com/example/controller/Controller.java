@@ -20,7 +20,12 @@ public class Controller {
 		gpaService = new GPAService(context);
 		settingService = new SettingService(context);
 	}
-	
+	public int getTotalCredit(){
+		return gpaService.getTotalCredit();
+	}
+	public float getTotalGPA(){
+		return gpaService.getTotalGPA();
+	}
 	public float getGPA(int type, int year, int semester){
 		return gpaService.getGPA(type, year, semester);
 	}

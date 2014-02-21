@@ -37,6 +37,14 @@ public class GPAService {
 	public List<GPADto> getAllList() {
 		return gpaDao.getAllList();
 	}
+	//총취득학점
+	public int getTotalCredit(){
+		return getSumOfCredit();
+	}
+	//총 평점
+	public float getTotalGPA(){
+		return getMyTotalGPA();
+	}
 
 	// 학년 학기별 성적
 	private List<GPADto> getGPADtoList(int year, int semester) {
@@ -100,5 +108,25 @@ public class GPAService {
 			totalScore += ConvertService.convertToScore(dto.getGrade()) * (dto.getCredit());
 		}
 		return totalScore / totalCredit;
+	}
+	
+	private int getSumOfCredit(){
+		List<GPADto>  list = getAllList();
+		int totalCredit = 0;
+		for(GPADto dto : list){
+			totalCredit += dto.getCredit();
+		}
+		return totalCredit;
+	}
+
+	private float getMyTotalGPA() {
+		List<GPADto> list = getAllList();
+		float mytotalGrade = 0;
+		int mytotalCredit = 0;
+		for(GPADto dto : list){
+			mytotalCredit = dto.getCredit();
+			mytotalGrade = ConvertService.convertToScore(dto.getGrade());
+		}
+		return mytotalGrade / mytotalCredit;
 	}
 }
