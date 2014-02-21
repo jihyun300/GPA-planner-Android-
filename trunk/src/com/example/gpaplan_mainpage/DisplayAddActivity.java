@@ -53,7 +53,6 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 		controller = new Controller(getApplicationContext());
 		// Show the Up button in the action bar.
 		setupActionBar();
-	
 		dynamicLayout=(LinearLayout)findViewById(R.id.dynamicArea);
 		
 

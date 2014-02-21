@@ -24,6 +24,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView.MultiChoiceModeListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 
@@ -250,6 +252,15 @@ ActionBar.TabListener {
 
 			lstView.setOnChildClickListener(mChildClickListener);
 			lstView.setChoiceMode(ExpandableListView.CHOICE_MODE_MULTIPLE_MODAL);
+			/*lstView.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+				@Override
+				public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+						int arg2, long arg3) {
+					// TODO Auto-generated method stub
+					return false;
+				}
+			});*/
 			lstView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
 
 				@Override
@@ -317,17 +328,18 @@ ActionBar.TabListener {
 			});
 			return rootView;
 		}
-
+		int index ;
 		private void LoadGroupData() {
-			
-			try{
 
+			try{
+				
 				dtoList = gservice.getAllList();
 			}
 			catch(Exception e){
 				e.printStackTrace();
 			}
 			finally{
+				
 				List<ChildItem> lstchd ;
 				Log.i("1",dtoList.size()+"");
 				for(GPADto dto_temp:  dtoList){
@@ -339,8 +351,8 @@ ActionBar.TabListener {
 					GroupItem gitem = new GroupItem();
 					gitem.setData(dto_temp.getYear()
 							+"학년 "+dto_temp.getSemester()+"학기");
-					int index = 0;
-					if(checkgitem(gitem.getData(),index)){
+					
+					if(checkgitem(gitem.getData())){
 	
 						gitem =lst_group.get(index);  
 						lstchd =  gitem.getItems();
@@ -352,39 +364,12 @@ ActionBar.TabListener {
 						gitem.setItems(lstchd);
 						lst_group.add(gitem);
 					}
-					adpt.notifyDataSetChanged();
-
-					// First DB占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占싶몌옙 占쌨아와쇽옙 占십깍옙화占쏙옙占쏙옙占쏙옙.		
-
-
-					/*ci = new ChildItem();
-			ci.setSubData("C", "디지털영상처리 ", "전공", 3.3);
-			lstchd.add(ci);
-			ci = new ChildItem();
-			ci.setSubData("B", "영화의이해 ", "교양", 3.4);
-			lstchd.add(ci);
-			ci = new ChildItem();
-			ci.setSubData("B-", "심리학의이해(2)", "전공", 3.1);
-			lstchd.add(ci);
-			gitem.setItems(lstchd);
-			lst_group.add(gitem);
-			// Second
-			lstchd = new ArrayList<ChildItem>();
-			gitem = new GroupItem();
-			gitem.setData("1학년2학기");
-			ci = new ChildItem();
-			ci.setSubData("B+", "데이터구조", "전공", 3.4);
-			lstchd.add(ci);
-			ci = new ChildItem();
-			ci.setSubData("A", "글쓰기", "교양", 3.1);
-			lstchd.add(ci);
-			gitem.setItems(lstchd);
-			lst_group.add(gitem);
-					 */	}
-
+				}
+				adpt.notifyDataSetChanged();
 			}
 		}
-		private boolean checkgitem(String name,int index){
+
+		private boolean checkgitem(String name){
 			for(GroupItem g:lst_group){
 				if(name.equals(g.getData())){
 					index = lst_group.indexOf(g);
