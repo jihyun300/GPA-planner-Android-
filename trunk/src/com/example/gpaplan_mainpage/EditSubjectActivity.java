@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -26,10 +27,11 @@ import com.example.service.GPAService;
 public class EditSubjectActivity extends Activity {
 	GPAService	 gservice;
 	EditText edit_subject ;
-	EditText edit_grade  ;
-	EditText edit_credit ;
 	ToggleButton edit_major;
+	NumberPicker edit_Grades;
+	NumberPicker edit_Credit;
 	GPADto dto_temp;
+	private String[] GradeList=new String[]{"A+","A","A-","B+","B","B-","C+","C","C-","D+","D","D-","F","P","NP"};
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
@@ -49,12 +51,24 @@ public class EditSubjectActivity extends Activity {
 		Button del_button = (Button) findViewById(R.id.delButton);
 		del_button.setVisibility(View.INVISIBLE);
 		edit_subject = (EditText)findViewById(R.id.editSubject);
-		edit_grade = (EditText)findViewById(R.id.editGrade);
-		edit_credit= (EditText)findViewById(R.id.editCredit);
+		
+		edit_Grades = (NumberPicker)findViewById(R.id.editGrades);
+		edit_Credit=(NumberPicker)findViewById(R.id.editCredit);
+		edit_Grades.setMinValue(0);
+		edit_Grades.setMaxValue(14);
+		edit_Grades.setDisplayedValues(GradeList);
+		edit_Credit.setMinValue(0);
+		edit_Credit.setMaxValue(5);
+		
+		int getGradeInt=0;
+		for(int i=0;i<GradeList.length;i++){
+			if(dto_temp.getGrade().equals(GradeList[i])) getGradeInt=i;
+		}
+		edit_Grades.setValue(getGradeInt);
+		edit_Credit.setValue(dto_temp.getCredit());
+		
 		edit_major = (ToggleButton)findViewById(R.id.button_MajorOr);
 		edit_subject.setText(dto_temp.getSubject());
-		edit_grade.setText(dto_temp.getGrade());
-		edit_credit.setText(Integer.toString(dto_temp.getCredit()));
 		edit_major.setChecked(MajorToBoolean(dto_temp.getMajor()));
 	}
 	private boolean MajorToBoolean(String s) {
@@ -81,9 +95,9 @@ public class EditSubjectActivity extends Activity {
 	}
 	//수정버튼을 눌렀을때 수행되는 FUNCTION
 	private void updateDB(){
-		dto_temp.setCredit(Integer.parseInt(edit_credit.getText().toString()));
+		dto_temp.setCredit(edit_Credit.getValue());
 		dto_temp.setSubject(edit_subject.getText().toString());
-		dto_temp.setGrade(edit_grade.getText().toString());
+		dto_temp.setGrade(GradeList[edit_Grades.getValue()]);
 		//Major 를 문자형으로 받기
 		if(edit_major.isChecked())		
 		dto_temp.setMajor("전공");
