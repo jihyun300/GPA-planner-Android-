@@ -70,7 +70,7 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 		
 		listview.setAdapter(adap);
 		//ListView 珥덇린��
-		Class_info init_cli = new Class_info("","", "", false);
+		Class_info init_cli = new Class_info("","A+", "", false);
 		classInfo.add(init_cli);
 	
 		
@@ -180,7 +180,6 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 
 		controller.insertGPADto(dto_temp);
 
-//		
 		}
 	}
 	
@@ -189,9 +188,12 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 	 */
 	public void addLayout(){		
 		
-		Class_info cl_temp = new Class_info("", "", "", false);
+		Class_info cl_temp = new Class_info("", "A+", "", false);
 		classInfo.add(cl_temp);
 		adap.notifyDataSetChanged();
+
+	/*	
+=======
 		
 		
 /*
@@ -200,6 +202,7 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 		gpdb.db.close();
 
 		/*
+>>>>>>> .r55
 	gpdb.db = gpdb.dbHelper.getWritableDatabase();
 	gpdb.db.execSQL("DELETE FROM gpa_table;"); //db없애기
 	gpdb.db.close();

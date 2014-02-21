@@ -14,6 +14,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import android.widget.NumberPicker;
+import android.widget.NumberPicker.OnValueChangeListener;
 
 import android.widget.Toast;
 
@@ -26,6 +27,9 @@ public class MyAdpater extends BaseAdapter {
 	private LayoutInflater inflater;
 	
 	private ArrayList<Class_info> Class_info_array; 
+	private String[] GradeList=new String[]{"A+","A","A-","B+","B","B-","C+","C","C-","D+","D","D-","F","P","NP"};
+	
+	
 	public MyAdpater(Context c,ArrayList<Class_info> Class_info_Array){
 		this.c =c;
 	
@@ -60,16 +64,29 @@ public class MyAdpater extends BaseAdapter {
 			convertView = inflater.inflate(R.layout.item_view,null);
 		//}
 			
+
+			NumberPicker edit_Grades = (NumberPicker)convertView.findViewById(R.id.editGrades);
 			
-			EditText edit_Grade = (EditText)convertView.findViewById(R.id.editGrade);
+
 			EditText edit_Credit = (EditText)convertView.findViewById(R.id.editCredit);
 			EditText edit_Subject=(EditText)convertView.findViewById(R.id.editSubject);
 			ToggleButton edit_major=(ToggleButton)convertView.findViewById(R.id.button_MajorOr);
 			Button edit_Delete=(Button)convertView.findViewById(R.id.delButton);
 			
+			edit_Grades.setMinValue(0);
+			edit_Grades.setMaxValue(14);
+			edit_Grades.setDisplayedValues(GradeList);
 			
 			Class_info ci = this.Class_info_array.get(position);
-			edit_Grade.setText(ci.getGrade());
+			
+			int getGradeInt = 0;
+			//ci.getGrade가 어떤 숫자일때
+			
+			for(int i=0;i<GradeList.length;i++){
+				if(ci.getGrade().equals(GradeList[i])) getGradeInt=i;
+			}
+			
+			edit_Grades.setValue(getGradeInt);
 			edit_Credit.setText(ci.getCredit());
 			edit_Subject.setText(ci.getSubject());
 			
@@ -77,12 +94,13 @@ public class MyAdpater extends BaseAdapter {
 			
 			edit_Delete.setTag(position);
 
-			edit_Grade.addTextChangedListener(new TextWacherImpl(ci, TextWacherImpl.Grade));
 			edit_Credit.addTextChangedListener(new TextWacherImpl(ci,TextWacherImpl.Credit));
 			edit_Subject.addTextChangedListener(new TextWacherImpl(ci,TextWacherImpl.Subject));
 			edit_major.setOnCheckedChangeListener(new ButtonCheakImpl(ci));
+			edit_Grades.setOnValueChangedListener(new GradeChangeImpl(ci));
 			
 	
+			
 
 			edit_Delete.setOnClickListener(new View.OnClickListener() {
 				
@@ -106,20 +124,6 @@ public class MyAdpater extends BaseAdapter {
 		return convertView;
 	}
 	
-	/*private View.OnClickListener buttonClickListener=new View.OnClickListener() {
-		
-		@Override
-		public void onClick(View v) {
-			// TODO Auto-generated method stub
-			switch(v.getId()){
-			case R.id.delButton:
-				Toast.makeText(c,"몇번째일까", Toast.LENGTH_SHORT).show();
-				break;
-				default:
-					break;
-			}
-		}
-	};*/
 	
 	/**
 	 * �ؽ�Ʈ �Է� ��ȭ�� üũ�ϴ� Ŭ����
@@ -186,6 +190,21 @@ public class MyAdpater extends BaseAdapter {
 				boolean isChecked) {
 			// TODO Auto-generated method stub
 			ci.setMajor(isChecked);
+		}
+		
+	}
+	
+	class GradeChangeImpl implements NumberPicker.OnValueChangeListener{
+
+		Class_info ci;
+		
+		public GradeChangeImpl(Class_info ci){
+			this.ci=ci;
+		}
+		@Override
+		public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+			// TODO Auto-generated method stub
+			ci.setGrade(GradeList[newVal]);
 		}
 		
 	}
