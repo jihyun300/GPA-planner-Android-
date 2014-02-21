@@ -1,5 +1,6 @@
 package com.example.gpaplan_mainpage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.gpaplan_mainpage.R;
@@ -17,28 +18,29 @@ import android.widget.TextView;
 public class mExpandableListAdpater extends BaseExpandableListAdapter{
 	public Context mContext;
 	public ExpandableListView mListView;
-	public List mlist;
+	public ArrayList<GroupItem> grouplist;
+	public ArrayList childlist;
 	public LayoutInflater inflater;
-	public mExpandableListAdpater(Context context, ExpandableListView ListView, List list){
+	public mExpandableListAdpater(Context context, ExpandableListView ListView,  ArrayList<GroupItem> list){
 		this.mContext=context;
 		this.mListView=ListView;
-		this.mlist= list;
+		this.grouplist= list;
 		this.inflater=(LayoutInflater)mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
 		
 		
 	}
 	public void addItem(ChildItem citem, GroupItem gitem){
-		mlist.add(gitem);
-		int index= mlist.indexOf(gitem);
-		List lstChild = ((GroupItem)(mlist.get(index))).getItems();
+		grouplist.add(gitem);
+		int index= grouplist.indexOf(gitem);
+		ArrayList lstChild = ((GroupItem)(grouplist.get(index))).getItems();
 		lstChild.add(citem);
-		((GroupItem)(mlist.get(index))).setItems(lstChild);
+		((GroupItem)(grouplist.get(index))).setItems(lstChild);
 		
 	}
 	@Override
 	public Object getChild(int groupPosition, int childPosition) {
 		// TODO Auto-generated method stub
-		List item= ((GroupItem)mlist.get(groupPosition)).getItems();
+		ArrayList item= ((GroupItem)grouplist.get(groupPosition)).getItems();
 		return item.get(childPosition);
 				
 	}
@@ -66,25 +68,25 @@ public class mExpandableListAdpater extends BaseExpandableListAdapter{
 	@Override
 	public int getChildrenCount(int groupPosition) {
 		// TODO Auto-generated method stub
-		return ((GroupItem)mlist.get(groupPosition)).getItems().size();
+		return ((GroupItem)grouplist.get(groupPosition)).getItems().size();
 	}
 
 	@Override
 	public Object getGroup(int groupPosition) {
 		// TODO Auto-generated method stub
-		return mlist.get(groupPosition);
+		return grouplist.get(groupPosition);
 	}
 
 	@Override
 	public int getGroupCount() {
 		// TODO Auto-generated method stub
-		return mlist.size();
+		return grouplist.size();
 	}
 
 	@Override
 	public long getGroupId(int groupPosition) {
 		// TODO Auto-generated method stub
-		return 0;
+		return groupPosition;
 	}
 
 	@Override
@@ -92,9 +94,9 @@ public class mExpandableListAdpater extends BaseExpandableListAdapter{
 			View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		GroupItem temp = (GroupItem)getGroup(groupPosition);
+		convertView = inflater.inflate(R.layout.group_item, null);
 		if(convertView == null){
 			   LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
-			   convertView = inflater.inflate(R.layout.group_item, null);
 		}
 		TextView groupLabel= (TextView)convertView.findViewById(R.id.group_label);
 		groupLabel.setText(temp.getData());

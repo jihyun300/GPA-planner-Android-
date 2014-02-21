@@ -8,9 +8,10 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
-        android:choiceMode="multipleChoiceModal"
+        android:layout_marginTop="10dp"
+       	android:drawSelectorOnTop="false"
     	android:groupIndicator="@drawable/list_closed"
+    
          >
        
     </ExpandableListView>

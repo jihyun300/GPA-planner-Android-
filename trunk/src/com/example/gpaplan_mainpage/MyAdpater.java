@@ -105,7 +105,7 @@ public class MyAdpater extends BaseAdapter {
 			edit_Delete.setTag(position);
 
 //			edit_Credit.addTextChangedListener(new TextWacherImpl(ci,TextWacherImpl.Credit));
-			
+		
 			edit_Subject.addTextChangedListener(new TextWacherImpl(ci,TextWacherImpl.Subject));
 			edit_major.setOnCheckedChangeListener(new ButtonCheakImpl(ci));
 			edit_Grades.setOnValueChangedListener(new PickerChangeImpl(ci,PickerChangeImpl.Grade));
