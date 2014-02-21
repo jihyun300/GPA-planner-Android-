@@ -70,7 +70,7 @@ public class GPAService {
 		int liberalCredit = 0;
 		float liberalScore = 0;
 		for(int i=0;i<dtoList.size();i++){
-			if(dtoList.get(i).getMajor().equals("liberal")){
+			if(dtoList.get(i).getMajor().equals("교양")){
 				liberalCredit += dtoList.get(i).getCredit();
 				liberalScore += ConvertService.convertToScore(dtoList.get(i).getGrade()) * (dtoList.get(i).getCredit());
 			}
@@ -83,7 +83,7 @@ public class GPAService {
 		int majorCredit = 0;
 		float majorScore = 0;
 		for(int i=0;i<dtoList.size();i++){
-			if(dtoList.get(i).getMajor().equals("major")){
+			if(dtoList.get(i).getMajor().equals("전공")){
 				majorCredit += dtoList.get(i).getCredit();
 				majorScore += ConvertService.convertToScore(dtoList.get(i).getGrade()) * (dtoList.get(i).getCredit());
 			}
