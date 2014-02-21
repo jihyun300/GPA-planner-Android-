@@ -28,6 +28,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.TextView;
 
 import com.echo.holographlibrary.Line;
 import com.echo.holographlibrary.LineGraph;
@@ -399,6 +400,18 @@ ActionBar.TabListener {
 					container, false);
 			//////////--------------------그래프시작
 			controller = new Controller(rootView.getContext());
+			 TextView tv1=(TextView)rootView.findViewById(R.id.textView1); //=(View)findViewById(R.id.textView1);
+			 tv1.setText(""+controller.getTotalGPA());
+			 TextView tv2=(TextView)rootView.findViewById(R.id.textView2);
+			 tv2.setText(""+controller.getTotalCredit());
+		/*
+		 * DB에서 year semester 가져온다음   이중포문 사용해서
+		 * GPAService.TOTAL_SCORE,year,semester 호출한다
+		 * setX
+		 * setY 
+		 * 문제 있을  수 있다
+		 * 
+		 */
 			Line l = new Line();
 			LinePoint p = new LinePoint();
 			p.setX(0);

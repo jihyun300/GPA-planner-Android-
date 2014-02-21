@@ -51,7 +51,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="60dp"
                 android:background="@drawable/st_pup_circle_dy"
-                android:text="GPA"
+                android:gravity="center"
+                android:textColor="#ffffff"
                 android:textSize="20dp"
                  />
 
@@ -63,7 +64,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="60dp"
                 android:background="@drawable/st_pup_circle_dy"
-                android:text="GPA"
+                android:gravity="center"
                 android:textColor="#ffffff"
                 android:textSize="20dp" />
 
