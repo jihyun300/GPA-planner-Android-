@@ -13,15 +13,6 @@
     android:layout_gravity="center_horizontal" >
 
     <TextView
-        android:id="@+id/txtgrade"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editSubject"
-        android:layout_below="@+id/editSubject"
-        android:layout_marginTop="24dp"
-        android:text="성적" />
-
-    <TextView
         android:id="@+id/txtsubject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,12 +23,12 @@
 
     <Button
         android:id="@+id/delButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_alignTop="@+id/txtsubject"
         android:layout_toRightOf="@+id/editSubject"
-        android:layout_weight="1"
-        android:text="삭제" />
+        android:background="@drawable/ic_reset"
+        android:layout_weight="1" />
 
     <EditText
         android:id="@+id/editSubject"
@@ -47,13 +38,6 @@
         android:layout_below="@+id/txtsubject"
         android:ems="10" >
     </EditText>
-
-    <NumberPicker
-        android:id="@+id/editGrades"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/txtgrade" />
 
     <TextView
         android:id="@+id/txtmajor"
@@ -66,9 +50,16 @@
     <NumberPicker
         android:id="@+id/editCredit"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_alignTop="@+id/editGrades"
         android:layout_centerHorizontal="true" />
+
+    <NumberPicker
+        android:id="@+id/editGrades"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/txtgrade" />
 
     <ToggleButton
         android:id="@+id/button_MajorOr"
@@ -76,15 +67,23 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/txtmajor"
         android:layout_alignTop="@+id/editCredit"
-        android:textOff="교양"
-        android:textOn="전공" />
+        android:background="@drawable/major_selector"
+        android:textOff=""
+        android:textOn="" />
+
+    <TextView
+        android:id="@+id/txtgrade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editSubject"
+        android:text="성적" />
 
     <TextView
         android:id="@+id/txtCredit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/txtmajor"
-        android:layout_alignBottom="@+id/txtmajor"
+        android:layout_below="@+id/editSubject"
         android:layout_centerHorizontal="true"
         android:text="학점" />
 
