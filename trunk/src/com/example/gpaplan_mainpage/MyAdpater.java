@@ -120,7 +120,6 @@ public class MyAdpater extends BaseAdapter {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					Toast.makeText(c,"위치:"+pos, Toast.LENGTH_SHORT).show();
 					Class_info_array.remove(pos);
 					notifyDataSetChanged();
 					
