@@ -1,47 +1,54 @@
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="horizontal"
-      android:background="?android:attr/activatedBackgroundIndicator" >
+    android:background="?android:attr/activatedBackgroundIndicator"
+    android:orientation="horizontal" >
 
     <TextView
         android:id="@+id/list_item_label"
         android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="-2dp"
+        android:layout_marginTop="-2dp"
         android:layout_weight="2"
-      
-         android:gravity="center_horizontal"
-        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingLeft="20dp"
         android:text="AA"
-        android:textSize="22sp" />
+        android:textSize="7.5pt" />
 
     <TextView
         android:id="@+id/list_item_subjectname"
         android:layout_width="0dp"
-        android:layout_weight ="4.8"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginBottom="-2dp"
+        android:layout_marginTop="-2dp"
+        android:layout_weight="4.8"
+        android:drawableLeft="@drawable/nn"
+        android:gravity="center"
+        android:textSize="7.5pt" />
 
-        android:text="디지털이미지" />
-  <TextView
+    <TextView
         android:id="@+id/list_item_credit"
         android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="-2dp"
+        android:layout_marginTop="-2dp"
         android:layout_weight="1.6"
-        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/nn"
+        android:gravity="center"
         android:text="3"
-        android:gravity="center_horizontal"
-        android:textSize="18sp" />
-    
-    <TextView
- 	    android:id="@+id/list_item_major"
- 	    android:layout_width="0dp"
- 	    android:layout_weight="1.5"
-        android:layout_height="wrap_content"
- 	    android:gravity="center_horizontal"
- 	    android:text="전공"
-        android:textSize="18sp"
- 	    />
-  
- 	
+        android:textSize="7.5pt" />
 
+    <TextView
+        android:id="@+id/list_item_major"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="-2dp"
+        android:layout_marginTop="-2dp"
+        android:layout_weight="1.5"
+        android:drawableLeft="@drawable/nn"
+        android:gravity="center"
+        android:text="전공"
+        android:textSize="7.5pt" />
 
 </LinearLayout>

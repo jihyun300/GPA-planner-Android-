@@ -6,26 +6,28 @@
     <TextView
         android:id="@+id/group_label"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="5dp"
+        android:gravity="center"
         android:text="TextView"
         android:textColor="@android:color/holo_purple"
-        android:textSize="21sp"
+        android:textSize="7.5pt"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/group_score"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_alignBaseline="@+id/group_label"
         android:layout_alignBottom="@+id/group_label"
         android:layout_alignParentRight="true"
         android:layout_marginRight="14dp"
         android:text="3.5"
+        android:gravity="center"
         android:textColor="@android:color/holo_purple"
-        android:textSize="21sp" />
+        android:textSize="7.5pt" />
 
 </RelativeLayout>

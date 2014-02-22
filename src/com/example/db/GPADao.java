@@ -154,7 +154,7 @@ public class GPADao {
 							" WHERE id = '"+DBid+"' ;";						
 		try {
 			
-			db.rawQuery(deletesql, null);
+			db.execSQL(deletesql);
 		} catch (Exception e) {
 			System.out.println("SQL오류");
 			e.printStackTrace();

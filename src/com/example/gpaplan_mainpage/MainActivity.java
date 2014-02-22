@@ -239,6 +239,7 @@ ActionBar.TabListener {
 			 */
 			// Set up ExpandableListView
 			lstView = (ExpandableListView) rootView.findViewById(R.id.explist);
+			//lstView.setDivider(null);
 			lst_group = new ArrayList<GroupItem>();
 			// Loading Data;
 
@@ -278,16 +279,6 @@ ActionBar.TabListener {
 
 			lstView.setOnChildClickListener(mChildClickListener);
 			lstView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-			/*lstView.setOnItemLongClickListener(new OnItemLongClickListener() {
-
-				@Override
-				public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-						int arg2, long arg3) {
-					// TODO Auto-generated method stub
-					return false;
-				}
-			});*/
-
 			////여기여기;;
 			lstView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
 
@@ -295,13 +286,17 @@ ActionBar.TabListener {
 				public void onItemCheckedStateChanged(ActionMode mode, int position,
 						long id, boolean checked) {
 					int count = lstView.getCheckedItemCount();
-
+					
 					if (count == 1) {
 						expandableListSelectionType = ExpandableListView.getPackedPositionType(
 								lstView.getExpandableListPosition(position));
+						
 					}
+					if(expandableListSelectionType == ExpandableListView.PACKED_POSITION_TYPE_GROUP)
+					mode.finish();
 					mode.setTitle(String.valueOf(count));
 					configureMenu(mode.getMenu(), count);
+				
 				}
 
 				@Override
@@ -331,9 +326,20 @@ ActionBar.TabListener {
 				public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 					int itemId = item.getItemId();
 					SparseBooleanArray checkedItemPositions = lstView.getCheckedItemPositions();
+					ArrayList<int[] > list = new ArrayList<int[]>();
 					int checkedItemCount = checkedItemPositions.size();
 					String msgAction="";
 					ArrayList<String> msgObject = new ArrayList<String>();
+					class ccip {
+						int grouppos;
+						int childpos;
+						ccip(int g,int c){
+							this.grouppos=g;
+							this.childpos=c;
+						}
+					}
+					ArrayList<ccip> convertedcheckedItemPos = new ArrayList<ccip>();
+					
 					if (checkedItemPositions != null) {
 						for (int i=0; i<checkedItemCount; i++) {
 							if (checkedItemPositions.valueAt(i)) {
@@ -346,6 +352,7 @@ ActionBar.TabListener {
 								} else {
 									int childPos = ExpandableListView.getPackedPositionChild(pos);
 									msgObject.add("Child " + childPos + " in group " + groupPos);
+									convertedcheckedItemPos.add(new ccip(groupPos,childPos));
 								}
 							}
 						}
@@ -356,9 +363,15 @@ ActionBar.TabListener {
 					case R.id.action_delete_item:
 					//	for()
 						//gservice.gpaDao.DeleteOneGpa(DBid);
+						for(ccip posSet : convertedcheckedItemPos){
+							ChildItem citem_temp = lst_group.get(posSet.grouppos).getItems().get(posSet.childpos);
+							gservice.gpaDao.DeleteOneGpa(citem_temp.getDBid());
+						}
+						
+						lst_group.clear();
+						LoadGroupData();
 						
 						Toast.makeText(getActivity(),"삭제한당", Toast.LENGTH_SHORT).show();
-						
 						break;
 					}
 
@@ -368,7 +381,9 @@ ActionBar.TabListener {
 
 				@Override
 				public void onDestroyActionMode(ActionMode mode) {
+					
 					mActionMode = null;
+
 				}
 			});
 			lstView.setOnGroupClickListener(new OnGroupClickListener() {
