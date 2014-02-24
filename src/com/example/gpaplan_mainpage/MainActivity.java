@@ -30,6 +30,7 @@ import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ExpandableListView.OnGroupClickListener;
+import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -247,6 +248,7 @@ ActionBar.TabListener {
 			adpt = new mExpandableListAdpater(rootView.getContext(), lstView,
 					(ArrayList<GroupItem>) lst_group);
 			lstView.setAdapter(adpt);
+			lstView.setDivider(null);
 			LoadGroupData();
 
 		 ExpandableListView.OnChildClickListener mChildClickListener = new OnChildClickListener() {
@@ -386,9 +388,18 @@ ActionBar.TabListener {
 
 				}
 			});
+			lstView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+				
+				@Override
+				public void onGroupCollapse(int groupPosition) {
+					// TODO Auto-generated method stub
+					//adpt.setClickedPos(20);
+				}
+			});
 			lstView.setOnGroupClickListener(new OnGroupClickListener() {
 				@Override
 				public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+					adpt.setClickedPos(groupPosition);
 					if (mActionMode != null)  {
 						if (expandableListSelectionType == ExpandableListView.PACKED_POSITION_TYPE_GROUP) {
 							int flatPosition = parent.getFlatListPosition(ExpandableListView.getPackedPositionForGroup(groupPosition));
@@ -398,8 +409,19 @@ ActionBar.TabListener {
 							return true;
 						}
 					}
+					
+				
 					return false;
 				}
+			});
+			lstView.setOnGroupExpandListener(new OnGroupExpandListener(){
+
+				@Override
+				public void onGroupExpand(int groupPosition) {
+					// TODO Auto-generated method stub
+					//adpt.setClickedPos(20);
+				}
+				
 			});
 			return rootView;
 		}
@@ -427,10 +449,14 @@ ActionBar.TabListener {
 					// First DB占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占싶몌옙 占쌨아와쇽옙 占십깍옙화占쏙옙占쏙옙占쏙옙.		
 
 					GroupItem gitem = new GroupItem();
-					gitem.setData(dto_temp.getYear()
-							+"학년 "+dto_temp.getSemester()+"학기");
-
-					if(checkgitem(gitem.getData())){
+					gitem.setName(dto_temp.getYear()
+							+"학년 "+
+							((dto_temp.getSemester()>=4)?"겨울":								
+							(dto_temp.getSemester()>=3)?"여름":dto_temp.getSemester())
+							
+							+"학기");
+					gitem.setGrade(gservice.getGPA(GPAService.TOTAL_SCORE, dto_temp.getYear(), dto_temp.getSemester()));
+					if(checkgitem(gitem.getName())){
 
 						gitem =lst_group.get(index);  
 						lstchd =  gitem.getItems();
@@ -444,12 +470,13 @@ ActionBar.TabListener {
 					}
 				}
 				adpt.notifyDataSetChanged();
+				
 			}
 		}
 
 		private boolean checkgitem(String name){
 			for(GroupItem g:lst_group){
-				if(name.equals(g.getData())){
+				if(name.equals(g.getName())){
 					index = lst_group.indexOf(g);
 					return true;
 				}

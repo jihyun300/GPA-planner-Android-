@@ -82,7 +82,6 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 		
 		 spinYear=(Spinner)findViewById(R.id.spinner_Year);
 		 spinSemester=(Spinner)findViewById(R.id.spinner_Semester);
-		
 		spinYear.setAdapter(adpSpin);
 		spinYear.setOnItemSelectedListener(new OnItemSelectedListener(){
 

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     
-    <color name="sa_green">#14a804</color>
-    <color name="stacked_green">#118504</color>
-    <color name="accent_green">#97e08f</color>
+    
     <color name= "white">#d6d6d6</color>
+    <color name ="background">#E6E6E6</color>
+    <color name="font_color_black">#4D4D4D</color>
+    <color name ="font_color_purple">#A570CF</color>
+    <color name ="child_white">#F2F2F2</color>
 </resources>

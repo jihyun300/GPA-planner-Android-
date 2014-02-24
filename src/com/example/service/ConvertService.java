@@ -27,12 +27,19 @@ public class ConvertService {
 			return 3.0f;
 		} else if (str.equals("B-")) {
 			return 2.7f;
-		} else if (str.equals("D+")) {
+		// C+부터 C-까지의 값이 없기에 새로 추가 하겠습니다. BY 대현	
+		} else if (str.equals("C+")) {
 			return 2.3f;
-		} else if (str.equals("D")) {
+		} else if (str.equals("C")) {
 			return 2.0f;
-		} else if (str.equals("D-")) {
+		} else if (str.equals("C-")) {
 			return 1.7f;
+		} else if (str.equals("D+")) {
+			return 1.3f;
+		} else if (str.equals("D")) {
+			return 1.0f;
+		} else if (str.equals("D-")) {
+			return 0.7f;
 		} else {
 			return 0f;
 		}

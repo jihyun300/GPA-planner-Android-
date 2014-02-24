@@ -10,11 +10,15 @@ import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.example.controller.Controller;
 import com.example.db.GPADto;
@@ -30,24 +34,77 @@ public class EditSubjectActivity extends Activity {
 	ToggleButton edit_major;
 	NumberPicker edit_Grades;
 	NumberPicker edit_Credit;
+	Spinner spinYear;
+	Spinner spinSemester;
 	GPADto dto_temp;
 	private String[] GradeList=new String[]{"A+","A","A-","B+","B","B-","C+","C","C-","D+","D","D-","F","P","NP"};
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
-	
+	private String[] spinCategory_Year={"1","2","3","4"};
+	private String[] spinCategory_Semester={"1","2","여름","겨울"}; 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-
+		
 		// id를 넘겨줘서 DB로 접근.
 		Intent intent = getIntent();
 		int DBid=intent.getIntExtra("DBid", 0);		
 		gservice = new GPAService(getApplicationContext());
 		dto_temp = gservice.gpaDao.getDtoById(DBid);
-		setContentView(R.layout.item_view);
+		setContentView(R.layout.activity_display_edit);
+		ArrayAdapter<String> adpSpin=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,spinCategory_Year);
+		ArrayAdapter<String> adpSpin_semester=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,spinCategory_Semester);
+		adpSpin.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		adpSpin.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		
+		 spinYear=(Spinner)findViewById(R.id.spinner_Year);
+		 spinSemester=(Spinner)findViewById(R.id.spinner_Semester);
+		spinYear.setAdapter(adpSpin);
+		
+		spinYear.setOnItemSelectedListener(new OnItemSelectedListener(){
+
+			@Override
+			public void onItemSelected(AdapterView<?> adapterView, View view,
+					int i, long l) {
+				// TODO Auto-generated method stub
+				spinYear.setSelection(i);
+		
+				String selYear=(String)spinYear.getSelectedItem();
+				
+//				selVersionYear.setText("Selected Android OS:"+selYear);
+				
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+			}
+			
+		});
+		
+		
+		spinSemester.setAdapter(adpSpin_semester);
+		spinSemester.setOnItemSelectedListener(new OnItemSelectedListener(){
+		
+			@Override
+			public void onItemSelected(AdapterView<?> adapterView, View view,
+					int i, long l) {
+				// TODO Auto-generated method stub
+				spinSemester.setSelection(i);
+		
+				String selSemster=(String)spinSemester.getSelectedItem();
+//				selVersionYear.setText("Selected Android OS:"+selYear);
+				
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+			}
+	});
+
 		Button del_button = (Button) findViewById(R.id.delButton);
 		del_button.setVisibility(View.INVISIBLE);
 		edit_subject = (EditText)findViewById(R.id.editSubject);
@@ -66,7 +123,8 @@ public class EditSubjectActivity extends Activity {
 		}
 		edit_Grades.setValue(getGradeInt);
 		edit_Credit.setValue(dto_temp.getCredit());
-		
+		spinYear.setSelection(dto_temp.getYear()-1);
+		spinSemester.setSelection(dto_temp.getSemester()-1);
 		edit_major = (ToggleButton)findViewById(R.id.button_MajorOr);
 		edit_subject.setText(dto_temp.getSubject());
 		edit_major.setChecked(MajorToBoolean(dto_temp.getMajor()));
@@ -103,8 +161,10 @@ public class EditSubjectActivity extends Activity {
 		dto_temp.setMajor("전공");
 		else
 		dto_temp.setMajor("교양");
+		dto_temp.setYear(spinYear.getSelectedItemPosition()+1);
+		dto_temp.setSemester(spinSemester.getSelectedItemPosition()+1);
 		gservice.gpaDao.updateOneGpa(dto_temp.getId(), dto_temp);
-		Toast.makeText(getApplicationContext(), "DB에 내용을 업데이트합니다.",Toast.LENGTH_SHORT).show();
+		Toast.makeText(getApplicationContext(), spinYear.getSelectedItemPosition()+" "+spinSemester.getSelectedItemPosition()+" DB에 내용을 업데이트합니다.",Toast.LENGTH_SHORT).show();
 	}
 	
 	@Override
