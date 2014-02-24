@@ -1,20 +1,23 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#E6E6E6" >
+     android:background="#E6E6E6" >
 
     <ExpandableListView
         android:id="@+id/explist"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-       	android:drawSelectorOnTop="false"
-    	android:groupIndicator="@drawable/list_closed"
-    
-         >
-       
+        android:background="@color/child_white"
+        android:drawSelectorOnTop="false"
+        android:groupIndicator="@drawable/list_indicator" >
     </ExpandableListView>
 
-</LinearLayout>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/explist"
+        android:background="#CCCCCC" />
+
+</RelativeLayout>

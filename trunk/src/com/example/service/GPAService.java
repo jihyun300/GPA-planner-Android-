@@ -96,6 +96,7 @@ public class GPAService {
 				majorScore += ConvertService.convertToScore(dtoList.get(i).getGrade()) * (dtoList.get(i).getCredit());
 			}
 		}
+		
 		return majorScore / majorCredit;
 	}
 
@@ -124,9 +125,20 @@ public class GPAService {
 		float mytotalGrade = 0;
 		int mytotalCredit = 0;
 		for(GPADto dto : list){
-			mytotalCredit = dto.getCredit();
-			mytotalGrade = ConvertService.convertToScore(dto.getGrade());
+			mytotalCredit += dto.getCredit();
+			mytotalGrade += ConvertService.convertToScore(dto.getGrade()) *( dto.getCredit());
 		}
-		return mytotalGrade / mytotalCredit;
+		
+		return roundGPA(mytotalGrade,mytotalCredit);
+	}
+	
+	///소수점 둘째자리에서 반올림하기위해 만든 메서드 입니다. 봐주시고 이해 못하겠거나 맘에 안드시면 알려주세요.
+	//원래는 그냥 MATH같은 클래스로 구현되어있는 반올림 코드를 사용하고자 했는데 둘째자리까지 반올림이  마땅히 없어서 메서드를 하나 생성해어요.
+	private float roundGPA(float grade, int credit){
+		float gpa = grade / credit *100;
+		gpa = (float) (gpa+0.5);
+		gpa = (int)(gpa);
+		gpa = (float)(gpa/100);
+		return gpa;
 	}
 }

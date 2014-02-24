@@ -2,53 +2,86 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="?android:attr/activatedBackgroundIndicator"
-    android:orientation="horizontal" >
+    android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/list_item_label"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="-2dp"
-        android:layout_marginTop="-2dp"
-        android:layout_weight="2"
-        android:gravity="center"
-        android:paddingLeft="20dp"
-        android:text="AA"
-        android:textSize="7.5pt" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+       
+        android:orientation="horizontal" >
 
-    <TextView
-        android:id="@+id/list_item_subjectname"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="-2dp"
-        android:layout_marginTop="-2dp"
-        android:layout_weight="4.8"
-        android:drawableLeft="@drawable/nn"
-        android:gravity="center"
-        android:textSize="7.5pt" />
+        <RelativeLayout            
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="2"
+            >
 
-    <TextView
-        android:id="@+id/list_item_credit"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="-2dp"
-        android:layout_marginTop="-2dp"
-        android:layout_weight="1.6"
-        android:drawableLeft="@drawable/nn"
-        android:gravity="center"
-        android:text="3"
-        android:textSize="7.5pt" />
+       		<ImageView
+       		    android:id="@+id/list_item_grade"
+       		    android:layout_width="35dp"
+       		    android:layout_height="35dp"
+       		    android:layout_centerHorizontal="true"
+       		    android:layout_centerVertical="true"
+       		    android:src="@drawable/grade_aplus" />
 
-    <TextView
-        android:id="@+id/list_item_major"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="-2dp"
-        android:layout_marginTop="-2dp"
-        android:layout_weight="1.5"
-        android:drawableLeft="@drawable/nn"
-        android:gravity="center"
-        android:text="전공"
-        android:textSize="7.5pt" />
+       </RelativeLayout>
+        <!-- 중간중간 선을 넣기위한 View -->
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="50dp"
+            android:background="#CCCCCC" />
+		<TextView
+            android:id="@+id/list_item_subjectname"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="4.8"
+            
+            android:paddingLeft="17dp"
+            android:gravity="fill_vertical"
+            android:text="과목명"
+            android:textSize="7.5pt" />
+   
+        <!-- 중간중간 선을 넣기위한 View -->
+
+
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="50dp"
+            android:background="#CCCCCC" />
+
+        <TextView
+            android:id="@+id/list_item_credit"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1.6"
+            
+            android:gravity="center"
+            android:text="3"
+            android:textSize="7.5pt" />
+        <!-- 중간중간 선을 넣기위한 View -->
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="50dp"
+            android:background="#CCCCCC" />
+
+        <TextView
+            android:id="@+id/list_item_major"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1.5"
+            
+            android:gravity="center"
+            android:text="전공"
+            android:textSize="7.5pt" />
+   
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#CCCCCC" />
 
 </LinearLayout>
