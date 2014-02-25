@@ -9,12 +9,17 @@ import com.example.gpaplan_mainpage.R;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
@@ -79,7 +84,7 @@ public class mExpandableListAdpater extends BaseExpandableListAdapter{
 		// TODO Auto-generated method stub
 		return childPosition;
 	}
-
+	
 	@Override
 	public View getChildView(int groupPosition, int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
@@ -90,20 +95,48 @@ public class mExpandableListAdpater extends BaseExpandableListAdapter{
 		((TextView)convertView.findViewById(R.id.list_item_subjectname)).setText(citem.getSubjectname());
 		((TextView)convertView.findViewById(R.id.list_item_major)).setText(citem.getMajor());
 		((TextView)convertView.findViewById(R.id.list_item_credit)).setText(Integer.toString(citem.getCredit()));
-		
-		if(groupPosition==getClickedPos()){
-			Animation fadeAnimation;
-			if(mListView.isGroupExpanded(groupPosition)) 
-				fadeAnimation = AnimationUtils.loadAnimation(this.mContext, R.anim.slidedown);
-			else
-				fadeAnimation = AnimationUtils.loadAnimation(this.mContext, R.anim.slideup);
+	
+			LayoutAnimationController controller = new LayoutAnimationController(AnimationUtils.loadAnimation(this.mContext, R.anim.slidedown), 0.5f);
+		/*if(groupPosition==this.groupclickedpos) 
+			parent.setLayoutAnimation(controller);
+		 */
 			
+			
+			
+		if(groupPosition==getClickedPos()){
+			
+			Animation fadeAnimation;
+			fadeAnimation = AnimationUtils.loadAnimation(this.mContext, R.anim.slidedown);
+			fadeAnimation.setDuration(fadeAnimation.getDuration()/((childPosition+1)*2));
+			fadeAnimation.setStartOffset(fadeAnimation.getDuration()*childPosition);
+	
 			convertView.startAnimation(fadeAnimation);
-		}
 		
+		}
+	//	if(grouplist.get(groupPosition).getItems().size()==childPosition+1&&groupPosition==getClickedPos())
+		//	this.setClickedPos(this.grouplist.size()+1);
 		return convertView;
+		
 	}
-
+	
+	@Override
+	public void onGroupExpanded(int groupPosition) {
+		// TODO Auto-generated method stub
+		super.onGroupExpanded(groupPosition);
+	
+	}
+	@Override
+	public void onGroupCollapsed(int groupPosition) {
+		// TODO Auto-generated method stub
+	/*	Animation fadeAnimation;
+		fadeAnimation = AnimationUtils.loadAnimation(this.mContext, R.anim.slideup);
+		for(int i =getChildrenCount(groupPosition);i>=0;i--){
+			mListView.getChildAt(i+groupPosition).startAnimation(fadeAnimation);
+		}
+		*/
+		super.onGroupCollapsed(groupPosition);
+		
+	}
 	@Override
 	public int getChildrenCount(int groupPosition) {
 		// TODO Auto-generated method stub
@@ -143,7 +176,7 @@ public class mExpandableListAdpater extends BaseExpandableListAdapter{
 		//소수점 두번째 자리에서 자르기
 		DecimalFormat format = new DecimalFormat("0.00");
 		groupGrade.setText(format.format(temp.getGrade()));
-
+		
 		return convertView;
 	}
 
