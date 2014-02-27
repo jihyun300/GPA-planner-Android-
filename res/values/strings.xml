@@ -16,7 +16,9 @@
     <string name="text_addButton">추가</string>
     <string name="hint_all">몇</string>
     <string name="title_edit_subject">과목편집</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_splash_layout">SplashLayout</string>
+    <string name="title_activity_setting_activity__scale">SettingActivity_Scale</string>
+    <string name="title_activity_setting_activity__goal">SettingActivity_Goal</string>
 
- 
-        
 </resources>
