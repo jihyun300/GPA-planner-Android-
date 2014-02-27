@@ -548,6 +548,8 @@ ActionBar.TabListener {
 		 * 문제 있을  수 있다
 		 * 
 		 */
+			LineGraph li = (LineGraph)rootView.findViewById(R.id.graph3);
+			
 			Line l = new Line();
 			LinePoint p = new LinePoint();
 			p.setX(0);
@@ -590,13 +592,107 @@ ActionBar.TabListener {
 			l.addPoint(p);
 			l.setColor(Color.parseColor("#0099CC"));
 
-			LineGraph li = (LineGraph)rootView.findViewById(R.id.graph3);
+			
 			li.addLine(l);
 			li.setRangeY(0, 4.6f);
-			li.setLineToFill(0);
+			Line l2 = new Line();
+			LinePoint p2 = new LinePoint();
+			p2.setX(0);
+			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,1,1));
+			l2.addPoint(p2);
 
+			p2 = new LinePoint();
+			p2.setX(2);
+			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,1,2));
+			l2.addPoint(p2);
+
+			p2 = new LinePoint();
+			p2.setX(4);
+			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,2,1));
+			l2.addPoint(p2);
+
+			p2 = new LinePoint();
+			p2.setX(6);
+			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,2,2));
+			l2.addPoint(p2);
+
+			p2 = new LinePoint();
+			p2.setX(8);
+			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,3,1));
+			l2.addPoint(p2);
+
+			p2 = new LinePoint();
+			p2.setX(10);
+			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,3,2));
+			l2.addPoint(p2);
+
+			p2 = new LinePoint();
+			p2.setX(12);
+			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,4,1));
+			l2.addPoint(p2);
+
+			p2 = new LinePoint();
+			p2.setX(14);
+			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,4,1));
+			l2.addPoint(p2);
+			l2.setColor(Color.parseColor("#823EB6"));
+
+			li.addLine(l2);
+			li.setRangeY(0, 4.6f);
+			
+
+			///////////////////////////
+
+
+			Line l3 = new Line();
+			LinePoint p3 = new LinePoint();
+			p3.setX(0);
+			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,1,1));
+			l3.addPoint(p3);
+
+			p3 = new LinePoint();
+			p3.setX(2);
+			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,1,2));
+			l3.addPoint(p3);
+
+			p3 = new LinePoint();
+			p3.setX(4);
+			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,2,1));
+			l3.addPoint(p3);
+
+			p3 = new LinePoint();
+			p3.setX(6);
+			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,2,2));
+			l3.addPoint(p3);
+
+			p3 = new LinePoint();
+			p3.setX(8);
+			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,3,1));
+			l3.addPoint(p3);
+
+			p3 = new LinePoint();
+			p3.setX(10);
+			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,3,2));
+			l3.addPoint(p3);
+
+			p3 = new LinePoint();
+			p3.setX(12);
+			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,4,1));
+			l3.addPoint(p3);
+
+			p3 = new LinePoint();
+			p3.setX(14);
+			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,4,2));
+			l3.addPoint(p3);
+			l3.setColor(Color.parseColor("#CBADE3"));
+
+			li.addLine(l3);
+			li.setRangeY(0, 4.6f);
+	
+		
+			
 			///////////
-
+/*
 			Line l2 = new Line();
 			LinePoint p2 = new LinePoint();
 			p2.setX(0);
@@ -694,7 +790,7 @@ ActionBar.TabListener {
 			li3.setRangeY(0, 4.6f);
 			li3.setLineToFill(0);
 
-
+*/
 
 			//			ArrayList<Bar> points = new ArrayList<Bar>();
 			//			Bar d = new Bar();
