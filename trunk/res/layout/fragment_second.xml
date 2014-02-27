@@ -17,93 +17,106 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="34dp"
-            android:layout_weight="0.06"
             android:background="#E6E6E6"
             android:orientation="vertical" >
 
             <TextView
+                android:id="@+id/txtview1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:text="전체성적"
                 android:textColor="#4d4d4d"
-                android:textSize="30px" />
+                android:textSize="18dp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/txtview1"
+                android:layout_marginTop="6dp"
+                android:background="#CCCCCC" />
         </RelativeLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="18px" >
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_weight="0.30"
-            android:background="#E6E6E6"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="60dp"
-                android:background="@drawable/st_pup_circle_dy"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                android:textSize="20dp"
-                 />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginRight="60dp"
-                android:background="@drawable/st_pup_circle_dy"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                android:textSize="20dp" />
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:orientation="vertical" >
 
             <LinearLayout
-                android:orientation="horizontal" 
-                android:id="@+id/linearLayout1"
                 android:layout_width="fill_parent"
-                android:layout_height="4dp"
-                android:layout_above="@+id/textView1"
-                android:layout_alignParentLeft="true" >
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="fill_parent"
-                android:layout_height="17dp"
-                android:layout_alignParentBottom="true"
-                android:background="#f5f5f5"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-                <TextView
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1" />
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#E6E6E6"
-                    android:layout_weight="0.5"
-                    android:text="총 증명평점"
-                    android:textAlignment="center" />
+                    android:orientation="vertical" >
 
-                <TextView
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/st_pup_circle_dy"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="27dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_marginTop="18dp"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:background="#E6E6E6"
+                        android:gravity="center"
+                        android:text="총 증명평점"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="2" />
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#E6E6E6"
-                     android:layout_weight="0.5"
-                    android:text="총 취득학점"
-                    android:textAlignment="textStart"
-                     />
+                    android:orientation="vertical" >
 
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/st_pup_circle_dy"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="27dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_marginTop="18dp"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:background="#E6E6E6"
+                        android:gravity="center"
+                        android:text="총 취득학점"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1" />
             </LinearLayout>
-        </RelativeLayout>
+        </LinearLayout>
 
         <!-- <LinearLayout -->
         <!-- android:layout_width="wrap_content" -->
@@ -118,16 +131,24 @@
         <!-- </LinearLayout> -->
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="54dp"
             android:background="#E6E6E6"
             android:orientation="vertical" >
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="54px"
-                android:background="#E6E6E6" >
-            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="학기순 성적"
+                android:textColor="#4d4d4d"
+                android:textSize="18dp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="6dp"
+                android:background="#CCCCCC" />
 
             <com.echo.holographlibrary.LineGraph
                 android:id="@+id/graph3"
@@ -140,26 +161,172 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:layout_width="86dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="total"
-                    android:textColor="#FFBB33" />
+                    android:layout_gravity="left"
+                    android:text="전공+교양"
+                    android:textColor="#808080" />
+
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="2dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="3dp"
+                    android:background="#0099CC" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:layout_weight="1" />
 
                 <TextView
-                    android:layout_width="87dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="major"
-                    android:textColor="#77AA00" />
+                    android:text="전공"
+                    android:textColor="#808080" />
+
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="2dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="3dp"
+                    android:background="#808080" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:layout_weight="1" />
 
                 <TextView
-                    android:layout_width="91dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="liberal arts"
-                    android:textColor="#BBDD55" />
+                    android:text="교양"
+                    android:textColor="#808080" />
+
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="2dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="3dp"
+                    android:background="#CBADE3" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="54dp"
+            android:background="#E6E6E6"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="학점 달성도"
+                android:textColor="#4d4d4d"
+                android:textSize="18dp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="6dp"
+                android:background="#CCCCCC" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:text="전공+교양" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp" >
+
+                <TextView
+                    android:id="@+id/bar_total_fill"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1"
+                    android:background="#0099CC"
+                    android:gravity="center"
+                    android:text="25"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/bar_total_remain"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1"
+                    android:background="#FFFFFF"
+                    android:gravity="right|center_vertical"
+                    android:text="50" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:text="전공" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp" >
+
+                <TextView
+                    android:id="@+id/bar_major_fill"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="0.5"
+                    android:background="#823EB6"
+                    android:gravity="center"
+                    android:text="20"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/bar_major_remain"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1"
+                    android:background="#FFFFFF"
+                    android:gravity="right|center_vertical"
+                    android:text="50" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:text="교양" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp" >
+
+                <TextView
+                    android:id="@+id/bar_liberal_fill"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="2.5"
+                    android:background="#CBADE3"
+                    android:gravity="center"
+                    android:text="40"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/bar_liber_remain"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1"
+                    android:background="#FFFFFF"
+                    android:gravity="right|center_vertical"
+                    android:text="50" />
+            </LinearLayout>
+        </LinearLayout>
+        <!--
+             <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="90dp" >
         </LinearLayout>
@@ -168,29 +335,32 @@
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:orientation="vertical" >
-
+			
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent" >
 
-<!--                 <com.echo.holographlibrary.PieGraph -->
-<!--                     android:id="@+id/graph2" -->
-<!--                     android:layout_width="150dp" -->
-<!--                     android:layout_height="150dp" -->
-<!--                     android:background="#e7eff4" /> -->
+                <com.echo.holographlibrary.PieGraph
+                android:id="@+id/graph2"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="#e7eff4" />
 
-<!--                 <TextView -->
-<!--                     android:layout_width="wrap_content" -->
-<!--                     android:layout_height="wrap_content" -->
-<!--                     android:layout_alignBottom="@+id/graph2" -->
-<!--                     android:layout_alignParentLeft="true" -->
-<!--                     android:layout_marginBottom="44dp" -->
-<!--                     android:layout_marginLeft="36dp" -->
-<!--                     android:text="77%" -->
-<!--                     android:textAlignment="center" -->
-<!--                     android:textSize="40dp" /> -->
+
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/graph2"
+                android:layout_alignParentLeft="true"
+                android:layout_marginBottom="44dp"
+                android:layout_marginLeft="36dp"
+                android:text="77%"
+                android:textAlignment="center"
+                android:textSize="40dp" />
             </RelativeLayout>
         </LinearLayout>
+        -->
+
     </LinearLayout>
 
 </ScrollView>
