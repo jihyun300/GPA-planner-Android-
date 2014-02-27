@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -82,6 +83,7 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 		
 		 spinYear=(Spinner)findViewById(R.id.spinner_Year);
 		 spinSemester=(Spinner)findViewById(R.id.spinner_Semester);
+
 		spinYear.setAdapter(adpSpin);
 		spinYear.setOnItemSelectedListener(new OnItemSelectedListener(){
 
@@ -190,11 +192,12 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 		classInfo.add(cl_temp);
 		adap.notifyDataSetChanged();
 	
-	/*	
+/*		
 		gpdb.db  = gpdb.dbHelper.getWritableDatabase();
 		gpdb.db.execSQL("DELETE FROM gpa_table;"); //db없애는 명령어
 		gpdb.db.close();
-*/
+		*/
+
 	/*	
 ======
 		

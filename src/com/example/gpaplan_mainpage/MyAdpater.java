@@ -8,6 +8,8 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -132,6 +134,7 @@ public class MyAdpater extends BaseAdapter {
 		TextView textSemester = (TextView)convertView.findViewById(R.id.textSemester);
 		textYear.setText(this.Class_info_array.get(position).getYear());
 		textSemester.setText(this.Class_info_array.get(position).getSemester());*/
+
 		return convertView;
 	}
 	
