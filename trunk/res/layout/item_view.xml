@@ -1,90 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" 
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="#E6E6E6"
+    >
 
-    <RelativeLayout
-        android:id="@+id/editGrade"
+<RelativeLayout
+    android:id="@+id/editGrade"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginLeft="18dp"
+    android:layout_marginTop="9dp"
+    android:layout_marginRight="18dp"
+    android:layout_marginBottom="9dp"
+    android:padding="18dp"
+    android:background="#F2F2F2" >
+
+    <TextView
+        android:id="@+id/txtsubject"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal" >
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editSubject"
+        android:layout_alignParentTop="true"
+        android:textColor="#4D4D4D"
+         android:text="과목명" />
 
-        <TextView
-            android:id="@+id/txtsubject"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/editSubject"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="18dp"
-            android:text="과목명" />
+    <EditText
+        android:id="@+id/editSubject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/txtsubject"
+        android:layout_marginLeft="18dp"
+        android:ems="10"
+        android:hint="과목명을 입력해주세요."
+        android:textColor="#823EB6"
+        android:textCursorDrawable="@null" >
 
-        <Button
-            android:id="@+id/delButton"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_alignTop="@+id/txtsubject"
-            android:layout_toRightOf="@+id/editSubject"
-            android:layout_weight="1"
-            android:background="@drawable/ic_reset" />
+    </EditText>
 
-        <EditText
-            android:id="@+id/editSubject"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/txtsubject"
-            android:ems="10"
-            android:hint="과목명을 입력해주세요." >
-        </EditText>
+    <NumberPicker
+        android:id="@+id/editCredit"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_alignTop="@+id/editGrades"
+        android:layout_marginBottom="18dp"
+        android:layout_centerHorizontal="true"
+       />
 
-        <TextView
-            android:id="@+id/txtmajor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/editGrades"
-            android:layout_alignRight="@+id/editSubject"
-            android:text="이수" />
+    <NumberPicker
+        android:id="@+id/editGrades"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginBottom="18dp"
+        android:layout_below="@+id/txtgrade" />
 
-        <NumberPicker
-            android:id="@+id/editCredit"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_alignTop="@+id/editGrades"
-            android:layout_centerHorizontal="true" />
+    <TextView
+        android:id="@+id/txtmajor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/txtCredit"
+        android:layout_alignBottom="@+id/txtCredit"
+        android:layout_alignRight="@+id/editSubject"
+        android:textColor="#4D4D4D"
+        android:layout_marginBottom="16dp"
+        android:text="이수" />
 
-        <NumberPicker
-            android:id="@+id/editGrades"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/txtgrade" />
+    <Button
+        android:id="@+id/delButton"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/editSubject"
+        android:layout_weight="1"
+        android:background="@drawable/ic_reset" />
 
-        <ToggleButton
-            android:id="@+id/button_MajorOr"
-            android:layout_width="65dp"
-            android:layout_height="29.5dp"
-            android:layout_alignLeft="@+id/txtmajor"
-            android:layout_alignTop="@+id/editCredit"
-            android:background="@drawable/major_selector"
-            android:textOff=""
-            android:textOn="" />
+    <TextView
+        android:id="@+id/txtgrade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editGrades"
+        android:layout_below="@+id/editSubject"
+        android:layout_marginTop="14dp"
+        android:text="성적"
+        android:textColor="#4D4D4D" />
 
-        <TextView
-            android:id="@+id/txtgrade"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/editSubject"
-            android:text="성적" />
+    <TextView
+        android:id="@+id/txtCredit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/txtgrade"
+        android:layout_alignBottom="@+id/txtgrade"
+        android:layout_centerHorizontal="true"
+        android:text="학점"
+        android:textColor="#4D4D4D" />
 
-        <TextView
-            android:id="@+id/txtCredit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/editSubject"
-            android:layout_centerHorizontal="true"
-            android:text="학점" />
-    </RelativeLayout>
+    <ToggleButton
+        android:id="@+id/button_MajorOr"
+        android:layout_width="65dp"
+        android:layout_height="29.5dp"
+        android:layout_alignRight="@+id/delButton"
+        android:layout_below="@+id/txtmajor"
+        android:background="@drawable/major_selector"
+        android:textOn=""
+        android:textOff="" />
+
+</RelativeLayout>
 
 </LinearLayout>
