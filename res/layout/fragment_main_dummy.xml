@@ -8,7 +8,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@color/child_white"
+      
         android:drawSelectorOnTop="false"
         android:groupIndicator="@drawable/list_indicator" >
     </ExpandableListView>
@@ -20,4 +20,5 @@
         android:layout_alignTop="@+id/explist"
         android:background="#CCCCCC" />
 
-</RelativeLayout>
+</RelativeLayout>	
+ <!-- android:background="@color/child_white" -->

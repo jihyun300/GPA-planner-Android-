@@ -89,6 +89,7 @@ public class mExpandableListAdpater extends BaseExpandableListAdapter{
 	public View getChildView(int groupPosition, int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
+		
 		ChildItem citem = (ChildItem)getChild(groupPosition,childPosition);
 		convertView= inflater.inflate(R.layout.list_item, null);
 		((ImageView)convertView.findViewById(R.id.list_item_grade)).setImageResource(imggrade.get(citem.getScore_en()));

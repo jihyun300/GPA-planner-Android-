@@ -9,6 +9,7 @@ import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.ClipData.Item;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,13 +23,19 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View.OnAttachStateChangeListener;
+import android.view.View.OnLayoutChangeListener;
+import android.view.View.OnSystemUiVisibilityChangeListener;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.ListView;
@@ -251,7 +258,7 @@ ActionBar.TabListener {
 			lstView.setDivider(null);
 			LoadGroupData();
 
-		 ExpandableListView.OnChildClickListener mChildClickListener = new OnChildClickListener() {
+			ExpandableListView.OnChildClickListener mChildClickListener = new OnChildClickListener() {
 
 				@Override
 				public boolean onChildClick(ExpandableListView parent, View v,
@@ -393,6 +400,7 @@ ActionBar.TabListener {
 				@Override
 				public void onGroupCollapse(int groupPosition) {
 					// TODO Auto-generated method stub
+				
 					//adpt.setClickedPos(20);
 				}
 			});
@@ -408,10 +416,33 @@ ActionBar.TabListener {
 									!parent.isItemChecked(flatPosition));
 							return true;
 						}
-					}
-					
-				
+					}				
 					return false;
+					
+				}
+				
+				
+			});
+		
+		
+			lstView.setScrollbarFadingEnabled(true);
+			lstView.addOnLayoutChangeListener(new OnLayoutChangeListener() {
+				
+				@Override
+				public void onLayoutChange(View v, int left, int top, int right,
+						int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+					// TODO Auto-generated method stub
+					if(bottom>=oldBottom)
+					adpt.setClickedPos(100);
+				}
+			});
+		
+			lstView.setOnSystemUiVisibilityChangeListener(new OnSystemUiVisibilityChangeListener() {
+				
+				@Override
+				public void onSystemUiVisibilityChange(int visibility) {
+					// TODO Auto-generated method stub
+					//if()
 				}
 			});
 			lstView.setOnGroupExpandListener(new OnGroupExpandListener(){
@@ -423,6 +454,7 @@ ActionBar.TabListener {
 				}
 				
 			});
+			
 			return rootView;
 		}
 		protected void configureMenu(Menu menu, int count) {

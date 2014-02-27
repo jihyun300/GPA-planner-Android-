@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.View.MeasureSpec;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
-
+//  이 파일은 사용하지 않는 파일입니다... 어쩌다보니 추가하게됏습;;
 /**
  * Class for handling collapse and expand animations.
  * @author Esben Gaarsmand
