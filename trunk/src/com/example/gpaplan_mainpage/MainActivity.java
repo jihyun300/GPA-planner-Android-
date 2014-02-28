@@ -8,7 +8,9 @@ import java.util.Locale;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.ClipData.Item;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -60,14 +62,26 @@ ActionBar.TabListener {
 
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	ViewPager mViewPager;
-
+	long m_startTime;
+	long m_endTime;
+	static float getScale;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		//사용자가 들어왔었는지 확인(write)
+		SharedPreferences sharedPref=getSharedPreferences("pref",Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor=sharedPref.edit();
+		editor.putInt(getString(R.string.savedSetting),1);
+		editor.commit();
 
+		//4.3 4.5읽기(READ)
+		SharedPreferences savedScale=getSharedPreferences("savedScale",MODE_PRIVATE);
+		float init43=4.3f;
+		getScale=savedScale.getFloat(getString(R.string.savedScale),init43);
 		setContentView(R.layout.activity_main);
 
+		m_startTime=System.currentTimeMillis();
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -81,6 +95,7 @@ ActionBar.TabListener {
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 
+	
 		// When swiping between different sections, select the corresponding
 		// tab. We can also use ActionBar.Tab#select() to do this if we have
 		// a reference to the Tab.
@@ -463,8 +478,15 @@ ActionBar.TabListener {
 			boolean inGroup = expandableListSelectionType == ExpandableListView.PACKED_POSITION_TYPE_GROUP;			
 		}
 		int index ;
+		
 		private void LoadGroupData() {
+			
 
+			if(getScale==4.3f)
+				gservice.setting=0;
+			else
+				gservice.setting=1;
+			
 			try{
 
 				dtoList = gservice.getAllList();
@@ -832,4 +854,25 @@ ActionBar.TabListener {
 		}
 	}
 
+	@Override
+	public void onBackPressed(){
+		boolean m_isPressedBackButton = true;
+		m_endTime=System.currentTimeMillis();
+		
+		if(m_endTime-m_startTime>2000)
+			m_isPressedBackButton=false;
+		//백버튼 막기
+		if(m_isPressedBackButton==false){
+			m_isPressedBackButton=true;
+			m_startTime=System.currentTimeMillis();
+			
+			Toast.makeText(this, "뒤로 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
+			
+		}
+		else{
+			finish();
+			System.exit(0);
+			android.os.Process.killProcess(android.os.Process.myPid());
+		}
+	}
 }

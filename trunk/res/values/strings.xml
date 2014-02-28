@@ -21,4 +21,9 @@
     <string name="title_activity_setting_activity__scale">SettingActivity_Scale</string>
     <string name="title_activity_setting_activity__goal">SettingActivity_Goal</string>
 
+    <string name="savedSetting">savedSetting</string>
+    <string name="savedScale">savedScale</string>
+    <string name="savedGoalMajor">savedGoalMajor</string>
+    <string name="savedGoalLiberal">savedGoalLiberal</string>
+    <string name="savedTarget">savedTarget</string>
 </resources>

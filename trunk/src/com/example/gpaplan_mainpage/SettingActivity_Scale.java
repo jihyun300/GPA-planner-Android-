@@ -2,7 +2,9 @@ package com.example.gpaplan_mainpage;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,8 +19,11 @@ public class SettingActivity_Scale extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		startActivity(new Intent(this,SplashActivity.class));
-		setContentView(R.layout.activity_setting_activity__scale);		
+		setContentView(R.layout.activity_setting_activity__scale);
+		
+
+
+	
 //		scaleLayout=(LinearLayout)findViewById(R.id.scaleLayout);
 //		View scaleView= getLayoutInflater().inflate(R.layout.activity_setting_activity__scale,null);
 /*		scaleView.findViewById(R.id.buttScale430).setOnClickListener(this);
@@ -55,9 +60,18 @@ public class SettingActivity_Scale extends Activity {
 		
 		Intent intent=new Intent(this,SettingActivity_Goal.class);
 		String message="4.5";
+		
+		//4.3 4.5 저장
+		SharedPreferences savedScale=getSharedPreferences("savedScale",Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor=savedScale.edit();
+		
+		editor.putFloat(getString(R.string.savedScale),Float.parseFloat(message));
+		editor.commit();
+		
 		intent.putExtra(EXTRA_MESSAGE, message);
 		startActivity(intent);
-		
+
+		finish();
 		
 		
 	}
@@ -66,9 +80,16 @@ public class SettingActivity_Scale extends Activity {
 		// TODO Auto-generated method stub
 		Intent intent=new Intent(this,SettingActivity_Goal.class);
 		String message="4.3";
+		//4.3 4.5 저장
+		SharedPreferences savedScale=getSharedPreferences("savedScale",Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor=savedScale.edit();
+		
+		editor.putFloat(getString(R.string.savedScale),Float.parseFloat(message));
+		editor.commit();
+		
 		intent.putExtra(EXTRA_MESSAGE, message);
 		startActivity(intent);
-
+		finish();
 	}
 
 }
