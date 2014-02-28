@@ -47,11 +47,7 @@ import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.TextView;
 
-import com.echo.holographlibrary.Line;
-import com.echo.holographlibrary.LineGraph;
-import com.echo.holographlibrary.LinePoint;
-import com.echo.holographlibrary.PieGraph;
-import com.echo.holographlibrary.PieSlice;
+import com.example.holographylibrary.*;
 import com.example.controller.Controller;
 import com.example.db.GPADto;
 
@@ -62,9 +58,13 @@ ActionBar.TabListener {
 
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	ViewPager mViewPager;
+
+	static ArrayList<GroupItem> lst_group;
+
 	long m_startTime;
 	long m_endTime;
 	static float getScale;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -242,7 +242,7 @@ ActionBar.TabListener {
 		// Expandable listView
 		mExpandableListAdpater adpt;
 		ExpandableListView lstView;
-		ArrayList<GroupItem> lst_group;
+		
 		GPAService gservice;
 		List<GPADto> dtoList;
 		private ActionMode mActionMode;
@@ -312,17 +312,17 @@ ActionBar.TabListener {
 				public void onItemCheckedStateChanged(ActionMode mode, int position,
 						long id, boolean checked) {
 					int count = lstView.getCheckedItemCount();
-					
+
 					if (count == 1) {
 						expandableListSelectionType = ExpandableListView.getPackedPositionType(
 								lstView.getExpandableListPosition(position));
-						
+
 					}
 					if(expandableListSelectionType == ExpandableListView.PACKED_POSITION_TYPE_GROUP)
-					mode.finish();
+						mode.finish();
 					mode.setTitle(String.valueOf(count));
 					configureMenu(mode.getMenu(), count);
-				
+
 				}
 
 				@Override
@@ -365,7 +365,7 @@ ActionBar.TabListener {
 						}
 					}
 					ArrayList<ccip> convertedcheckedItemPos = new ArrayList<ccip>();
-					
+
 					if (checkedItemPositions != null) {
 						for (int i=0; i<checkedItemCount; i++) {
 							if (checkedItemPositions.valueAt(i)) {
@@ -383,20 +383,20 @@ ActionBar.TabListener {
 							}
 						}
 					}
-					
+
 					switch(itemId) {
-					
+
 					case R.id.action_delete_item:
-					//	for()
+						//	for()
 						//gservice.gpaDao.DeleteOneGpa(DBid);
 						for(ccip posSet : convertedcheckedItemPos){
 							ChildItem citem_temp = lst_group.get(posSet.grouppos).getItems().get(posSet.childpos);
 							gservice.gpaDao.DeleteOneGpa(citem_temp.getDBid());
 						}
-						
+
 						lst_group.clear();
 						LoadGroupData();
-						
+
 						Toast.makeText(getActivity(),"삭제한당", Toast.LENGTH_SHORT).show();
 						break;
 					}
@@ -407,17 +407,17 @@ ActionBar.TabListener {
 
 				@Override
 				public void onDestroyActionMode(ActionMode mode) {
-					
+
 					mActionMode = null;
 
 				}
 			});
 			lstView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-				
+
 				@Override
 				public void onGroupCollapse(int groupPosition) {
 					// TODO Auto-generated method stub
-				
+
 					//adpt.setClickedPos(20);
 				}
 			});
@@ -435,27 +435,27 @@ ActionBar.TabListener {
 						}
 					}				
 					return false;
-					
+
 				}
-				
-				
+
+
 			});
-		
-		
+
+
 			lstView.setScrollbarFadingEnabled(true);
 			lstView.addOnLayoutChangeListener(new OnLayoutChangeListener() {
-				
+
 				@Override
 				public void onLayoutChange(View v, int left, int top, int right,
 						int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
 					// TODO Auto-generated method stub
 					if(bottom>=oldBottom)
-					adpt.setClickedPos(100);
+						adpt.setClickedPos(100);
 				}
 			});
-		
+
 			lstView.setOnSystemUiVisibilityChangeListener(new OnSystemUiVisibilityChangeListener() {
-				
+
 				@Override
 				public void onSystemUiVisibilityChange(int visibility) {
 					// TODO Auto-generated method stub
@@ -469,9 +469,9 @@ ActionBar.TabListener {
 					// TODO Auto-generated method stub
 					//adpt.setClickedPos(20);
 				}
-				
+
 			});
-			
+
 			return rootView;
 		}
 		protected void configureMenu(Menu menu, int count) {
@@ -508,10 +508,12 @@ ActionBar.TabListener {
 					gitem.setName(dto_temp.getYear()
 							+"학년 "+
 							((dto_temp.getSemester()>=4)?"겨울":								
-							(dto_temp.getSemester()>=3)?"여름":dto_temp.getSemester())
-							
-							+"학기");
+								(dto_temp.getSemester()>=3)?"여름":dto_temp.getSemester())
+
+								+"학기");
 					gitem.setGrade(gservice.getGPA(GPAService.TOTAL_SCORE, dto_temp.getYear(), dto_temp.getSemester()));
+					gitem.setYear(dto_temp.getYear());
+					gitem.setSemester(dto_temp.getSemester());
 					if(checkgitem(gitem.getName())){
 
 						gitem =lst_group.get(index);  
@@ -526,7 +528,7 @@ ActionBar.TabListener {
 					}
 				}
 				adpt.notifyDataSetChanged();
-				
+
 			}
 		}
 
@@ -560,22 +562,57 @@ ActionBar.TabListener {
 					container, false);
 			//////////--------------------그래프시작
 			controller = new Controller(rootView.getContext());
-			 TextView tv1=(TextView)rootView.findViewById(R.id.textView1); //=(View)findViewById(R.id.textView1);
-			 tv1.setText(""+controller.getTotalGPA());
-			 TextView tv2=(TextView)rootView.findViewById(R.id.textView2);
-			 tv2.setText(""+controller.getTotalCredit());
-		/*
-		 * DB에서 year semester 가져온다음   이중포문 사용해서
-		 * GPAService.TOTAL_SCORE,year,semester 호출한다
-		 * setX
-		 * setY 
-		 * 문제 있을  수 있다
-		 * 
-		 */
+			TextView tv1=(TextView)rootView.findViewById(R.id.textView1); //=(View)findViewById(R.id.textView1);
+			tv1.setText(""+controller.getTotalGPA());
+			TextView tv2=(TextView)rootView.findViewById(R.id.textView2);
+			tv2.setText(""+controller.getTotalCredit());
+			/*
+			 * DB에서 year semester 가져온다음   이중포문 사용해서
+			 * GPAService.TOTAL_SCORE,year,semester 호출한다
+			 * setX
+			 * setY 
+			 * 문제 있을  수 있다
+			 * 
+			 */
 			LineGraph li = (LineGraph)rootView.findViewById(R.id.graph3);
+			li.showHorizontalGrid(true);
+			li.showMinAndMaxValues(true);
+			li.setRangeY(0, 4.5f);
 			
-			Line l = new Line();
-			LinePoint p = new LinePoint();
+			Line tline = new Line();
+			Line mline = new Line();
+			Line lline = new Line();
+			
+		
+			
+			float plot_x=0;
+			for(GroupItem g : lst_group){
+				LinePoint tpoint = new LinePoint();
+				LinePoint mpoint = new LinePoint();
+				LinePoint lpoint = new LinePoint();
+				tpoint.setX(plot_x);
+				mpoint.setX(plot_x);
+				lpoint.setX(plot_x);
+				
+				tpoint.setY(controller.getGPA(GPAService.TOTAL_SCORE,g.getYear(),g.getSemester()));
+				mpoint.setY(controller.getGPA(GPAService.MAJOR_SCORE,g.getYear(),g.getSemester()));
+				lpoint.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,g.getYear(),g.getSemester()));
+				if(tpoint.getY()!=-1.0f)
+				tline.addPoint(tpoint);
+				if(mpoint.getY()!=-1.0f)
+				mline.addPoint(mpoint);
+				if(lpoint.getY()!=-1.0f)
+				lline.addPoint(lpoint);
+				
+				plot_x+=2.0f;
+			}
+			tline.setColor(getResources().getColor(R.color.line_total));
+			mline.setColor(getResources().getColor(R.color.line_major));
+			lline.setColor(getResources().getColor(R.color.line_liberal));
+			li.addLine(tline);
+			li.addLine(mline);
+			li.addLine(lline);
+			/*
 			p.setX(0);
 			p.setY(controller.getGPA(GPAService.TOTAL_SCORE,1,1));
 			l.addPoint(p);
@@ -616,9 +653,10 @@ ActionBar.TabListener {
 			l.addPoint(p);
 			l.setColor(Color.parseColor("#0099CC"));
 
-			
+
 			li.addLine(l);
-			li.setRangeY(0, 4.6f);
+
+			///////////////////////////////////////////////
 			Line l2 = new Line();
 			LinePoint p2 = new LinePoint();
 			p2.setX(0);
@@ -662,8 +700,8 @@ ActionBar.TabListener {
 			l2.setColor(Color.parseColor("#823EB6"));
 
 			li.addLine(l2);
-			li.setRangeY(0, 4.6f);
-			
+
+
 
 			///////////////////////////
 
@@ -710,13 +748,15 @@ ActionBar.TabListener {
 			l3.addPoint(p3);
 			l3.setColor(Color.parseColor("#CBADE3"));
 
+			li.setRangeY(0, 4.5f);
 			li.addLine(l3);
-			li.setRangeY(0, 4.6f);
-	
-		
-			
+
+
+
+
+
 			///////////
-/*
+			/*
 			Line l2 = new Line();
 			LinePoint p2 = new LinePoint();
 			p2.setX(0);
@@ -814,7 +854,7 @@ ActionBar.TabListener {
 			li3.setRangeY(0, 4.6f);
 			li3.setLineToFill(0);
 
-*/
+			 */
 
 			//			ArrayList<Bar> points = new ArrayList<Bar>();
 			//			Bar d = new Bar();

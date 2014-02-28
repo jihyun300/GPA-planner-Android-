@@ -150,7 +150,7 @@
                 android:layout_marginTop="6dp"
                 android:background="#CCCCCC" />
 
-            <com.echo.holographlibrary.LineGraph
+            <com.example.holographylibrary.LineGraph
                 android:id="@+id/graph3"
                 android:layout_width="match_parent"
                 android:layout_height="200dp" />
@@ -191,7 +191,7 @@
                     android:layout_height="2dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="3dp"
-                    android:background="#808080" />
+                    android:background="@color/line_major" />
 
                 <View
                     android:layout_width="0dp"
@@ -202,7 +202,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="교양"
-                    android:textColor="#808080" />
+                    android:textColor="@color/line_liberal" />
 
                 <View
                     android:layout_width="30dp"
