@@ -25,6 +25,7 @@ public class GPAService {
 	public static final int MAJOR_SCORE = 1;
 	public static final int LIBERALARTS_SCORE = 2;
 	
+	public int setting;
 	public GPAService(Context context) {
 		gpaDao = new GPADao(context);
 		//gpaDBhelper = gpaDao.dbHelper;
@@ -80,7 +81,7 @@ public class GPAService {
 		for(int i=0;i<dtoList.size();i++){
 			if(dtoList.get(i).getMajor().equals("교양")){
 				liberalCredit += dtoList.get(i).getCredit();
-				liberalScore += ConvertService.convertToScore(dtoList.get(i).getGrade()) * (dtoList.get(i).getCredit());
+				liberalScore += ConvertService.convertToScore(dtoList.get(i).getGrade(),setting) * (dtoList.get(i).getCredit());
 			}
 		}
 		return liberalScore / liberalCredit;
@@ -93,7 +94,7 @@ public class GPAService {
 		for(int i=0;i<dtoList.size();i++){
 			if(dtoList.get(i).getMajor().equals("전공")){
 				majorCredit += dtoList.get(i).getCredit();
-				majorScore += ConvertService.convertToScore(dtoList.get(i).getGrade()) * (dtoList.get(i).getCredit());
+				majorScore += ConvertService.convertToScore(dtoList.get(i).getGrade(),setting) * (dtoList.get(i).getCredit());
 			}
 		}
 		
@@ -106,7 +107,7 @@ public class GPAService {
 		float totalScore = 0;
 		for(GPADto dto : dtoList){
 			totalCredit += dto.getCredit();
-			totalScore += ConvertService.convertToScore(dto.getGrade()) * (dto.getCredit());
+			totalScore += ConvertService.convertToScore(dto.getGrade(),setting) * (dto.getCredit());
 		}
 		return totalScore / totalCredit;
 	}
@@ -126,7 +127,7 @@ public class GPAService {
 		int mytotalCredit = 0;
 		for(GPADto dto : list){
 			mytotalCredit += dto.getCredit();
-			mytotalGrade += ConvertService.convertToScore(dto.getGrade()) *( dto.getCredit());
+			mytotalGrade += ConvertService.convertToScore(dto.getGrade(),setting) *( dto.getCredit());
 		}
 		
 		return roundGPA(mytotalGrade,mytotalCredit);

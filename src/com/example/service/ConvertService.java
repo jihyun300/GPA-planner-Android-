@@ -5,9 +5,9 @@ package com.example.service;
  *
  */
 public class ConvertService {
-
-	public static float convertToScore(String str) {
-		if (SettingService.gpaSys == 0) {
+	
+	public static float convertToScore(String str,int a) {
+		if (a==0) {
 			return convertToScore43(str);
 		} else {
 			return convertToScore45(str);

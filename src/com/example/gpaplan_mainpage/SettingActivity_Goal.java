@@ -20,7 +20,7 @@ public class SettingActivity_Goal extends Activity {
 
 		textView.setTextSize(20);
 		textView.setText(message);
-		
+	
 		
 		
 
@@ -36,6 +36,7 @@ public class SettingActivity_Goal extends Activity {
 	public void selectedPASS(View view){
 		Intent intent=new Intent(this,MainActivity.class);
 		startActivity(intent);
+		finish();
 	}
 	
 

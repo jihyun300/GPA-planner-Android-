@@ -13,7 +13,6 @@ public class SettingService {
 	public SettingDbHelper settingDbHelper;
 	public SQLiteDatabase settingDb;
 	public static int gpaSys;
-
 	public SettingService(Context context){
 		settingDao = new SettingDao(context);
 		settingDbHelper = settingDao.dbHelper;
@@ -26,6 +25,8 @@ public class SettingService {
 	
 	//0이면  4.3  1이면 4.5
 	public int infoOfGPASys(){
+		
 		return gpaSys=getSettingInfo().getGpaSystem();
 	}
+
 }
