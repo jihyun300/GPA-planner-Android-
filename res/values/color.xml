@@ -8,4 +8,7 @@
     <color name ="font_color_purple">#A570CF</color>
     <color name ="child_white">#F2F2F2</color>
     <color name ="default_purple">#823EB6</color>
+    <color name = "line_total">#0099CC</color>
+    <color name = "line_major">#823EB6</color>
+    <color name = "line_liberal">#CBADE3</color>
 </resources>
