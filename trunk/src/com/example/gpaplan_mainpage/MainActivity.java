@@ -56,15 +56,14 @@ import com.example.service.GPAService;
 public class MainActivity extends FragmentActivity implements
 ActionBar.TabListener {
 
-	SectionsPagerAdapter mSectionsPagerAdapter;
+ SectionsPagerAdapter mSectionsPagerAdapter;
 	ViewPager mViewPager;
 
 	static ArrayList<GroupItem> lst_group;
-
+	
 	long m_startTime;
 	long m_endTime;
 	static float getScale;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -80,7 +79,7 @@ ActionBar.TabListener {
 		float init43=4.3f;
 		getScale=savedScale.getFloat(getString(R.string.savedScale),init43);
 		setContentView(R.layout.activity_main);
-
+		
 		m_startTime=System.currentTimeMillis();
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
@@ -159,8 +158,10 @@ ActionBar.TabListener {
 	public void onTabSelected(ActionBar.Tab tab,
 			FragmentTransaction fragmentTransaction) {
 		// When the given tab is selected, switch to the corresponding page in
-		// the ViewPager.
+		// the ViewPager.	
+	
 		mViewPager.setCurrentItem(tab.getPosition());
+		
 	}
 
 	@Override
@@ -171,6 +172,7 @@ ActionBar.TabListener {
 	@Override
 	public void onTabReselected(ActionBar.Tab tab,
 			FragmentTransaction fragmentTransaction) {
+	
 	}
 
 	/**
@@ -242,7 +244,7 @@ ActionBar.TabListener {
 		// Expandable listView
 		mExpandableListAdpater adpt;
 		ExpandableListView lstView;
-		
+		TextView blankView;
 		GPAService gservice;
 		List<GPADto> dtoList;
 		private ActionMode mActionMode;
@@ -264,6 +266,7 @@ ActionBar.TabListener {
 			 */
 			// Set up ExpandableListView
 			lstView = (ExpandableListView) rootView.findViewById(R.id.explist);
+			blankView = (TextView)rootView.findViewById(R.id.blank_textview);
 			//lstView.setDivider(null);
 			lst_group = new ArrayList<GroupItem>();
 			// Loading Data;
@@ -273,6 +276,7 @@ ActionBar.TabListener {
 					(ArrayList<GroupItem>) lst_group);
 			lstView.setAdapter(adpt);
 			lstView.setDivider(null);
+			
 			LoadGroupData();
 
 			ExpandableListView.OnChildClickListener mChildClickListener = new OnChildClickListener() {
@@ -396,7 +400,7 @@ ActionBar.TabListener {
 
 						lst_group.clear();
 						LoadGroupData();
-
+						
 						Toast.makeText(getActivity(),"삭제한당", Toast.LENGTH_SHORT).show();
 						break;
 					}
@@ -495,8 +499,18 @@ ActionBar.TabListener {
 				e.printStackTrace();
 			}
 			finally{
-
+				if(dtoList.size()==0){
+					lstView.setVisibility(View.GONE);
+					blankView.setVisibility(View.VISIBLE);
+					return;
+				}
+				else{
+					blankView.setVisibility(View.GONE);
+				}
+					
 				ArrayList<ChildItem> lstchd ;
+				if(dtoList.size()>0)
+					
 				Log.i("1",dtoList.size()+"");
 				for(GPADto dto_temp:  dtoList){
 					ChildItem ci = new ChildItem();
@@ -554,7 +568,12 @@ ActionBar.TabListener {
 
 		public SecondSectionFragment() {
 		}
-
+		@Override
+		public void onResume() {
+	// TODO Auto-generated method stub
+			
+			super.onResume();
+		}
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
@@ -597,21 +616,24 @@ ActionBar.TabListener {
 				tpoint.setY(controller.getGPA(GPAService.TOTAL_SCORE,g.getYear(),g.getSemester()));
 				mpoint.setY(controller.getGPA(GPAService.MAJOR_SCORE,g.getYear(),g.getSemester()));
 				lpoint.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,g.getYear(),g.getSemester()));
-				if(tpoint.getY()!=-1.0f)
+				if(!Float.isNaN(tpoint.getY()))
 				tline.addPoint(tpoint);
-				if(mpoint.getY()!=-1.0f)
+				if(!Float.isNaN(mpoint.getY()))
 				mline.addPoint(mpoint);
-				if(lpoint.getY()!=-1.0f)
+				if(!Float.isNaN(lpoint.getY()))
 				lline.addPoint(lpoint);
 				
 				plot_x+=2.0f;
 			}
+			if(lst_group.size()>0){
 			tline.setColor(getResources().getColor(R.color.line_total));
 			mline.setColor(getResources().getColor(R.color.line_major));
 			lline.setColor(getResources().getColor(R.color.line_liberal));
 			li.addLine(tline);
 			li.addLine(mline);
 			li.addLine(lline);
+			li.setGrouplist(lst_group);
+			}
 			/*
 			p.setX(0);
 			p.setY(controller.getGPA(GPAService.TOTAL_SCORE,1,1));

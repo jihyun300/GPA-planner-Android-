@@ -85,12 +85,9 @@ public class GPAService {
 			}
 		}
 		//교양이나 전공 과목 들은 게 없을 경우에는 -1.0을 리턴 .. 0으로 나누는 케이스를 막기위한 부분
-		if(liberalCredit ==0){
-			return -1.0f;
-		}
-		else{
+	
 		return liberalScore / liberalCredit;
-		}
+	
 	}
 
 	private float getMajorGPA(int year, int semester) {
@@ -104,13 +101,10 @@ public class GPAService {
 			}
 		}
 		//교양이나 전공 과목 들은 게 없을 경우에는 -1.0을 리턴 .. 0으로 나누는 케이스를 막기위한 부분
-		if(majorCredit ==0){
-			return -1.0f;
-		}
-		else{
+		
 			
 		return majorScore / majorCredit;
-		}
+		
 	}
 
 	private float getTotalGPA(int year, int semester) {
@@ -121,13 +115,11 @@ public class GPAService {
 			totalCredit += dto.getCredit();
 			totalScore += ConvertService.convertToScore(dto.getGrade(),setting) * (dto.getCredit());
 		}
-		if(totalCredit ==0){
-			return -1.0f;
-		}
+		
 		//교양이나 전공 과목 들은 게 없을 경우에는 -1.0을 리턴 .. 0으로 나누는 케이스를 막기위한 부분
-		else{
+		
 		return totalScore / totalCredit;
-		}
+		
 	}
 	
 	private int getSumOfCredit(){
