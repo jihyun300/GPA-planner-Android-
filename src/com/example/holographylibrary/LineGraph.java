@@ -33,11 +33,13 @@ import android.view.View;
 
 import java.util.ArrayList;
 
+import com.example.gpaplan_mainpage.GroupItem;
 import com.example.gpaplan_mainpage.R;
 
 public class LineGraph extends View {
 	
 	private ArrayList<Line> lines = new ArrayList<Line>();
+	private ArrayList<GroupItem> grouplist ; 
 	private Paint paint = new Paint();
 	private Paint txtPaint = new Paint();
 	private float minY = 0, minX = 0;
@@ -86,7 +88,9 @@ public class LineGraph extends View {
 	public void setMinY(float minY){
 		this.minY = minY;
 	}
-	
+	public void setGrouplist(ArrayList<GroupItem> gr){
+		this.grouplist=gr;
+	}
 	public void update()
 	{
 		shouldUpdate = true;
@@ -162,13 +166,14 @@ public class LineGraph extends View {
 		}
 	}
 	public float getMaxX(){
-		float max = lines.get(0).getPoint(0).getX();
+			float max = lines.get(0).getPoint(0).getX();
 		for (Line line : lines){
 			for (LinePoint point : line.getPoints()){
 				if (point.getX() > max) max = point.getX();
 			}
 		}
 		maxX = max;
+	
 		return maxX;
 		
 	}
@@ -192,7 +197,7 @@ public class LineGraph extends View {
 			paint.reset();
 			Path path = new Path();
 			
-			float bottomPadding = 1, topPadding = 0;
+			float bottomPadding = 30, topPadding = 15;
 			float sidePadding = 20;
             if (this.showMinAndMax)
                 sidePadding = txtPaint.measureText(max);
@@ -204,7 +209,7 @@ public class LineGraph extends View {
 			pp.setColor(getResources().getColor(R.color.child_white));
 			pp.setAlpha(255);
 			pp.setStyle(Paint.Style.FILL);
-			ca.drawRect(sidePadding,bottomPadding, getWidth(),getHeight()-bottomPadding, pp);
+			ca.drawRect(sidePadding,0, getWidth(),getHeight()-bottomPadding-topPadding, pp);
 			int lineCount = 0;
 			for (Line line : lines){
 				int count = 0;
@@ -231,11 +236,11 @@ public class LineGraph extends View {
 						float xPercent = (p.getX()-minX)/(maxX - minX);
 						if (count == 0){
 							lastXPixels = sidePadding + (xPercent*usableWidth);
-							lastYPixels = getHeight() - bottomPadding - (usableHeight*yPercent);
+							lastYPixels = getHeight() - bottomPadding -topPadding- (usableHeight*yPercent);
 							path.moveTo(lastXPixels, lastYPixels);
 						} else {
 							newXPixels = sidePadding + (xPercent*usableWidth);
-							newYPixels = getHeight() - bottomPadding - (usableHeight*yPercent);
+							newYPixels = getHeight() - bottomPadding - topPadding-(usableHeight*yPercent);
 							path.lineTo(newXPixels, newYPixels);
 							Path pa = new Path();
 							pa.moveTo(lastXPixels, lastYPixels);
@@ -250,7 +255,7 @@ public class LineGraph extends View {
 						count++;
 					}
 					
-					path.reset();
+				path.reset();
 					
 					path.moveTo(0, getHeight()-bottomPadding);
 					path.lineTo(sidePadding, getHeight()-bottomPadding);
@@ -283,13 +288,14 @@ public class LineGraph extends View {
 			if(this.showHorizontalGrid)
 				for(int i=0;i<5;i++)
 				{
-					canvas.drawLine(sidePadding, getHeight() - bottomPadding-(i*lineSpace), getWidth(), getHeight()-bottomPadding-(i*lineSpace), paint);
+					canvas.drawLine(sidePadding, getHeight() - bottomPadding-topPadding-(i*lineSpace), getWidth(), getHeight()-bottomPadding-topPadding-(i*lineSpace), paint);
 				}
 		
 			paint.setAlpha(255);
-			if(this.showVerticalGrid)
+			if(this.showVerticalGrid&&lines.size()>0)
 			{
-				for (Line line : lines){
+			
+				Line line = lines.get(0);
 					float maxY = getMaxY();
 					float minY = getMinY();
 					float maxX = getMaxX();
@@ -297,16 +303,19 @@ public class LineGraph extends View {
 					
 					paint.setColor(this.gridColor);
 					paint.setAlpha(255);
-					
+					int lastcheck=1;
 						for (LinePoint p : line.getPoints()){
 							float yPercent = (p.getY()-minY)/(maxY - minY);
 							float xPercent = (p.getX()-minX)/(maxX - minX);
 							float xPixels = sidePadding + (xPercent*usableWidth);
-							float yPixels = getHeight() - bottomPadding - (usableHeight*yPercent);
-							canvas.drawLine((int)xPixels, bottomPadding, (int)xPixels,getHeight(), paint);							
-						
-						
-					}
+							float yPixels = getHeight() -(usableHeight*yPercent);
+							canvas.drawLine((int)xPixels,getHeight()-bottomPadding-topPadding, (int)xPixels,0, paint);
+							String xname = grouplist.get(lastcheck-1).getYear()+"-"+grouplist.get(lastcheck-1).getSemester();
+							if(line.getPoints().size() == lastcheck)
+								canvas.drawText(xname, (int)xPixels-50,getHeight()-topPadding+5, txtPaint);
+							else
+							canvas.drawText(xname, (int)xPixels-25,getHeight()-topPadding+5, txtPaint);
+							lastcheck++;
 				}
 			}
 			
@@ -327,10 +336,10 @@ public class LineGraph extends View {
 					float xPercent = (p.getX()-minX)/(maxX - minX);
 					if (count == 0){
 						lastXPixels = sidePadding + (xPercent*usableWidth);
-						lastYPixels = getHeight() - bottomPadding - (usableHeight*yPercent);
+						lastYPixels = getHeight() - bottomPadding-topPadding- (usableHeight*yPercent);
 					} else {
 						newXPixels = sidePadding + (xPercent*usableWidth);
-						newYPixels = getHeight() - bottomPadding - (usableHeight*yPercent);
+						newYPixels = getHeight() - bottomPadding -topPadding- (usableHeight*yPercent);
 						canvas.drawLine(lastXPixels, lastYPixels, newXPixels, newYPixels, paint);
 						lastXPixels = newXPixels;
 						lastYPixels = newYPixels;
@@ -357,7 +366,7 @@ public class LineGraph extends View {
 						float yPercent = (p.getY()-minY)/(maxY - minY);
 						float xPercent = (p.getX()-minX)/(maxX - minX);
 						float xPixels = sidePadding + (xPercent*usableWidth);
-						float yPixels = getHeight() - bottomPadding - (usableHeight*yPercent);
+						float yPixels = getHeight() - bottomPadding -topPadding- (usableHeight*yPercent);
 						
 						paint.setColor(Color.GRAY);
 						canvas.drawCircle(xPixels, yPixels, 10, paint);
@@ -383,11 +392,11 @@ public class LineGraph extends View {
 			
 			shouldUpdate = false;
             if (this.showMinAndMax) {
-            	for(int i=0;i<5;i++)
+            	for(int i=0;i<5;i++)				
+				ca.drawText(Integer.toString(i),0,getHeight() - bottomPadding-(i*lineSpace),txtPaint);
+            	
 				
-				ca.drawText(Integer.toString(i),0,getHeight() - bottomPadding-(i*lineSpace),txtPaint);				
-				ca.drawText(max, 0, txtPaint.getTextSize(), txtPaint);
-				ca.drawText(min,0,this.getHeight(),txtPaint);
+            	ca.drawText(max, -1, bottomPadding-7, txtPaint);
 			
             	}
 		

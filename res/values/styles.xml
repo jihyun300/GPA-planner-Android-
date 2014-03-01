@@ -22,6 +22,7 @@
     
 <style name="ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
     <item name="android:backgroundStacked">@color/white</item>
+    <item name="android:icon">@drawable/icon_titlebar</item>
  </style>
 
 	
