@@ -2,12 +2,18 @@ package com.example.gpaplan_mainpage;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class SettingActivity_Goal extends Activity {
+
+	TextView editGraduate_major;
+	TextView editGraduate_liberal;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +25,8 @@ public class SettingActivity_Goal extends Activity {
 		
 	
 		
+		editGraduate_major=(TextView)findViewById(R.id.editgoal_major);
+		editGraduate_liberal=(TextView)findViewById(R.id.editgoal_liberal);
 		
 
 	}
@@ -31,8 +39,23 @@ public class SettingActivity_Goal extends Activity {
 	}
 	
 	public void selectedPASS(View view){
-		Intent intent=new Intent(this,MainActivity.class);
-		startActivity(intent);
+	
+		
+		//졸업이수학점(전공)저장
+		String txtGrad_major=editGraduate_major.getText().toString();
+		SharedPreferences savedGrad_major=getSharedPreferences("savedMajor_gra",Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor=savedGrad_major.edit();		
+		editor.putInt(getString(R.string.savedGoalMajor), Integer.parseInt(txtGrad_major));
+		editor.commit();
+		//졸업이수학점(교양)저장
+		String txtGrad_liberal=editGraduate_liberal.getText().toString();
+		SharedPreferences savedGrad_liberal=getSharedPreferences("savedLiberal_gra",Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor2=savedGrad_liberal.edit();
+		editor2.putInt(getString(R.string.savedGoalLiberal), Integer.parseInt(txtGrad_liberal));
+		editor2.commit();
+		
+		Intent intented=new Intent(this,SettingActivity_Target.class);
+		startActivity(intented);
 		finish();
 	}
 	

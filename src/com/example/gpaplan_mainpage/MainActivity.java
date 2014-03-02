@@ -75,7 +75,7 @@ ActionBar.TabListener {
 		editor.commit();
 
 		//4.3 4.5읽기(READ)
-		SharedPreferences savedScale=getSharedPreferences("savedScale",MODE_PRIVATE);
+		SharedPreferences savedScale=getSharedPreferences("savedScale",Context.MODE_PRIVATE);
 		float init43=4.3f;
 		getScale=savedScale.getFloat(getString(R.string.savedScale),init43);
 		setContentView(R.layout.activity_main);
