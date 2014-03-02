@@ -60,7 +60,6 @@ ActionBar.TabListener {
 	ViewPager mViewPager;
 
 	static ArrayList<GroupItem> lst_group;
-	
 	long m_startTime;
 	long m_endTime;
 	static float getScale;
@@ -144,18 +143,24 @@ ActionBar.TabListener {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
+
+		Intent intent ;
 		switch(item.getItemId()){
-		case R.id.action_subject_add:
-			Intent intent = new Intent(this, DisplayAddActivity.class);
+		
+		case R.id.action_subject_add :
+			 intent = new Intent(this, DisplayAddActivity.class);
+
+		
+		case R.id.action_settings :
+			 intent = new Intent(this, SettingsActivity.class);
 			startActivity(intent);
 			return true;
-		case R.id.action_settings:
-			Intent intentSetting=new Intent(this,SettingMain.class);
-			startActivity(intentSetting);
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
+		default :
+			return super.onOptionsItemSelected(item);
 
+
+		}
+	
 	}
 
 	@Override
@@ -259,17 +264,13 @@ ActionBar.TabListener {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main_dummy,
+			View rootView = inflater.inflate(R.layout.fragment_main,
 					container, false);
 			gservice = new GPAService(getActivity());
-			/*
-			 * TextView dummyTextView = (TextView) rootView
-			 * .findViewById(R.id.section_label);
-			 * dummyTextView.setText(Integer.toString(getArguments().getInt(
-			 * ARG_SECTION_NUMBER)));
-			 */
+		
 			// Set up ExpandableListView
 			lstView = (ExpandableListView) rootView.findViewById(R.id.explist);
+			lstView.setIndicatorBounds(10,100);
 			blankView = (TextView)rootView.findViewById(R.id.blank_textview);
 			//lstView.setDivider(null);
 			lst_group = new ArrayList<GroupItem>();

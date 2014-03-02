@@ -9,8 +9,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
       
-        android:drawSelectorOnTop="false"
-        android:groupIndicator="@drawable/list_indicator" >
+        android:drawSelectorOnTop="true"
+        android:groupIndicator="@drawable/list_indicator" 
+        android:indicatorLeft="100dp"
+        
+    >
     </ExpandableListView>
 	<TextView 
 	    android:id="@+id/blank_textview"
