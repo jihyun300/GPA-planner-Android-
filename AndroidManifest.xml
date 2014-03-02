@@ -60,6 +60,10 @@
             android:name="com.example.gpaplan_mainpage.SettingActivity_Target"
             android:label="@string/title_activity_setting_activity__target" >
         </activity>
+        <activity
+            android:name="com.example.gpaplan_mainpage.SettingMain"
+            android:label="@string/title_activity_setting_main" >
+        </activity>
     </application>
 
 </manifest>

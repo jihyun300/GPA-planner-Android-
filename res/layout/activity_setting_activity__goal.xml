@@ -64,7 +64,9 @@
                     android:textColor="#ffffff"
                     android:textColorHint="#E6E6E6"
                     android:textSize="27dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textCursorDrawable="@null"
+                    android:inputType="number" />
             </LinearLayout>
 
             <View
@@ -86,7 +88,9 @@
                     android:textColor="#ffffff"
                     android:textColorHint="#E6E6E6"
                     android:textSize="27dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textCursorDrawable="@null"
+                    android:inputType="number" />
             </LinearLayout>
 
             <View

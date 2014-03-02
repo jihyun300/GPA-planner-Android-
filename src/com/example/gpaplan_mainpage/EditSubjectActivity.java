@@ -5,6 +5,7 @@ package com.example.gpaplan_mainpage;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
@@ -38,6 +39,8 @@ public class EditSubjectActivity extends Activity {
 	Spinner spinSemester;
 	GPADto dto_temp;
 	private String[] GradeList=new String[]{"A+","A","A-","B+","B","B-","C+","C","C-","D+","D","D-","F","P","NP"};
+	private String[] GradeList45=new String[]{"A+","A","B+","B","C+","C","D+","D","F","P","NP"};
+	private float getScale;
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
@@ -109,19 +112,39 @@ public class EditSubjectActivity extends Activity {
 		del_button.setVisibility(View.INVISIBLE);
 		edit_subject = (EditText)findViewById(R.id.editSubject);
 		
+		
+		//4.3 4.5인지 읽기
+		SharedPreferences savedScale=getSharedPreferences("savedScale",MODE_PRIVATE);
+		float init43=4.3f;
+		getScale=savedScale.getFloat(getString(R.string.savedScale),init43);
+		
+		
 		edit_Grades = (NumberPicker)findViewById(R.id.editGrades);
 		edit_Credit=(NumberPicker)findViewById(R.id.editCredit);
+		
+		int getGradeInt=0;
+		if(getScale==4.3f){
 		edit_Grades.setMinValue(0);
 		edit_Grades.setMaxValue(14);
 		edit_Grades.setDisplayedValues(GradeList);
+		for(int i=0;i<GradeList.length;i++)
+			if(dto_temp.getGrade().equals(GradeList[i])) getGradeInt=i;
+		
+		edit_Grades.setValue(getGradeInt);
+		}
+		else{
+			edit_Grades.setMinValue(0);
+			edit_Grades.setMaxValue(10);
+			edit_Grades.setDisplayedValues(GradeList45);
+			for(int i=0;i<GradeList45.length;i++)
+				if(dto_temp.getGrade().equals(GradeList45[i])) getGradeInt=i;
+		}
+		
 		edit_Credit.setMinValue(0);
 		edit_Credit.setMaxValue(5);
 		
-		int getGradeInt=0;
-		for(int i=0;i<GradeList.length;i++){
-			if(dto_temp.getGrade().equals(GradeList[i])) getGradeInt=i;
-		}
-		edit_Grades.setValue(getGradeInt);
+		
+	
 		edit_Credit.setValue(dto_temp.getCredit());
 		spinYear.setSelection(dto_temp.getYear()-1);
 		spinSemester.setSelection(dto_temp.getSemester()-1);
@@ -155,7 +178,10 @@ public class EditSubjectActivity extends Activity {
 	private void updateDB(){
 		dto_temp.setCredit(edit_Credit.getValue());
 		dto_temp.setSubject(edit_subject.getText().toString());
-		dto_temp.setGrade(GradeList[edit_Grades.getValue()]);
+		if(getScale==4.3f)
+			dto_temp.setGrade(GradeList[edit_Grades.getValue()]);
+		else
+			dto_temp.setGrade(GradeList45[edit_Grades.getValue()]);
 		//Major 를 문자형으로 받기
 		if(edit_major.isChecked())		
 		dto_temp.setMajor("전공");

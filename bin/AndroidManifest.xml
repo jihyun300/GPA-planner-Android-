@@ -10,7 +10,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/grade_aplus"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -36,7 +36,7 @@
         </activity>
         <activity
             android:name="com.example.gpaplan_mainpage.SplashActivity"
-            android:label="@string/app_name"
+            android:label="@string/title_activity_splash"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,17 +51,21 @@
         <activity
             android:name="com.example.gpaplan_mainpage.SettingActivity_Scale"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.DeviceDefault.NoActionBar" >
-            
+             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
         <activity
             android:name="com.example.gpaplan_mainpage.SettingActivity_Goal"
             android:label="@string/title_activity_setting_activity__goal"
-            android:theme="@android:style/Theme.DeviceDefault.NoActionBar" >
+             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
         <activity
             android:name="com.example.gpaplan_mainpage.SettingActivity_Target"
-            android:label="@string/title_activity_setting_activity__target" >
+            android:label="@string/title_activity_setting_activity__target"
+             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+            android:name="com.example.gpaplan_mainpage.SettingMain"
+            android:label="@string/title_activity_setting_main" >
         </activity>
     </application>
 
