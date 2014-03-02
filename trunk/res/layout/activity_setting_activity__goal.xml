@@ -57,6 +57,7 @@
 
                 <EditText
                     android:id="@+id/editgoal_major"
+                    android:inputType="numberDecimal"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:background="@drawable/splash_major_circle"
@@ -66,7 +67,7 @@
                     android:textSize="27dp"
                     android:textStyle="bold"
                     android:textCursorDrawable="@null"
-                    android:inputType="number" />
+                     />
             </LinearLayout>
 
             <View
@@ -83,6 +84,7 @@
                     android:id="@+id/editgoal_liberal"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
+                    android:inputType="numberDecimal"
                     android:background="@drawable/splash_liberalarts_circle"
                     android:gravity="center"
                     android:textColor="#ffffff"
@@ -90,7 +92,7 @@
                     android:textSize="27dp"
                     android:textStyle="bold"
                     android:textCursorDrawable="@null"
-                    android:inputType="number" />
+                     />
             </LinearLayout>
 
             <View
@@ -132,7 +134,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="후에설정페이지나통계페이지에서"
+                android:text="후에 설정페이지나 통계페이지에서"
                 android:textColor="#a5a5a5"
                 android:textSize="10dp" />
         </LinearLayout>
@@ -146,7 +148,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="다시설정하실수있습니다."
+                android:text="다시 설정하실 수 있습니다."
                 android:textColor="#a5a5a5"
                 android:textSize="10dp" />
         </LinearLayout>

@@ -1,0 +1,43 @@
+<resources>
+
+    <string name="title_activity_settings">설정</string>
+
+    <!-- Strings related to Settings -->
+
+
+    <!-- Example General settings -->
+  
+   
+    <string name="pref_title_goal_major">전공</string>
+    <string name="pref_default_goal_major">0</string>
+    
+    <string name="pref_title_goal_liberalarts">교양</string>
+    <string name="pref_default_goal_liberalarts">0</string>
+    
+    
+    <string name="pref_title_scale">학점기준</string>
+    
+    
+    <string name="pref_title_target">목표!</string>
+    <string name="pref_default_target">0</string>
+    
+
+    <string-array name="pref_scale">
+        <item>4.3</item>
+        <item>4.5</item>   
+    </string-array>
+    <string-array name="pref_scale_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+ 
+
+   
+    
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_goal">졸업시 요구되는 이수학점</string>
+    <string name="pref_header_scale">학점기준</string>
+    <string name="pref_header_target">졸업시 달성하고자 하는 평량평균</string>
+</resources>
