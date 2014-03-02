@@ -16,10 +16,7 @@ public class SettingActivity_Goal extends Activity {
 		
 		Intent extraIntent=getIntent();
 		String message=extraIntent.getStringExtra(SettingActivity_Scale.EXTRA_MESSAGE);
-		TextView textView=(TextView)findViewById(R.id.txt_scale);
-
-		textView.setTextSize(20);
-		textView.setText(message);
+		
 	
 		
 		

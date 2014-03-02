@@ -1,145 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/goalLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:id="@+id/goalLayout"
+    android:background="@color/child_white"
     android:orientation="vertical" >
-    
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="21dp"
+        android:background="@drawable/splash_top" />
+
     <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="88dp"
-            android:orientation="vertical" >
- 
-         <TextView
-             android:id="@+id/txt_scale"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:layout_marginBottom="9dp"
-                android:textColor="#823EB6"
-                android:text="몇학점"/>
-         
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="67dp"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:baselineAlignBottom="true"
+                android:src="@drawable/splash_check" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="31dp"
+                android:layout_marginLeft="9.5dp"
+                android:gravity="center_horizontal"
+                android:textColor="@color/font_color_black"
+                android:text="@string/setting_goal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <EditText
+                    android:id="@+id/editgoal_major"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/splash_major_circle"
+                    android:gravity="center"
+                    android:textColor="#ffffff"
+                    android:textColorHint="#E6E6E6"
+                    android:textSize="27dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="2" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <EditText
+                    android:id="@+id/editgoal_liberal"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/splash_liberalarts_circle"
+                    android:gravity="center"
+                    android:textColor="#ffffff"
+                    android:textColorHint="#E6E6E6"
+                    android:textSize="27dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:orientation="horizontal" >
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="3" />
+
+            <Button
+                android:id="@+id/buttPass"
+                android:layout_width="79.5dp"
+                android:layout_height="28.5dp"
+                android:background="@drawable/splash_pass"
+                android:onClick="selectedPASS" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="3" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp" >
+
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:layout_marginBottom="31dp"
-                android:text="졸업 요구 학점을 설정해주세요."/>
-                </LinearLayout>
-                
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1" />
-
-               <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" >
-
-                    <EditText
-                        android:id="@+id/editgoal_major"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:background="@drawable/st_pup_circle_dy"
-                        android:gravity="center"
-                        android:textColor="#ffffff"
-                        android:textSize="27dp"
-                        android:textStyle="bold"
-                        android:hint="얼마"
-                        android:textColorHint="#E6E6E6" />
-
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="2" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" >
-
-                    <EditText
-                        android:id="@+id/editgoal_liberal"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:background="@drawable/st_pup_circle_dy"
-                        android:gravity="center"
-                        android:textColor="#ffffff"
-                        android:textSize="27dp"
-                        android:textStyle="bold"
-                        android:hint="얼마"
-                        android:textColorHint="#E6E6E6" />
-
-                
-                </LinearLayout>
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1" />
-            </LinearLayout>
-            
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
-                android:orientation="horizontal">
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="3" />
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/buttPass"
-                    android:layout_weight="1"
-                    android:text="PASS"
-                    android:onClick="selectedPASS" />
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="3" />
+                android:gravity="center"
+                android:text="후에설정페이지나통계페이지에서"
+                android:textColor="#a5a5a5"
+                android:textSize="10dp" />
         </LinearLayout>
-    
 
-            <LinearLayout
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp" >
+
+            <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="9dp">
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="후에 설정페이지나 통계페이지에서"
-                    android:textSize="10dp"
-                    android:textColor="#a5a5a5"/>
-                </LinearLayout>
-                
-                  <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp">
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="다시 설정하실 수 있습니다."
-                    android:textSize="10dp"
-                    android:textColor="#a5a5a5"/>
-                </LinearLayout>
-</LinearLayout>
-</LinearLayout>
+                android:gravity="center"
+                android:text="다시설정하실수있습니다."
+                android:textColor="#a5a5a5"
+                android:textSize="10dp" />
+        </LinearLayout>
+    </LinearLayout>
 
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="7dp"
+        android:background="@drawable/splash_paper1" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="7dp"
+        android:background="@drawable/splash_paper2" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="7dp"
+        android:background="@drawable/splash_paper3" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="7dp"
+        android:background="@drawable/splash_bottom" />
+
+</LinearLayout>

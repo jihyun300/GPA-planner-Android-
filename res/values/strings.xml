@@ -26,4 +26,7 @@
     <string name="savedGoalMajor">savedGoalMajor</string>
     <string name="savedGoalLiberal">savedGoalLiberal</string>
     <string name="savedTarget">savedTarget</string>
+    
+    <string name="setting_scale"><u>졸업 요구 학점을 설정해주세요.</u></string>
+    <string name="setting_goal"><u>학교의 만점기준을 선택해주세요.</u></string>
 </resources>
