@@ -144,13 +144,17 @@ ActionBar.TabListener {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
-		if (item.getItemId() == R.id.action_subject_add) {
+		switch(item.getItemId()){
+		case R.id.action_subject_add:
 			Intent intent = new Intent(this, DisplayAddActivity.class);
 			startActivity(intent);
 			return true;
-		} else {
-			return super.onOptionsItemSelected(item);
+		case R.id.action_settings:
+			Intent intentSetting=new Intent(this,SettingMain.class);
+			startActivity(intentSetting);
+			return true;
 		}
+		return super.onOptionsItemSelected(item);
 
 	}
 

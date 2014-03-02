@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class SettingActivity_Target extends Activity {
@@ -17,7 +18,7 @@ public class SettingActivity_Target extends Activity {
 		setContentView(R.layout.activity_setting_activity__target);
 		
 		
-
+		//저장된 졸업이수학점 받아오기(Read)
 		 //졸업 이수학점(전공)이 저장된 곳이 "savedMajor_gra"
 			SharedPreferences savedGrad_major=getSharedPreferences("savedMajor_gra",Context.MODE_PRIVATE);
 			int getGrad_major;
@@ -45,6 +46,15 @@ public class SettingActivity_Target extends Activity {
 		return true;
 	}
 	public void selectedTarget(View view){
+		
+		EditText editTarget=(EditText)findViewById(R.id.editTarget);
+		String targetScore=editTarget.getText().toString();
+		
+		//목표학점 저장
+		SharedPreferences savedTarget=getSharedPreferences("savedTarget",Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor=savedTarget.edit();
+		editor.putFloat(getString(R.string.savedTarget),Float.parseFloat(targetScore));
+		editor.commit();
 		
 		Intent intent=new Intent(this,MainActivity.class);
 		startActivity(intent);

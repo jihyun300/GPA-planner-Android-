@@ -63,7 +63,7 @@
                     android:orientation="vertical" >
 
                     <EditText
-                        android:id="@+id/editgoal_liberal"
+                        android:id="@+id/editTarget"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:background="@drawable/st_pup_circle_dy"
@@ -72,7 +72,10 @@
                         android:textSize="27dp"
                         android:textStyle="bold"
                         android:hint="몇점"
-                        android:textColorHint="#E6E6E6" />
+                        android:textColorHint="#E6E6E6"
+                        android:textCursorDrawable="@null"
+                        android:inputType="numberDecimal"
+                        />
 
                 
                 </LinearLayout>

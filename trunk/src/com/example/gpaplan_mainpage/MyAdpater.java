@@ -3,6 +3,7 @@ package com.example.gpaplan_mainpage;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -30,14 +31,15 @@ public class MyAdpater extends BaseAdapter {
 	
 	private ArrayList<Class_info> Class_info_array; 
 	private String[] GradeList=new String[]{"A+","A","A-","B+","B","B-","C+","C","C-","D+","D","D-","F","P","NP"};
+	private String[] GradeList45=new String[]{"A+","A","B+","B","C+","C","D+","D","F","P","NP"};
+	private float getScale;
 	
-	
-	public MyAdpater(Context c,ArrayList<Class_info> Class_info_Array){
+	public MyAdpater(Context c,ArrayList<Class_info> Class_info_Array,float getScale){
 		this.c =c;
 	
 		this.Class_info_array = Class_info_Array;
 		this.inflater = (LayoutInflater) c.getSystemService(c.LAYOUT_INFLATER_SERVICE);
-	
+		this.getScale=getScale;
 	}
 	
 	@Override
@@ -60,6 +62,8 @@ public class MyAdpater extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
+
+		
 		// TODO Auto-generated method stub
 		final int pos = position;	
 		//if(convertView == null){
@@ -76,9 +80,7 @@ public class MyAdpater extends BaseAdapter {
 			ToggleButton edit_major=(ToggleButton)convertView.findViewById(R.id.button_MajorOr);
 			Button edit_Delete=(Button)convertView.findViewById(R.id.delButton);
 			
-			edit_Grades.setMinValue(0);
-			edit_Grades.setMaxValue(14);
-			edit_Grades.setDisplayedValues(GradeList);
+
 			
 			edit_Credit.setMinValue(0);
 			edit_Credit.setMaxValue(5);
@@ -90,9 +92,24 @@ public class MyAdpater extends BaseAdapter {
 			int getCreditInt=0;
 			//ci.getGrade가 어떤 숫자일때
 			
-			for(int i=0;i<GradeList.length;i++){
+			if(getScale==4.3f){
+			edit_Grades.setMinValue(0);
+			edit_Grades.setMaxValue(14);
+			edit_Grades.setDisplayedValues(GradeList);
+			for(int i=0;i<GradeList.length;i++)
 				if(ci.getGrade().equals(GradeList[i])) getGradeInt=i;
+			
 			}
+			else{
+				edit_Grades.setMinValue(0);
+				edit_Grades.setMaxValue(10);
+				edit_Grades.setDisplayedValues(GradeList45);
+				for(int i=0;i<GradeList45.length;i++){
+					if(ci.getGrade().equals(GradeList45[i])) getGradeInt=i;
+				}
+			}
+			
+		
 		
 			for(int i=0;i<6;i++){
 				if(Integer.parseInt(ci.getCredit())==i) getCreditInt=i;
@@ -220,7 +237,10 @@ public class MyAdpater extends BaseAdapter {
 			switch(type){
 			
 			case Grade:
+				if(getScale==4.3f)
 				ci.setGrade(GradeList[newVal]);
+				else
+					ci.setGrade(GradeList45[newVal]);
 				break;
 			case Credit:
 				ci.setCredit(Integer.toString(newVal));

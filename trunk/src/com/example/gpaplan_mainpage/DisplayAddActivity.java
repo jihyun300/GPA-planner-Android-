@@ -3,6 +3,7 @@ package com.example.gpaplan_mainpage;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
@@ -60,11 +61,17 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 		View footView = getLayoutInflater().inflate(R.layout.button_view, null);
 		     footView.findViewById(R.id.addButton).setOnClickListener(this);
 		   
+		 	//4.3 4.5읽기(READ)
+				SharedPreferences savedScale=getSharedPreferences("savedScale",MODE_PRIVATE);
+				float init43=4.3f;
+				float getScale=savedScale.getFloat(getString(R.string.savedScale),init43);
 		     
 		     //  footView.findViewById(R.id.delButton).setOnClickListener(this);
 		
+		     
+		     
 		classInfo = new ArrayList<Class_info>();
-		adap = new MyAdpater(this,classInfo);
+		adap = new MyAdpater(this,classInfo,getScale);
 		listview = (ListView) findViewById(R.id.listview1);
 		listview.addFooterView(footView);
 		
