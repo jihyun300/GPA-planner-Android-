@@ -1,8 +1,9 @@
 package com.example.service;
+
 /**
  * 
  * @author Doyoon
- *
+ * 
  */
 public class ConvertService {
 	
@@ -43,7 +44,6 @@ public class ConvertService {
 		} else {
 			return 0f;
 		}
-
 	}
 
 	private static float convertToScore45(String str) {
@@ -67,6 +67,4 @@ public class ConvertService {
 			return 0f;
 		}
 	}
-	
-	
 }

@@ -152,4 +152,47 @@ public class GPAService {
 		gpa = (float)(gpa/100);
 		return gpa;
 	}
+
+	//남은 학기당 맞아야하는 학점 구현하는 메소드   //성적체계 매개변수 필요-->필요없어도 될듯...사용자가 아니까
+	public float getTargetGpaPerSemester(int creditForGraduate, float targetGpa) {
+		float targetGpaPerSemester = 0.0f;
+		float currentGpa = getMyTotalGPA(); 
+		int finishedCredit = this.finishedCredit();
+		
+		targetGpaPerSemester=((targetGpa*creditForGraduate)-(currentGpa*finishedCredit))/
+											(creditForGraduate-finishedCredit);
+		return Float.parseFloat(String.format("%.2f",""+targetGpaPerSemester));
+	}
+	//이수한 학기 구하기/( 필요없는것 같음)
+	private int finishedSemester(){
+		class YearSemester{
+			int year;
+			int semester;
+			YearSemester(int year,int semester){
+				this.year = year;
+				this.semester = semester;
+			}
+		}
+		int finishedSemester = 0;
+		HashSet<YearSemester> yearSemesterSet = new HashSet<YearSemester>();
+		List<GPADto> dtoList = getAllList();
+		if(dtoList.isEmpty()){
+			return finishedSemester;
+		}
+		for(GPADto dto : dtoList){
+			new YearSemester(dto.getYear(),dto.getSemester());
+			yearSemesterSet.add(new YearSemester(dto.getYear(),dto.getSemester()));
+		}
+		finishedSemester = yearSemesterSet.size();
+		return finishedSemester;
+	}
+	//이수한 학점 구하기
+	private int finishedCredit(){
+		List<GPADto> dtoList = getAllList();
+		int finishedCredit = 0;
+		for(GPADto dto : dtoList){
+			finishedCredit += dto.getCredit();
+		}
+		return finishedCredit;
+	}
 }
