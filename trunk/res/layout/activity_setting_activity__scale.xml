@@ -57,9 +57,9 @@
 
                 <Button
                     android:id="@+id/buttScale430"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="@drawable/st_pup_circle_dy"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/splash_circle_edited"
                     android:gravity="center"
                     android:onClick="selected430"
                     android:text="4.3"
@@ -69,9 +69,9 @@
             </LinearLayout>
 
             <View
-                android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_weight="2" />
+                android:layout_width="40dp"
+                android:layout_height="100dp"
+                android:layout_weight="0" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -80,9 +80,9 @@
 
                 <Button
                     android:id="@+id/buttScale450"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="@drawable/st_pup_circle_dy"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/splash_circle_edited"
                     android:gravity="center"
                     android:onClick="selected450"
                     android:text="4.5"
@@ -93,7 +93,7 @@
 
             <View
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="100dp"
                 android:layout_weight="1" />
         </LinearLayout>
     </LinearLayout>

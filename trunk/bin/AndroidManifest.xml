@@ -66,6 +66,10 @@
             android:name="com.example.gpaplan_mainpage.SettingsActivity"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name="com.example.gpaplan_mainpage.SettingMain"
+            >
+        </activity>
     </application>
 
 </manifest>

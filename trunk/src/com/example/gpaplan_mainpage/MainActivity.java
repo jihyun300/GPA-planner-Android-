@@ -149,6 +149,8 @@ ActionBar.TabListener {
 		
 		case R.id.action_subject_add :
 			 intent = new Intent(this, DisplayAddActivity.class);
+			 startActivity(intent);
+			 return true;
 
 		
 		case R.id.action_settings :

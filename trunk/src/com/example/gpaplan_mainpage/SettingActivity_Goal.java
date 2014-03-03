@@ -26,9 +26,7 @@ public class SettingActivity_Goal extends Activity {
 	
 		
 		editGraduate_major=(TextView)findViewById(R.id.editgoal_major);
-		editGraduate_liberal=(TextView)findViewById(R.id.editgoal_liberal);
 		editGraduate_major.setText("0");
-		editGraduate_liberal.setText("0");
 
 	}
 
@@ -41,23 +39,24 @@ public class SettingActivity_Goal extends Activity {
 	
 	public void selectedPASS(View view){
 	
-
 		
 		//졸업이수학점(전공)저장
 		String txtGrad_major=editGraduate_major.getText().toString();
-		SharedPreferences savedGrad_major=getSharedPreferences("savedMajor_gra",Context.MODE_PRIVATE);
+		
+		SharedPreferences savedGrad_major=getSharedPreferences("SharedSetting",Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor=savedGrad_major.edit();		
-		editor.putInt(getString(R.string.savedGoalMajor), Integer.parseInt(txtGrad_major));
+		editor.putInt(getString(R.string.savedGoalMajor), Integer.parseInt(txtGrad_major));		
 		editor.commit();
+
 		//졸업이수학점(교양)저장
-		String txtGrad_liberal=editGraduate_liberal.getText().toString();
-		SharedPreferences savedGrad_liberal=getSharedPreferences("savedLiberal_gra",Context.MODE_PRIVATE);
-		SharedPreferences.Editor editor2=savedGrad_liberal.edit();
-		editor2.putInt(getString(R.string.savedGoalLiberal), Integer.parseInt(txtGrad_liberal));
-		editor2.commit();
+	
+//		SharedPreferences savedGrad_liberal=getSharedPreferences("savedLiberal_gra",Context.MODE_PRIVATE);
+//		SharedPreferences.Editor editor2=savedGrad_liberal.edit();
+	
 		
 		Intent intented=new Intent(this,SettingActivity_Target.class);
 		startActivity(intented);
+		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
 		finish();
 	}
 	
