@@ -34,4 +34,8 @@ public class Controller {
 			gpaService.insertGPADto(gpaDto);
 		}
 	}
+	public float getTargetGpaPerSemester(int creditForGraduate, float targetGpa) {
+		// TODO Auto-generated method stub
+		return gpaService.getTargetGpaPerSemester(creditForGraduate,targetGpa);
+	}
 }   
