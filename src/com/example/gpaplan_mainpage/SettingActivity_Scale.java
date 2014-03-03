@@ -70,7 +70,7 @@ public class SettingActivity_Scale extends Activity {
 		
 		intent.putExtra(EXTRA_MESSAGE, message);
 		startActivity(intent);
-
+		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
 		finish();
 		
 		
@@ -80,15 +80,16 @@ public class SettingActivity_Scale extends Activity {
 		// TODO Auto-generated method stub
 		Intent intent=new Intent(this,SettingActivity_Goal.class);
 		String message="4.3";
-		//4.3 4.5 저장
-		SharedPreferences savedScale=getSharedPreferences("savedScale",Context.MODE_PRIVATE);
-		SharedPreferences.Editor editor=savedScale.edit();
 		
+		//4.3 4.5 저장
+		SharedPreferences savedScale=getSharedPreferences("SharedSetting",Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor=savedScale.edit();		
 		editor.putFloat(getString(R.string.savedScale),Float.parseFloat(message));
 		editor.commit();
 		
 		intent.putExtra(EXTRA_MESSAGE, message);
 		startActivity(intent);
+		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
 		finish();
 	}
 
