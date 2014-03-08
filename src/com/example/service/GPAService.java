@@ -153,6 +153,8 @@ public class GPAService {
 		return gpa;
 	}
 
+	
+	//졸업목표학점
 	//남은 학기당 맞아야하는 학점 구현하는 메소드   //성적체계 매개변수 필요-->필요없어도 될듯...사용자가 아니까
 	public float getTargetGpaPerSemester(int creditForGraduate, float targetGpa) {
 		float targetGpaPerSemester = 0.0f;
@@ -194,5 +196,16 @@ public class GPAService {
 			finishedCredit += dto.getCredit();
 		}
 		return finishedCredit;
+	}
+	//학점 달성도 구하기
+	public int getGpaAchievement(float targetGpa) {
+		float currentGpa = getMyTotalGPA();
+		int gpaAchievement = (int)((currentGpa / targetGpa)*100);
+		if(gpaAchievement>=100){
+			return gpaAchievement = 100;
+		}else if(gpaAchievement <= 0){
+			return gpaAchievement = 0;
+		}
+		return gpaAchievement;
 	}
 }
