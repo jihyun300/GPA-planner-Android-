@@ -149,8 +149,8 @@ public class MainActivity extends FragmentActivity implements
 
 		Intent intent;
 		switch (item.getItemId()) {
-			 startActivity(intent);
-			 return true;
+		//	 startActivity(intent);
+	//		 return true;
 
 		case R.id.action_subject_add:
 			intent = new Intent(this, DisplayAddActivity.class);
@@ -594,6 +594,7 @@ public class MainActivity extends FragmentActivity implements
 		 */
 		private Controller controller;
 		private float targetGpaPerSemester;
+		private int gpaAchievement;
 
 		private int creditForGraduate;
 		private float targetGpa;
@@ -629,6 +630,7 @@ public class MainActivity extends FragmentActivity implements
 			targetGpa = savedGrad_major.getFloat(getString(R.string.savedTarget), 0);
 
 			targetGpaPerSemester = controller.getTargetGpaPerSemester(creditForGraduate, targetGpa);
+			gpaAchievement = controller.getGpaAchievement(targetGpa);
 			/*
 			 * DB에서 year semester 가져온다음 이중포문 사용해서
 			 * GPAService.TOTAL_SCORE,year,semester 호출한다 setX setY 문제 있을 수 있다

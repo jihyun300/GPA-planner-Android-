@@ -38,4 +38,7 @@ public class Controller {
 		// TODO Auto-generated method stub
 		return gpaService.getTargetGpaPerSemester(creditForGraduate,targetGpa);
 	}
+	public int getGpaAchievement(float targetGpa) {
+		return gpaService.getGpaAchievement(targetGpa);
+	}
 }   
