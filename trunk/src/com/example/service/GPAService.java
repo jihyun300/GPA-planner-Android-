@@ -201,11 +201,6 @@ public class GPAService {
 	public int getGpaAchievement(float targetGpa) {
 		float currentGpa = getMyTotalGPA();
 		int gpaAchievement = (int)((currentGpa / targetGpa)*100);
-		if(gpaAchievement>=100){
-			return gpaAchievement = 100;
-		}else if(gpaAchievement <= 0){
-			return gpaAchievement = 0;
-		}
-		return gpaAchievement;
+		return gpaAchievement>=100 ? 100 : ((gpaAchievement<=0) ? 0 : gpaAchievement);
 	}
 }
