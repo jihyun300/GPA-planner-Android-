@@ -70,9 +70,9 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:layout_marginTop="18dp"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
                         android:layout_weight="0.5"
                         android:background="#E6E6E6"
                         android:gravity="center"
@@ -101,9 +101,9 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:layout_marginTop="18dp"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
                         android:layout_weight="0.5"
                         android:background="#E6E6E6"
                         android:gravity="center"
@@ -153,14 +153,14 @@
             <com.example.holographylibrary.LineGraph
                 android:id="@+id/graph3"
                 android:layout_width="match_parent"
-                android:layout_marginTop="18dp"
-                android:layout_height="200dp" />
+                android:layout_height="200dp"
+                android:layout_marginTop="18dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="14dp" >
+                android:layout_marginTop="14dp"
+                android:orientation="horizontal" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -246,7 +246,7 @@
                 android:layout_marginTop="9dp" >
 
                 <TextView
-                    android:id="@+id/bar_total_fill"
+                    android:id="@+id/bar_total_remain"
                     android:layout_width="0dp"
                     android:layout_height="20dp"
                     android:layout_weight="1"
@@ -256,7 +256,7 @@
                     android:textColor="#FFFFFF" />
 
                 <TextView
-                    android:id="@+id/bar_total_remain"
+                    android:id="@+id/bar_total_fill"
                     android:layout_width="0dp"
                     android:layout_height="20dp"
                     android:layout_weight="1"
@@ -325,12 +325,13 @@
                     android:layout_height="20dp"
                     android:layout_weight="1"
                     android:background="#FFFFFF"
-                    android:paddingRight="6dp"
                     android:gravity="right|center_vertical"
+                    android:paddingRight="6dp"
                     android:text="50" />
             </LinearLayout>
         </LinearLayout>
-         <LinearLayout
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="54dp"
@@ -349,131 +350,135 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="6dp"
                 android:background="#CCCCCC" />
-         	  <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:orientation="vertical" >
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1" />
+                android:layout_marginTop="18dp"
+                android:orientation="vertical" >
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:orientation="horizontal" >
 
-                    <TextView
-                        android:id="@+id/present_textView"
-                        android:layout_width="80dp"
+                    <View
+                        android:layout_width="0dp"
                         android:layout_height="80dp"
-                        android:background="@drawable/st_gre_circle_dy"
-                        android:gravity="center"
-                        android:text="3.78"
-                        android:textColor="#ffffff"
-                        android:textSize="27dp"
-                        android:textStyle="bold" />
+                        android:layout_weight="1" />
 
-                    <TextView
-                        android:layout_marginTop="18dp"
-                        android:layout_width="80dp"
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
-                        android:background="#E6E6E6"
-                        android:gravity="center"
-                        android:text="현재 학점"
-                        android:textSize="13dp" />
-                </LinearLayout>
+                        android:orientation="vertical" >
 
-                
-                <ImageView 
-                    android:layout_width="0dp"
-                    android:layout_height="10dp"
-                    android:layout_marginTop="35dp"
-                    android:src="@drawable/triangle"
-                    android:layout_weight="2" />
-				
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                        <TextView
+                            android:id="@+id/present_textView"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@drawable/st_gre_circle_dy"
+                            android:gravity="center"
+                            android:text="3.78"
+                            android:textColor="#ffffff"
+                            android:textSize="27dp"
+                            android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/graduate_textView"
-                        android:layout_width="80dp"
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:layout_weight="0.5"
+                            android:background="#E6E6E6"
+                            android:gravity="center"
+                            android:text="현재 학점"
+                            android:textSize="13dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="35dp"
+                        android:layout_weight="2"
+                        android:src="@drawable/triangle" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/graduate_textView"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@drawable/st_pup_circle_dy"
+                            android:gravity="center"
+                            android:text="4.5"
+                            android:textColor="#ffffff"
+                            android:textSize="27dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:layout_weight="0.5"
+                            android:background="#E6E6E6"
+                            android:gravity="center"
+                            android:text="졸업목표학점"
+                            android:textSize="13dp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="0dp"
                         android:layout_height="80dp"
-                        android:background="@drawable/st_pup_circle_dy"
-                        android:gravity="center"
-                         android:text="4.5"
-                        android:textColor="#ffffff"
-                        android:textSize="27dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_marginTop="18dp"
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
-                        android:background="#E6E6E6"
-                        android:gravity="center"
-                        android:text="졸업목표학점"
-                        android:textSize="13dp" />
+                        android:layout_weight="1" />
                 </LinearLayout>
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1" />
             </LinearLayout>
         </LinearLayout>
-       </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:layout_marginTop="54dp"
             android:background="#E6E6E6"
             android:orientation="vertical" >
-         	<TextView
-         	    android:layout_width="match_parent"
-         	    android:layout_height="wrap_content"
-         	   	android:gravity="center_horizontal"
-         	    android:text="목표학점을 달성할려면"
-         	    />
-         	<LinearLayout
-         	    android:layout_width="match_parent"
-         	    android:layout_height ="wrap_content"
-         	    android:orientation="horizontal">
-         	    <TextView
-         	     android:layout_width="0dp"
-         	     android:layout_height="wrap_content"
-         	     android:layout_weight="0.46" 
-         	     android:gravity="right"
-         	     android:text="남은 학기 동안 평균 " />
-         	    <TextView
-         	      android:id="@+id/goalgpa_txtView"
-         	      android:layout_width="wrap_content"
-         	      android:layout_height="wrap_content"         	      
-         	      android:text="4.33"
-         	      android:textColor="@color/default_purple"
-         	      android:textStyle="bold"/>
-         	    <TextView
-         	     android:layout_width="0dp"
-         	     android:layout_height="wrap_content"
-         	     android:layout_weight="0.48" 
-         	     android:gravity="left"
-         	     android:text="점을 받으셔야합니다." />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="목표학점을 달성할려면" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.46"
+                    android:gravity="right"
+                    android:text="남은 학기 동안 평균 " />
+
+                <TextView
+                    android:id="@+id/goalgpa_txtView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4.33"
+                    android:textColor="@color/default_purple"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.48"
+                    android:gravity="left"
+                    android:text="점을 받으셔야합니다." />
          	    "
-         	 </LinearLayout>
-         	
-		</LinearLayout>
-                <!--
+            </LinearLayout>
+        </LinearLayout>
+        <!--
              <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="90dp" >
@@ -506,8 +511,9 @@
                 android:textAlignment="center"
                 android:textSize="40dp" />
             </RelativeLayout>
-        </LinearLayout>
+        </LinearLayout>
         -->
 
     </LinearLayout>
+
 </ScrollView>

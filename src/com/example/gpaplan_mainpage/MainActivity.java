@@ -39,6 +39,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -149,11 +150,11 @@ public class MainActivity extends FragmentActivity implements
 
 		Intent intent;
 		switch (item.getItemId()) {
-		//	 startActivity(intent);
-	//		 return true;
-
+	
 		case R.id.action_subject_add:
 			intent = new Intent(this, DisplayAddActivity.class);
+			 startActivity(intent);
+			 return true;
 
 		case R.id.action_settings:
 			intent = new Intent(this, SettingsActivity.class);
@@ -644,6 +645,21 @@ public class MainActivity extends FragmentActivity implements
 			Line mline = new Line();
 			Line lline = new Line();
 
+			TextView remain = (TextView) rootView.findViewById(R.id.bar_total_remain);
+			TextView fill = (TextView) rootView.findViewById(R.id.bar_total_fill);
+			
+			LayoutParams remainParam = (LayoutParams) remain.getLayoutParams();
+			remainParam.weight = gpaAchievement;
+			remain.setLayoutParams(remainParam);
+			remain.setText(gpaAchievement + "");
+			
+			LayoutParams fillParam = (LayoutParams) fill.getLayoutParams();
+			fillParam.weight = 100 - gpaAchievement;
+			fill.setLayoutParams(fillParam);
+			fill.setText("100");
+			
+			((TextView) rootView.findViewById(R.id.goalgpa_txtView)).setText(String.valueOf(targetGpaPerSemester));
+			
 			float plot_x = 0;
 			for (GroupItem g : lst_group) {
 				LinePoint tpoint = new LinePoint();
