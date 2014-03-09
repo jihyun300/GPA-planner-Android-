@@ -163,7 +163,7 @@ public class GPAService {
 		
 		targetGpaPerSemester=((targetGpa*creditForGraduate)-(currentGpa*finishedCredit))/
 											(creditForGraduate-finishedCredit);
-		return Float.parseFloat(String.format("%.2f",""+targetGpaPerSemester));
+		return Float.parseFloat(String.format("%.2f", targetGpaPerSemester));
 	}
 	//이수한 학기 구하기/( 필요없는것 같음)
 	private int finishedSemester(){
@@ -201,6 +201,6 @@ public class GPAService {
 	public int getGpaAchievement(float targetGpa) {
 		float currentGpa = getMyTotalGPA();
 		int gpaAchievement = (int)((currentGpa / targetGpa)*100);
-		return gpaAchievement>=100 ? 100 : ((gpaAchievement<=0) ? 0 : gpaAchievement);
+		return gpaAchievement>=100 ? 100 : ( (gpaAchievement<=0) ? 0 : gpaAchievement );
 	}
 }
