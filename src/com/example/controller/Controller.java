@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.example.db.GPADto;
 import com.example.service.GPAService;
-import com.example.service.SettingService;
+
 
 /*
  * created by doyoon
@@ -13,12 +13,12 @@ import com.example.service.SettingService;
  */
 public class Controller {
 	public GPAService gpaService;
-	public SettingService settingService;
+	
     
 	// 논의 해보기
 	public Controller(Context context) {
 		gpaService = new GPAService(context);
-		settingService = new SettingService(context);
+	
 	}
 	public int getTotalCredit(){
 		return gpaService.getTotalCredit();

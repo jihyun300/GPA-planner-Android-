@@ -10,13 +10,15 @@ import com.example.db.GPADao;
 import com.example.db.GPADbHelper;
 import com.example.db.GPADto;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.preference.PreferenceManager;
 
 //dao에서 받아온 것들로 서비스로직 구현
 public class GPAService {
 
 	public GPADao gpaDao;
-	// public MySetting settingDao; //만들어야함
+
 
 	public GPADbHelper gpaDBhelper;
 	public SQLiteDatabase gpaDB;
@@ -24,10 +26,22 @@ public class GPAService {
 	public static final int TOTAL_SCORE = 0;
 	public static final int MAJOR_SCORE = 1;
 	public static final int LIBERALARTS_SCORE = 2;
-	
+	SharedPreferences s ;
 	public int setting;
 	public GPAService(Context context) {
 		gpaDao = new GPADao(context);
+		s = PreferenceManager.getDefaultSharedPreferences(context);
+		s.getString("savedScale", "4.3");
+		
+		if(s.equals("4.3")){
+			setting=0;
+		}
+		else{
+			setting=1;
+		}
+			
+		
+		
 		//gpaDBhelper = gpaDao.dbHelper;
 		//gpaDB = gpaDao.db;
 	}
@@ -46,6 +60,7 @@ public class GPAService {
 	public float getTotalGPA(){
 		return getMyTotalGPA();
 	}
+
 
 	// 학년 학기별 성적
 	private List<GPADto> getGPADtoList(int year, int semester) {
@@ -121,7 +136,6 @@ public class GPAService {
 		return totalScore / totalCredit;
 		
 	}
-	
 	private int getSumOfCredit(){
 		List<GPADto>  list = getAllList();
 		int totalCredit = 0;
@@ -164,6 +178,7 @@ public class GPAService {
 		targetGpaPerSemester=((targetGpa*creditForGraduate)-(currentGpa*finishedCredit))/
 											(creditForGraduate-finishedCredit);
 		return Float.parseFloat(String.format("%.2f", targetGpaPerSemester));
+
 	}
 	//이수한 학기 구하기/( 필요없는것 같음)
 	private int finishedSemester(){

@@ -6,7 +6,7 @@
      
         android:defaultValue="@string/pref_default_target"
         android:inputType="numberDecimal"
-        android:key="target"
+        android:key="savedTarget"
         android:maxLines="1"
         android:selectAllOnFocus="true"
         android:singleLine="true"

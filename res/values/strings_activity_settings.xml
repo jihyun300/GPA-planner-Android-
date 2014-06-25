@@ -8,7 +8,7 @@
     <!-- Example General settings -->
   
    
-    <string name="pref_title_goal_major">전공</string>
+    <string name="pref_title_goal_major">졸업요구학점</string>
     <string name="pref_default_goal_major">0</string>
     
     <string name="pref_title_goal_liberalarts">교양</string>

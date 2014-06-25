@@ -238,7 +238,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="13dp"
-                android:text="전공+교양" />
+                android:text="졸업요구학점" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -266,68 +266,16 @@
                     android:text="50" />
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="13dp"
-                android:text="전공" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp" >
-
-                <TextView
-                    android:id="@+id/bar_major_fill"
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_weight="0.5"
-                    android:background="#823EB6"
-                    android:gravity="center"
-                    android:text="20"
-                    android:textColor="#FFFFFF" />
-
-                <TextView
-                    android:id="@+id/bar_major_remain"
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_weight="1"
-                    android:background="#FFFFFF"
-                    android:gravity="right|center_vertical"
-                    android:paddingRight="6dp"
-                    android:text="50" />
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="13dp"
-                android:text="교양" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp" >
-
-                <TextView
-                    android:id="@+id/bar_liberal_fill"
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_weight="2.5"
-                    android:background="#CBADE3"
-                    android:gravity="center"
-                    android:text="40"
-                    android:textColor="#FFFFFF" />
-
-                <TextView
-                    android:id="@+id/bar_liber_remain"
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_weight="1"
-                    android:background="#FFFFFF"
-                    android:gravity="right|center_vertical"
-                    android:paddingRight="6dp"
-                    android:text="50" />
             </LinearLayout>
         </LinearLayout>
 
@@ -341,7 +289,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="졸업목표학점"
+                android:text="전공+교양"
                 android:textColor="#4d4d4d"
                 android:textSize="18dp" />
 
@@ -475,10 +423,16 @@
                     android:layout_weight="0.48"
                     android:gravity="left"
                     android:text="점을 받으셔야합니다." />
-         	    "
+         	    
             </LinearLayout>
         </LinearLayout>
-        <!--
+      
+		
+    </LinearLayout>
+
+</ScrollView>
+
+  <!--
              <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="90dp" >
@@ -511,9 +465,6 @@
                 android:textAlignment="center"
                 android:textSize="40dp" />
             </RelativeLayout>
-        </LinearLayout>
+        </LinearLayout>
+
         -->
-
-    </LinearLayout>
-
-</ScrollView>
