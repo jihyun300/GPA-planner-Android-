@@ -93,6 +93,16 @@
                 android:layout_height="28.5dp"
                 android:background="@drawable/splash_pass"
                 android:onClick="selectedPASS" />
+             <View
+                android:layout_width="0dp"
+                android:layout_height="8dp"
+                android:layout_weight="3" />
+            <Button
+                android:id="@+id/buttPass"
+                android:layout_width="79.5dp"
+                android:layout_height="28.5dp"
+                android:background="@drawable/splash_ok"
+                android:onClick="selectedOK" />
 
             <View
                 android:layout_width="0dp"

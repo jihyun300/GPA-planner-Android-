@@ -3,6 +3,7 @@ package com.example.gpaplan_mainpage;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -32,10 +33,7 @@ public class SplashActivity extends Activity {
 		setContentView(R.layout.activity_splash);
 		
 		splashLayout=(LinearLayout)findViewById(R.id.splashLayout);
-/*		View scaleView= getLayoutInflater().inflate(R.layout.activity_set_scale,null);
 
-		scaleView.findViewById(R.id.buttScale43).setOnClickListener(this);
-*/		
 
 		
 		splashSceneNumber=0;
@@ -54,7 +52,7 @@ public class SplashActivity extends Activity {
 					
 				case 1:
 					newOrnot();
-//					SplashActivity.this.finish();
+
 					break;
 					
 				case 2:
@@ -73,32 +71,24 @@ public class SplashActivity extends Activity {
 	}
 
 	public void newOrnot(){
-		SharedPreferences sharedPref=getSharedPreferences("pref",Context.MODE_PRIVATE);
+		SharedPreferences sharedPref=PreferenceManager.getDefaultSharedPreferences(this);
 
-		//원래는 defalutValue=0;으로 설정
-		int defaultValue=1;
+		int defaultValue=0;
 		int keepcheck=sharedPref.getInt(getString(R.string.savedSetting),defaultValue);
 		if(keepcheck==defaultValue){ //아직 한번도 안써졌을때
 			Intent intent=new Intent(this,SettingActivity_Scale.class);
 			startActivity(intent);
 			finish();
-//			SplashActivity.this.finish();
 		}
 		else{
 			Intent intent=new Intent(this,MainActivity.class);
 			startActivity(intent);
 			finish();
-//			SplashActivity.this.finish();
+
 		}
 	}
 
-/*	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.splash, menu);
-		return true;
-	}
-*/
+
 
 
 

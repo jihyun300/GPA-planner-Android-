@@ -1,23 +1,22 @@
 package com.example.gpaplan_mainpage;
 
+import java.util.List;
+
+
+
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.preference.RingtonePreference;
-import android.text.TextUtils;
-
-import java.util.List;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -42,7 +41,7 @@ public class SettingsActivity extends PreferenceActivity {
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
-
+	
 		setupSimplePreferencesScreen();
 	}
 
@@ -51,15 +50,20 @@ public class SettingsActivity extends PreferenceActivity {
 	 * device configuration dictates that a simplified, single-pane UI should be
 	 * shown.
 	 */
+	
 	private void setupSimplePreferencesScreen() {
 		if (!isSimplePreferences(this)) {
 			return;
 		}
 
+		
+		//PreferenceManager.setDefaultValues(context, sharedPreferencesName, sharedPreferencesMode, resId, readAgain)
 		// In the simplified UI, fragments are not used at all and we instead
 		// use the older PreferenceActivity APIs.
 
 		// Add 'general' preferences.
+		
+		
 		addPreferencesFromResource(R.xml.pref_general);
 
 		// Add 'notifications' preferences, and a corresponding header.
@@ -74,13 +78,13 @@ public class SettingsActivity extends PreferenceActivity {
 		getPreferenceScreen().addPreference(fakeHeader);
 		addPreferencesFromResource(R.xml.pref_target);
 
+
 		// Bind the summaries of EditText/List/Dialog/Ringtone preferences to
 		// their values. When their values change, their summaries are updated
 		// to reflect the new value, per the Android Design guidelines.
-		bindPreferenceSummaryToValue(findPreference("scale_list"));
-		bindPreferenceSummaryToValue(findPreference("goal_major_text"));
-		bindPreferenceSummaryToValue(findPreference("goal_liberalarts_text"));
-		bindPreferenceSummaryToValue(findPreference("target"));
+		bindPreferenceSummaryToValue(findPreference("savedScale"));
+		bindPreferenceSummaryToValue(findPreference("savedGoalMajor"));
+		bindPreferenceSummaryToValue(findPreference("savedTarget"));
 			
 	}
 
@@ -127,23 +131,30 @@ public class SettingsActivity extends PreferenceActivity {
 	private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
 		@Override
 		public boolean onPreferenceChange(Preference preference, Object value) {
+			if(value==null)
+				value="";
 			String stringValue = value.toString();
 
 			if (preference instanceof ListPreference) {
 				// For list preferences, look up the correct display value in
 				// the preference's 'entries' list.
 				ListPreference listPreference = (ListPreference) preference;
+			
 				int index = listPreference.findIndexOfValue(stringValue);
-
+				
 				// Set the summary to reflect the new value.
 				preference
 						.setSummary(index >= 0 ? listPreference.getEntries()[index]
 							: "");
+				
+				//4.3만 가능하게 할것이므로 
+				preference.setSummary("4.3");
 
 			} else {
 				// For all other preferences, set the summary to the value's
 				// simple string representation.
 				preference.setSummary(stringValue);
+				
 			}
 			
 			return true;
@@ -166,18 +177,19 @@ public class SettingsActivity extends PreferenceActivity {
 
 		// Trigger the listener immediately with the preference's
 		// current value.
+		
+		
 		sBindPreferenceSummaryToValueListener.onPreferenceChange(
 				preference,
 				PreferenceManager.getDefaultSharedPreferences(
 						preference.getContext()).getString(preference.getKey(),
 						""));
 	}
-
-	/**
-	 * This fragment shows general preferences only. It is used when the
+			/**
+	 * This fragment shows notification preferences only. It is used when the
 	 * activity is showing a two-pane settings UI.
 	 */
-/*	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	public static class GeneralPreferenceFragment extends PreferenceFragment {
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
@@ -188,15 +200,11 @@ public class SettingsActivity extends PreferenceActivity {
 			// to their values. When their values change, their summaries are
 			// updated to reflect the new value, per the Android Design
 			// guidelines.
-			bindPreferenceSummaryToValue(findPreference("example_text"));
-			bindPreferenceSummaryToValue(findPreference("example_list"));
+			bindPreferenceSummaryToValue(findPreference("savedScale"));
+			
 		}
 	}
-*/
-	/**
-	 * This fragment shows notification preferences only. It is used when the
-	 * activity is showing a two-pane settings UI.
-	 */
+
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	public static class NotificationPreferenceFragment extends
 			PreferenceFragment {
@@ -209,8 +217,7 @@ public class SettingsActivity extends PreferenceActivity {
 			// to their values. When their values change, their summaries are
 			// updated to reflect the new value, per the Android Design
 			// guidelines.
-			bindPreferenceSummaryToValue(findPreference("goal_major_text"));
-			bindPreferenceSummaryToValue(findPreference("goal_liberalarts_text"));
+			bindPreferenceSummaryToValue(findPreference("savedGoalMajor"));
 		}
 	}
 
@@ -229,7 +236,7 @@ public class SettingsActivity extends PreferenceActivity {
 			// to their values. When their values change, their summaries are
 			// updated to reflect the new value, per the Android Design
 			// guidelines.
-			bindPreferenceSummaryToValue(findPreference("traget"));
+			bindPreferenceSummaryToValue(findPreference("savedTarget"));
 		
 		}
 	}

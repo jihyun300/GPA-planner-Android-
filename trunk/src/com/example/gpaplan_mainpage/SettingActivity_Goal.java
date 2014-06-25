@@ -1,6 +1,7 @@
 package com.example.gpaplan_mainpage;
 
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -38,27 +39,38 @@ public class SettingActivity_Goal extends Activity {
 	}
 	
 	public void selectedPASS(View view){
-	
 		
+			Intent intented=new Intent(this,SettingActivity_Target.class);
+			startActivity(intented);
+			overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+			finish();
+		
+		
+	}
+	public void selectedOK(View view){
 		//졸업이수학점(전공)저장
-		String txtGrad_major=editGraduate_major.getText().toString();
-		
-		SharedPreferences savedGrad_major=getSharedPreferences("SharedSetting",Context.MODE_PRIVATE);
-		SharedPreferences.Editor editor=savedGrad_major.edit();		
-		editor.putInt(getString(R.string.savedGoalMajor), Integer.parseInt(txtGrad_major));		
-		editor.commit();
+				String txtGrad_major=editGraduate_major.getText().toString();
+				SharedPreferences savedGrad = PreferenceManager.getDefaultSharedPreferences(this);
+				SharedPreferences.Editor editor=savedGrad.edit();		
+				editor.putString(getString(R.string.savedGoalMajor), txtGrad_major);		
+				editor.commit();
 
-		//졸업이수학점(교양)저장
-	
-//		SharedPreferences savedGrad_liberal=getSharedPreferences("savedLiberal_gra",Context.MODE_PRIVATE);
-//		SharedPreferences.Editor editor2=savedGrad_liberal.edit();
-	
-		
-		Intent intented=new Intent(this,SettingActivity_Target.class);
-		startActivity(intented);
-		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
-		finish();
+				
+				
+				//졸업이수학점(교양)저장
+			
+			/*//지난시간에 교양 전공 따로 받지 않기로 했음;
+			 * 
+			 * 	SharedPreferences savedGrad_liberal=getSharedPreferences("SharedSetting",Context.MODE_PRIVATE);
+				SharedPreferences savedGrad_liberal = PreferenceManager.getDefaultSharedPreferences(this);
+				SharedPreferences.Editor editor2=savedGrad_liberal.edit();
+				editor2.putString(getString(R.string.savedGoalMajor), txtGrad_major);
+				editor2.commit();
+				*/
+				Intent intented=new Intent(this,SettingActivity_Target.class);
+				startActivity(intented);
+				overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+				finish();
 	}
 	
-
 }
