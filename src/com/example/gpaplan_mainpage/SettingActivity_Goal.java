@@ -25,7 +25,7 @@ public class SettingActivity_Goal extends Activity {
 		String message=extraIntent.getStringExtra(SettingActivity_Scale.EXTRA_MESSAGE);
 		
 	
-		
+	
 		editGraduate_major=(TextView)findViewById(R.id.editgoal_major);
 		editGraduate_major.setText("0");
 
