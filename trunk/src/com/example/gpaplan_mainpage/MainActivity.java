@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
@@ -14,6 +13,7 @@ import android.content.SharedPreferences;
 import android.content.ClipData.Item;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -40,6 +40,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -51,14 +52,14 @@ import com.example.holographylibrary.*;
 import com.example.controller.Controller;
 import com.example.db.GPADto;
 
-
 import com.example.service.GPAService;
+
 public class MainActivity extends FragmentActivity implements
-ActionBar.TabListener {
+		ActionBar.TabListener {
 
- SectionsPagerAdapter mSectionsPagerAdapter;
+	SectionsPagerAdapter mSectionsPagerAdapter;
 	ViewPager mViewPager;
-
+	
 	static ArrayList<GroupItem> lst_group;
 	long m_startTime;
 	long m_endTime;
@@ -67,19 +68,22 @@ ActionBar.TabListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		//사용자가 들어왔었는지 확인(write)
-		SharedPreferences sharedPref=getSharedPreferences("pref",Context.MODE_PRIVATE);
-		SharedPreferences.Editor editor=sharedPref.edit();
-		editor.putInt(getString(R.string.savedSetting),1);
+		// 사용자가 들어왔었는지 확인(write)
+		SharedPreferences sharedPref =PreferenceManager.getDefaultSharedPreferences(this);
+		SharedPreferences.Editor editor = sharedPref.edit();
+		editor.putInt(getString(R.string.savedSetting), 1);
+		
 		editor.commit();
 
-		//4.3 4.5읽기(READ)
-		SharedPreferences savedScale=getSharedPreferences("savedScale",Context.MODE_PRIVATE);
-		float init43=4.3f;
-		getScale=savedScale.getFloat(getString(R.string.savedScale),init43);
-		setContentView(R.layout.activity_main);
+		// 4.3 4.5읽기(READ)
+		SharedPreferences savedScale = PreferenceManager.getDefaultSharedPreferences(this);
 		
-		m_startTime=System.currentTimeMillis();
+		float init43 = 4.3f;
+		getScale = Float.parseFloat(savedScale.getString(getString(R.string.savedScale), Float.toString(init43)));
+					
+		setContentView(R.layout.activity_main);
+
+		m_startTime = System.currentTimeMillis();
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -93,17 +97,16 @@ ActionBar.TabListener {
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 
-	
 		// When swiping between different sections, select the corresponding
 		// tab. We can also use ActionBar.Tab#select() to do this if we have
 		// a reference to the Tab.
 		mViewPager
-		.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-			@Override
-			public void onPageSelected(int position) {
-				actionBar.setSelectedNavigationItem(position);
-			}
-		});
+				.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+					@Override
+					public void onPageSelected(int position) {
+						actionBar.setSelectedNavigationItem(position);
+					}
+				});
 
 		// For each of the sections in the app, add a tab to the action bar.
 		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
@@ -144,35 +147,33 @@ ActionBar.TabListener {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
 
-		Intent intent ;
-		switch(item.getItemId()){
-		
-		case R.id.action_subject_add :
-			
-			 intent = new Intent(this, DisplayAddActivity.class);
+		Intent intent;
+		switch (item.getItemId()) 
+		{
+		case R.id.action_subject_add:
+			intent = new Intent(this, DisplayAddActivity.class);
 			 startActivity(intent);
 			 return true;
-		
-		case R.id.action_settings :
-			 intent = new Intent(this, SettingsActivity.class);
+
+		case R.id.action_settings:
+			intent = new Intent(this, SettingsActivity.class);
 			startActivity(intent);
 			return true;
-		default :
+		default:
 			return super.onOptionsItemSelected(item);
 
-
 		}
-	
+
 	}
 
 	@Override
 	public void onTabSelected(ActionBar.Tab tab,
 			FragmentTransaction fragmentTransaction) {
 		// When the given tab is selected, switch to the corresponding page in
-		// the ViewPager.	
-	
+		// the ViewPager.
+
 		mViewPager.setCurrentItem(tab.getPosition());
-		
+
 	}
 
 	@Override
@@ -183,7 +184,7 @@ ActionBar.TabListener {
 	@Override
 	public void onTabReselected(ActionBar.Tab tab,
 			FragmentTransaction fragmentTransaction) {
-	
+
 	}
 
 	/**
@@ -204,12 +205,6 @@ ActionBar.TabListener {
 			// below) with the page number as its lone argument.
 			switch (position) {
 			case 0:
-				/*
-				 * Fragment fragment = new FirstSectionFragment(); Bundle args =
-				 * new Bundle();
-				 * args.putInt(FirstSectionFragment.ARG_SECTION_NUMBER, position
-				 * + 1); fragment.setArguments(args); return fragment;
-				 */
 				return new FirstSectionFragment();
 			case 1:
 				return new SecondSectionFragment();
@@ -248,42 +243,49 @@ ActionBar.TabListener {
 		 * fragment.
 		 */
 		public void onResume() {
+			lst_group.clear();
+			LoadGroupData();
 			super.onResume();
+			
 		};
+
 		public static final String ARG_SECTION_NUMBER = "section_number";
 
 		// Expandable listView
+		
 		mExpandableListAdpater adpt;
 		ExpandableListView lstView;
 		TextView blankView;
 		GPAService gservice;
 		List<GPADto> dtoList;
 		private ActionMode mActionMode;
+		SharedPreferences s;
 		int expandableListSelectionType = ExpandableListView.PACKED_POSITION_TYPE_NULL;
+
 		public FirstSectionFragment() {
 		}
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main,
-					container, false);
+			View rootView = inflater.inflate(R.layout.fragment_main, container,
+					false);
 			gservice = new GPAService(getActivity());
+			s=PreferenceManager.getDefaultSharedPreferences(getActivity());
 			
 			// Set up ExpandableListView
 			lstView = (ExpandableListView) rootView.findViewById(R.id.explist);
-			lstView.setIndicatorBounds(10,100);
-			blankView = (TextView)rootView.findViewById(R.id.blank_textview);
-			//lstView.setDivider(null);
+			lstView.setIndicatorBounds(10, 100);
+			blankView = (TextView) rootView.findViewById(R.id.blank_textview);
+			// lstView.setDivider(null);
 			lst_group = new ArrayList<GroupItem>();
 			// Loading Data;
-
 
 			adpt = new mExpandableListAdpater(rootView.getContext(), lstView,
 					(ArrayList<GroupItem>) lst_group);
 			lstView.setAdapter(adpt);
 			lstView.setDivider(null);
-			
+
 			LoadGroupData();
 
 			ExpandableListView.OnChildClickListener mChildClickListener = new OnChildClickListener() {
@@ -292,20 +294,22 @@ ActionBar.TabListener {
 				public boolean onChildClick(ExpandableListView parent, View v,
 						int groupPosition, int childPosition, long id) {
 					// TODO Auto-generated method stub
-					if (mActionMode != null)  {
+					if (mActionMode != null) {
 						if (expandableListSelectionType == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
-							int flatPosition = parent.getFlatListPosition(
-									ExpandableListView.getPackedPositionForChild(groupPosition,childPosition));
-							parent.setItemChecked(
-									flatPosition,
+							int flatPosition = parent
+									.getFlatListPosition(ExpandableListView
+											.getPackedPositionForChild(
+													groupPosition,
+													childPosition));
+							parent.setItemChecked(flatPosition,
 									!parent.isItemChecked(flatPosition));
 						}
 						return true;
-					}
-					else{
+					} else {
 						Intent intent = new Intent(getActivity(),
 								EditSubjectActivity.class);
-						int DBid = lst_group.get(groupPosition).getItems().get(childPosition).getDBid();
+						int DBid = lst_group.get(groupPosition).getItems()
+								.get(childPosition).getDBid();
 						intent.putExtra("DBid", DBid);
 						startActivity(intent);
 						return true;
@@ -316,20 +320,21 @@ ActionBar.TabListener {
 
 			lstView.setOnChildClickListener(mChildClickListener);
 			lstView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-			////여기여기;;
+			// //여기여기;;
 			lstView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
 
 				@Override
-				public void onItemCheckedStateChanged(ActionMode mode, int position,
-						long id, boolean checked) {
+				public void onItemCheckedStateChanged(ActionMode mode,
+						int position, long id, boolean checked) {
 					int count = lstView.getCheckedItemCount();
 
 					if (count == 1) {
-						expandableListSelectionType = ExpandableListView.getPackedPositionType(
-								lstView.getExpandableListPosition(position));
+						expandableListSelectionType = ExpandableListView
+								.getPackedPositionType(lstView
+										.getExpandableListPosition(position));
 
 					}
-					if(expandableListSelectionType == ExpandableListView.PACKED_POSITION_TYPE_GROUP)
+					if (expandableListSelectionType == ExpandableListView.PACKED_POSITION_TYPE_GROUP)
 						mode.finish();
 					mode.setTitle(String.valueOf(count));
 					configureMenu(mode.getMenu(), count);
@@ -338,16 +343,21 @@ ActionBar.TabListener {
 
 				@Override
 				public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-					//After orientation change,
-					//setting expandableListSelectionType, as tried in setExpandableListSelectionType
-					//does not work, because getExpandableListPosition does not return the correct value
-					//probably because the adapter has not yet been set up correctly
-					//thus we default to PACKED_POSITION_TYPE_GROUP
-					//this workaround works because orientation change collapses the groups
-					//so we never restore the CAB for PACKED_POSITION_TYPE_CHILD
+					// After orientation change,
+					// setting expandableListSelectionType, as tried in
+					// setExpandableListSelectionType
+					// does not work, because getExpandableListPosition does not
+					// return the correct value
+					// probably because the adapter has not yet been set up
+					// correctly
+					// thus we default to PACKED_POSITION_TYPE_GROUP
+					// this workaround works because orientation change
+					// collapses the groups
+					// so we never restore the CAB for
+					// PACKED_POSITION_TYPE_CHILD
 					expandableListSelectionType = ExpandableListView.PACKED_POSITION_TYPE_GROUP;
-					MenuInflater in=mode.getMenuInflater();
-					in.inflate(R.menu.action_mode,menu);
+					MenuInflater in = mode.getMenuInflater();
+					in.inflate(R.menu.action_mode, menu);
 					mode.setTitle(String.valueOf(lstView.getCheckedItemCount()));
 					mActionMode = mode;
 					return true;
@@ -360,55 +370,66 @@ ActionBar.TabListener {
 				}
 
 				@Override
-				public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+				public boolean onActionItemClicked(ActionMode mode,
+						MenuItem item) {
 					int itemId = item.getItemId();
-					SparseBooleanArray checkedItemPositions = lstView.getCheckedItemPositions();
-					ArrayList<int[] > list = new ArrayList<int[]>();
+					SparseBooleanArray checkedItemPositions = lstView
+							.getCheckedItemPositions();
+					ArrayList<int[]> list = new ArrayList<int[]>();
 					int checkedItemCount = checkedItemPositions.size();
-					String msgAction="";
+					String msgAction = "";
 					ArrayList<String> msgObject = new ArrayList<String>();
 					class ccip {
 						int grouppos;
 						int childpos;
-						ccip(int g,int c){
-							this.grouppos=g;
-							this.childpos=c;
+
+						ccip(int g, int c) {
+							this.grouppos = g;
+							this.childpos = c;
 						}
 					}
 					ArrayList<ccip> convertedcheckedItemPos = new ArrayList<ccip>();
 
 					if (checkedItemPositions != null) {
-						for (int i=0; i<checkedItemCount; i++) {
+						for (int i = 0; i < checkedItemCount; i++) {
 							if (checkedItemPositions.valueAt(i)) {
 								int position = checkedItemPositions.keyAt(i);
 								ContextMenu.ContextMenuInfo info;
-								long pos = lstView.getExpandableListPosition(position);
-								int groupPos = ExpandableListView.getPackedPositionGroup(pos);
-								if (ExpandableListView.getPackedPositionType(pos) == ExpandableListView.PACKED_POSITION_TYPE_GROUP) {
+								long pos = lstView
+										.getExpandableListPosition(position);
+								int groupPos = ExpandableListView
+										.getPackedPositionGroup(pos);
+								if (ExpandableListView
+										.getPackedPositionType(pos) == ExpandableListView.PACKED_POSITION_TYPE_GROUP) {
 									msgObject.add("Group " + groupPos);
 								} else {
-									int childPos = ExpandableListView.getPackedPositionChild(pos);
-									msgObject.add("Child " + childPos + " in group " + groupPos);
-									convertedcheckedItemPos.add(new ccip(groupPos,childPos));
+									int childPos = ExpandableListView
+											.getPackedPositionChild(pos);
+									msgObject.add("Child " + childPos
+											+ " in group " + groupPos);
+									convertedcheckedItemPos.add(new ccip(
+											groupPos, childPos));
 								}
 							}
 						}
 					}
 
-					switch(itemId) {
+					switch (itemId) {
 
 					case R.id.action_delete_item:
-						//	for()
-						//gservice.gpaDao.DeleteOneGpa(DBid);
-						for(ccip posSet : convertedcheckedItemPos){
-							ChildItem citem_temp = lst_group.get(posSet.grouppos).getItems().get(posSet.childpos);
+					
+						for (ccip posSet : convertedcheckedItemPos) {
+							ChildItem citem_temp = lst_group
+									.get(posSet.grouppos).getItems()
+									.get(posSet.childpos);
 							gservice.gpaDao.DeleteOneGpa(citem_temp.getDBid());
 						}
 
 						lst_group.clear();
 						LoadGroupData();
-						
-						Toast.makeText(getActivity(),"삭제한당", Toast.LENGTH_SHORT).show();
+
+						Toast.makeText(getActivity(), "과목을 삭제했습니다.",
+								Toast.LENGTH_SHORT).show();
 						break;
 					}
 
@@ -429,38 +450,38 @@ ActionBar.TabListener {
 				public void onGroupCollapse(int groupPosition) {
 					// TODO Auto-generated method stub
 
-					//adpt.setClickedPos(20);
+					// adpt.setClickedPos(20);
 				}
 			});
 			lstView.setOnGroupClickListener(new OnGroupClickListener() {
 				@Override
-				public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+				public boolean onGroupClick(ExpandableListView parent, View v,
+						int groupPosition, long id) {
 					adpt.setClickedPos(groupPosition);
-					if (mActionMode != null)  {
+					if (mActionMode != null) {
 						if (expandableListSelectionType == ExpandableListView.PACKED_POSITION_TYPE_GROUP) {
-							int flatPosition = parent.getFlatListPosition(ExpandableListView.getPackedPositionForGroup(groupPosition));
-							parent.setItemChecked(
-									flatPosition,
+							int flatPosition = parent.getFlatListPosition(ExpandableListView
+									.getPackedPositionForGroup(groupPosition));
+							parent.setItemChecked(flatPosition,
 									!parent.isItemChecked(flatPosition));
 							return true;
 						}
-					}				
+					}
 					return false;
 
 				}
 
-
 			});
-
 
 			lstView.setScrollbarFadingEnabled(true);
 			lstView.addOnLayoutChangeListener(new OnLayoutChangeListener() {
 
 				@Override
-				public void onLayoutChange(View v, int left, int top, int right,
-						int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+				public void onLayoutChange(View v, int left, int top,
+						int right, int bottom, int oldLeft, int oldTop,
+						int oldRight, int oldBottom) {
 					// TODO Auto-generated method stub
-					if(bottom>=oldBottom)
+					if (bottom >= oldBottom)
 						adpt.setClickedPos(100);
 				}
 			});
@@ -470,78 +491,80 @@ ActionBar.TabListener {
 				@Override
 				public void onSystemUiVisibilityChange(int visibility) {
 					// TODO Auto-generated method stub
-					//if()
+					// if()
 				}
 			});
-			lstView.setOnGroupExpandListener(new OnGroupExpandListener(){
+			lstView.setOnGroupExpandListener(new OnGroupExpandListener() {
 
 				@Override
 				public void onGroupExpand(int groupPosition) {
 					// TODO Auto-generated method stub
-					//adpt.setClickedPos(20);
+					// adpt.setClickedPos(20);
 				}
 
 			});
 
 			return rootView;
 		}
+
 		protected void configureMenu(Menu menu, int count) {
-			boolean inGroup = expandableListSelectionType == ExpandableListView.PACKED_POSITION_TYPE_GROUP;			
+			boolean inGroup = expandableListSelectionType == ExpandableListView.PACKED_POSITION_TYPE_GROUP;
 		}
-		int index ;
-		
+
+		int index;
+
 		private void LoadGroupData() {
-			
 
-			if(getScale==4.3f)
-				gservice.setting=0;
-			else
-				gservice.setting=1;
+		
+			try {
 			
-			try{
-
+				if(s.getString(getString(R.string.savedScale), "4.3").equals("4.3"))
+					gservice.setting =0;
+				else
+					gservice.setting =0;//4.3버전만 가능하게 할거라서 이렇게 값을넣어줌.
+				
 				dtoList = gservice.getAllList();
-			}
-			catch(Exception e){
+			} catch (Exception e) {
 				e.printStackTrace();
-			}
-			finally{
-				if(dtoList.size()==0){
+			} finally {
+				
+				if (dtoList.size() == 0) {
 					lstView.setVisibility(View.GONE);
 					blankView.setVisibility(View.VISIBLE);
 					return;
-				}
-				else{
+				} else {
 					blankView.setVisibility(View.GONE);
 				}
-					
-				ArrayList<ChildItem> lstchd ;
-				if(dtoList.size()>0)
-					
-				Log.i("1",dtoList.size()+"");
-				for(GPADto dto_temp:  dtoList){
+
+				ArrayList<ChildItem> lstchd;
+				if (dtoList.size() > 0)
+
+					Log.i("1", dtoList.size() + "");
+				for (GPADto dto_temp : dtoList) {
 					ChildItem ci = new ChildItem();
-					ci.setSubData(dto_temp.getId(),dto_temp.getGrade(),dto_temp.getSubject(),
-							dto_temp.getMajor(), dto_temp.getCredit());
-					// First DB占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占싶몌옙 占쌨아와쇽옙 占십깍옙화占쏙옙占쏙옙占쏙옙.		
+					ci.setSubData(dto_temp.getId(), dto_temp.getGrade(),
+							dto_temp.getSubject(), dto_temp.getMajor(),
+							dto_temp.getCredit());
+					// First DB占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占싶몌옙 占쌨아와쇽옙 占십깍옙화占쏙옙占쏙옙占쏙옙.
 
 					GroupItem gitem = new GroupItem();
 					gitem.setName(dto_temp.getYear()
-							+"학년 "+
-							((dto_temp.getSemester()>=4)?"겨울":								
-								(dto_temp.getSemester()>=3)?"여름":dto_temp.getSemester())
+							+ "학년 "
+							+ ((dto_temp.getSemester() >= 4) ? "겨울" : (dto_temp
+									.getSemester() >= 3) ? "여름" : dto_temp
+									.getSemester())
 
-								+"학기");
-					gitem.setGrade(gservice.getGPA(GPAService.TOTAL_SCORE, dto_temp.getYear(), dto_temp.getSemester()));
+							+ "학기");
+					gitem.setGrade(gservice.getGPA(GPAService.TOTAL_SCORE,
+							dto_temp.getYear(), dto_temp.getSemester()));
 					gitem.setYear(dto_temp.getYear());
 					gitem.setSemester(dto_temp.getSemester());
-					if(checkgitem(gitem.getName())){
+					if (checkgitem(gitem.getName())) {
 
-						gitem =lst_group.get(index);  
-						lstchd =  gitem.getItems();
+						gitem = lst_group.get(index);
+						lstchd = gitem.getItems();
 						lstchd.add(ci);
-					}
-					else{
+					} else {
 						lstchd = new ArrayList<ChildItem>();
 						lstchd.add(ci);
 						gitem.setItems(lstchd);
@@ -553,9 +576,9 @@ ActionBar.TabListener {
 			}
 		}
 
-		private boolean checkgitem(String name){
-			for(GroupItem g:lst_group){
-				if(name.equals(g.getName())){
+		private boolean checkgitem(String name) {
+			for (GroupItem g : lst_group) {
+				if (name.equals(g.getName())) {
 					index = lst_group.indexOf(g);
 					return true;
 				}
@@ -564,381 +587,144 @@ ActionBar.TabListener {
 			return false;
 		}
 	}
+
 	public static class SecondSectionFragment extends Fragment {
 		/**
 		 * The fragment argument representing the section number for this
 		 * fragment.
 		 */
 		private Controller controller;
+		private float targetGpaPerSemester;
+		private SharedPreferences s;
+		private int creditForGraduate;
+		private float targetGpa;
 
 		public static final String ARG_SECTION_NUMBER = "section_number";
 
 		public SecondSectionFragment() {
 		}
+
 		@Override
 		public void onResume() {
-	// TODO Auto-generated method stub
-			
+			// TODO Auto-generated method stub
+	
 			super.onResume();
 		}
+
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_second,
 					container, false);
-			//////////--------------------그래프시작
+			// ////////--------------------그래프시작
+			 s = PreferenceManager.getDefaultSharedPreferences(getActivity());
 			controller = new Controller(rootView.getContext());
-			TextView tv1=(TextView)rootView.findViewById(R.id.textView1); //=(View)findViewById(R.id.textView1);
-			tv1.setText(""+controller.getTotalGPA());
-			TextView tv2=(TextView)rootView.findViewById(R.id.textView2);
-			tv2.setText(""+controller.getTotalCredit());
+			TextView tv1 = (TextView) rootView.findViewById(R.id.textView1); // =(View)findViewById(R.id.textView1);
+			tv1.setText("" + controller.getTotalGPA());
+			TextView tv2 = (TextView) rootView.findViewById(R.id.textView2);
+			tv2.setText("" + controller.getTotalCredit());
+
+
+			String defaultNumber = "0";// 아무것도 저장되지 않았을때의 값
+			creditForGraduate = Integer.parseInt(s.getString(getString(R.string.savedGoalMajor), defaultNumber));
+			targetGpa = Float.parseFloat(s.getString(getString(R.string.savedTarget), defaultNumber));
+
+			targetGpaPerSemester = controller.getTargetGpaPerSemester(creditForGraduate, targetGpa);
 			/*
-			 * DB에서 year semester 가져온다음   이중포문 사용해서
-			 * GPAService.TOTAL_SCORE,year,semester 호출한다
-			 * setX
-			 * setY 
-			 * 문제 있을  수 있다
-			 * 
+			 * DB에서 year semester 가져온다음 이중포문 사용해서
+			 * GPAService.TOTAL_SCORE,year,semester 호출한다 setX setY 문제 있을 수 있다
 			 */
-			LineGraph li = (LineGraph)rootView.findViewById(R.id.graph3);
+			LineGraph li = (LineGraph) rootView.findViewById(R.id.graph3);
 			li.showHorizontalGrid(true);
 			li.showMinAndMaxValues(true);
 			li.setRangeY(0, 4.5f);
-			
+
 			Line tline = new Line();
 			Line mline = new Line();
 			Line lline = new Line();
-			
-		
-			
-			float plot_x=0;
-			for(GroupItem g : lst_group){
+
+			float plot_x = 0;
+			for (GroupItem g : lst_group) {
 				LinePoint tpoint = new LinePoint();
 				LinePoint mpoint = new LinePoint();
 				LinePoint lpoint = new LinePoint();
 				tpoint.setX(plot_x);
 				mpoint.setX(plot_x);
 				lpoint.setX(plot_x);
-				
-				tpoint.setY(controller.getGPA(GPAService.TOTAL_SCORE,g.getYear(),g.getSemester()));
-				mpoint.setY(controller.getGPA(GPAService.MAJOR_SCORE,g.getYear(),g.getSemester()));
-				lpoint.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,g.getYear(),g.getSemester()));
-				if(!Float.isNaN(tpoint.getY()))
-				tline.addPoint(tpoint);
-				if(!Float.isNaN(mpoint.getY()))
-				mline.addPoint(mpoint);
-				if(!Float.isNaN(lpoint.getY()))
-				lline.addPoint(lpoint);
-				
-				plot_x+=2.0f;
+
+				tpoint.setY(controller.getGPA(GPAService.TOTAL_SCORE,
+						g.getYear(), g.getSemester()));
+				mpoint.setY(controller.getGPA(GPAService.MAJOR_SCORE,
+						g.getYear(), g.getSemester()));
+				lpoint.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,
+						g.getYear(), g.getSemester()));
+				if (!Float.isNaN(tpoint.getY()))
+					tline.addPoint(tpoint);
+				if (!Float.isNaN(mpoint.getY()))
+					mline.addPoint(mpoint);
+				if (!Float.isNaN(lpoint.getY()))
+					lline.addPoint(lpoint);
+
+				plot_x += 2.0f;
 			}
-			if(lst_group.size()>0){
-			tline.setColor(getResources().getColor(R.color.line_total));
-			mline.setColor(getResources().getColor(R.color.line_major));
-			lline.setColor(getResources().getColor(R.color.line_liberal));
-			li.addLine(tline);
-			li.addLine(mline);
-			li.addLine(lline);
-			li.setGrouplist(lst_group);
+			if (lst_group.size() > 0) {
+				tline.setColor(getResources().getColor(R.color.line_total));
+				mline.setColor(getResources().getColor(R.color.line_major));
+				lline.setColor(getResources().getColor(R.color.line_liberal));
+				li.addLine(tline);
+				li.addLine(mline);
+				li.addLine(lline);
+				li.setGrouplist(lst_group);
 			}
-			/*
-			p.setX(0);
-			p.setY(controller.getGPA(GPAService.TOTAL_SCORE,1,1));
-			l.addPoint(p);
-
-			p = new LinePoint();
-			p.setX(2);
-			p.setY(controller.getGPA(GPAService.TOTAL_SCORE,1,2));
-			l.addPoint(p);
-
-			p = new LinePoint();
-			p.setX(4);
-			p.setY(controller.getGPA(GPAService.TOTAL_SCORE,2,1));
-			l.addPoint(p);
-
-			p = new LinePoint();
-			p.setX(6);
-			p.setY(controller.getGPA(GPAService.TOTAL_SCORE,2,2));
-			l.addPoint(p);
-
-			p = new LinePoint();
-			p.setX(8);
-			p.setY(controller.getGPA(GPAService.TOTAL_SCORE,3,1));
-			l.addPoint(p);
-
-			p = new LinePoint();
-			p.setX(10);
-			p.setY(controller.getGPA(GPAService.TOTAL_SCORE,3,2));
-			l.addPoint(p);
-
-			p = new LinePoint();
-			p.setX(12);
-			p.setY(controller.getGPA(GPAService.TOTAL_SCORE,4,1));
-			l.addPoint(p);
-
-			p = new LinePoint();
-			p.setX(14);
-			p.setY(controller.getGPA(GPAService.TOTAL_SCORE,4,2));
-			l.addPoint(p);
-			l.setColor(Color.parseColor("#0099CC"));
-
-
-			li.addLine(l);
-
-			///////////////////////////////////////////////
-			Line l2 = new Line();
-			LinePoint p2 = new LinePoint();
-			p2.setX(0);
-			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,1,1));
-			l2.addPoint(p2);
-
-			p2 = new LinePoint();
-			p2.setX(2);
-			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,1,2));
-			l2.addPoint(p2);
-
-			p2 = new LinePoint();
-			p2.setX(4);
-			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,2,1));
-			l2.addPoint(p2);
-
-			p2 = new LinePoint();
-			p2.setX(6);
-			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,2,2));
-			l2.addPoint(p2);
-
-			p2 = new LinePoint();
-			p2.setX(8);
-			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,3,1));
-			l2.addPoint(p2);
-
-			p2 = new LinePoint();
-			p2.setX(10);
-			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,3,2));
-			l2.addPoint(p2);
-
-			p2 = new LinePoint();
-			p2.setX(12);
-			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,4,1));
-			l2.addPoint(p2);
-
-			p2 = new LinePoint();
-			p2.setX(14);
-			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,4,1));
-			l2.addPoint(p2);
-			l2.setColor(Color.parseColor("#823EB6"));
-
-			li.addLine(l2);
-
-
-
-			///////////////////////////
-
-
-			Line l3 = new Line();
-			LinePoint p3 = new LinePoint();
-			p3.setX(0);
-			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,1,1));
-			l3.addPoint(p3);
-
-			p3 = new LinePoint();
-			p3.setX(2);
-			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,1,2));
-			l3.addPoint(p3);
-
-			p3 = new LinePoint();
-			p3.setX(4);
-			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,2,1));
-			l3.addPoint(p3);
-
-			p3 = new LinePoint();
-			p3.setX(6);
-			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,2,2));
-			l3.addPoint(p3);
-
-			p3 = new LinePoint();
-			p3.setX(8);
-			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,3,1));
-			l3.addPoint(p3);
-
-			p3 = new LinePoint();
-			p3.setX(10);
-			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,3,2));
-			l3.addPoint(p3);
-
-			p3 = new LinePoint();
-			p3.setX(12);
-			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,4,1));
-			l3.addPoint(p3);
-
-			p3 = new LinePoint();
-			p3.setX(14);
-			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,4,2));
-			l3.addPoint(p3);
-			l3.setColor(Color.parseColor("#CBADE3"));
-
-			li.setRangeY(0, 4.5f);
-			li.addLine(l3);
-
-
-
-
-
-			///////////
-			/*
-			Line l2 = new Line();
-			LinePoint p2 = new LinePoint();
-			p2.setX(0);
-			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,1,1));
-			l2.addPoint(p2);
-
-			p2 = new LinePoint();
-			p2.setX(2);
-			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,1,2));
-			l2.addPoint(p2);
-
-			p2 = new LinePoint();
-			p2.setX(4);
-			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,2,1));
-			l2.addPoint(p2);
-
-			p2 = new LinePoint();
-			p2.setX(6);
-			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,2,2));
-			l2.addPoint(p2);
-
-			p2 = new LinePoint();
-			p2.setX(8);
-			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,3,1));
-			l2.addPoint(p2);
-
-			p2 = new LinePoint();
-			p2.setX(10);
-			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,3,2));
-			l2.addPoint(p2);
-
-			p2 = new LinePoint();
-			p2.setX(12);
-			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,4,1));
-			l2.addPoint(p2);
-
-			p2 = new LinePoint();
-			p2.setX(14);
-			p2.setY(controller.getGPA(GPAService.MAJOR_SCORE,4,1));
-			l2.addPoint(p2);
-			l2.setColor(Color.parseColor("#823EB6"));
-
-			LineGraph li2 = (LineGraph)rootView.findViewById(R.id.graph3);
-			li2.addLine(l2);
-			li2.setRangeY(0, 4.6f);
-			li2.setLineToFill(0);
-
-			///////////////////////////
-
-
-			Line l3 = new Line();
-			LinePoint p3 = new LinePoint();
-			p3.setX(0);
-			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,1,1));
-			l3.addPoint(p3);
-
-			p3 = new LinePoint();
-			p3.setX(2);
-			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,1,2));
-			l3.addPoint(p3);
-
-			p3 = new LinePoint();
-			p3.setX(4);
-			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,2,1));
-			l3.addPoint(p3);
-
-			p3 = new LinePoint();
-			p3.setX(6);
-			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,2,2));
-			l3.addPoint(p3);
-
-			p3 = new LinePoint();
-			p3.setX(8);
-			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,3,1));
-			l3.addPoint(p3);
-
-			p3 = new LinePoint();
-			p3.setX(10);
-			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,3,2));
-			l3.addPoint(p3);
-
-			p3 = new LinePoint();
-			p3.setX(12);
-			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,4,1));
-			l3.addPoint(p3);
-
-			p3 = new LinePoint();
-			p3.setX(14);
-			p3.setY(controller.getGPA(GPAService.LIBERALARTS_SCORE,4,2));
-			l3.addPoint(p3);
-			l3.setColor(Color.parseColor("#CBADE3"));
-
-			LineGraph li3 = (LineGraph)rootView.findViewById(R.id.graph3);
-			li3.addLine(l3);
-			li3.setRangeY(0, 4.6f);
-			li3.setLineToFill(0);
-
-			 */
-
-			//			ArrayList<Bar> points = new ArrayList<Bar>();
-			//			Bar d = new Bar();
-			//			d.setColor(Color.parseColor("#99CC00"));
-			//			d.setName("Test1");
-			//			d.setValue(10);
-			//			Bar d2 = new Bar();
-			//			d2.setColor(Color.parseColor("#FFBB33"));
-			//			d2.setName("Test2");
-			//			d2.setValue(20);
-			//			points.add(d);
-			//			points.add(d2);
-			//
-			//			BarGraph g = (BarGraph)findViewById(R.id.graph);
-			//			g.setBars(points);
-
-
-
-			//////////
-			//			PieGraph pg = (PieGraph)rootView.findViewById(R.id.graph2);
-			//			PieSlice slice = new PieSlice();
-			//			slice.setColor(Color.parseColor("#99CC00"));
-			//			slice.setValue(17);
-			//			pg.addSlice(slice);
-			//			slice = new PieSlice();
-			//			slice.setColor(Color.parseColor("#FFBB33"));
-			//			slice.setValue(3);
-			//			pg.addSlice(slice);
-			//			slice = new PieSlice();
-			//			slice.setColor(Color.parseColor("#AA66CC"));
-			//			slice.setValue(80f);
-			//			pg.addSlice(slice);
-			////------------------------------------------------------
+			//그래프종료
+			
+			//목표학점 달성도.
+		
+			 int goal_credit = Integer.parseInt(s.getString(getString(R.string.savedGoalMajor), "0"));
+			 int total_credit = controller.getTotalCredit();
+			 TextView v = ((TextView)rootView.findViewById(R.id.bar_total_remain));
+			 ((TextView)rootView.findViewById(R.id.bar_total_fill)).setText(Integer.toString(goal_credit));
+			 v.setText(Integer.toString(total_credit));
+			 LinearLayout.LayoutParams loparams = (LinearLayout.LayoutParams) v.getLayoutParams();
+			 loparams.weight= (float)total_credit/(goal_credit-total_credit);
+			 
+			 v.setLayoutParams(loparams);			 
+			 //예상학점
+			 
+			 float presentGPA = controller.getTotalGPA();
+			 	 
+			 TextView presentv = ((TextView)rootView.findViewById(R.id.present_textView));
+			 TextView targetv =((TextView)rootView.findViewById(R.id.graduate_textView));
+			 presentv.setText(Float.toString(presentGPA));
+			 targetv.setText(Float.toString(targetGpa));
+			 
+			 
+			 ((TextView)rootView.findViewById(R.id.goalgpa_txtView)).setText(Float.toString(targetGpaPerSemester));
+			 
+			 
+ 			 
+			
+			
 			return rootView;
-
-
 		}
 	}
 
 	@Override
-	public void onBackPressed(){
+	public void onBackPressed() {
 		boolean m_isPressedBackButton = true;
-		m_endTime=System.currentTimeMillis();
-		
-		if(m_endTime-m_startTime>2000)
-			m_isPressedBackButton=false;
-		//백버튼 막기
-		if(m_isPressedBackButton==false){
-			m_isPressedBackButton=true;
-			m_startTime=System.currentTimeMillis();
-			
-			Toast.makeText(this, "뒤로 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
-			
-		}
-		else{
+		m_endTime = System.currentTimeMillis();
+
+		if (m_endTime - m_startTime > 2000)
+			m_isPressedBackButton = false;
+		// 백버튼 막기
+		if (m_isPressedBackButton == false) {
+			m_isPressedBackButton = true;
+			m_startTime = System.currentTimeMillis();
+
+			Toast.makeText(this, "뒤로 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT)
+					.show();
+
+		} else {
 			finish();
 			System.exit(0);
 			android.os.Process.killProcess(android.os.Process.myPid());
