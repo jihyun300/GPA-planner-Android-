@@ -1,11 +1,15 @@
 package com.example.gpaplan_mainpage;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 
 
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Build;
@@ -17,75 +21,35 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.support.v4.app.NavUtils;
+import android.widget.Toast;
 
-/**
- * A {@link PreferenceActivity} that presents a set of application settings. On
- * handset devices, settings are presented as a single list. On tablets,
- * settings are split by category, with category headers shown to the left of
- * the list of settings.
- * <p>
- * See <a href="http://developer.android.com/design/patterns/settings.html">
- * Android Design: Settings</a> for design guidelines and the <a
- * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
- * API Guide</a> for more information on developing a Settings UI.
- */
 public class SettingsActivity extends PreferenceActivity {
-	/**
-	 * Determines whether to always show the simplified settings UI, where
-	 * settings are presented in a single list. When false, settings are shown
-	 * as a master/detail two-pane view on tablets. When true, a single pane is
-	 * shown on tablets.
-	 */
+
 	private static final boolean ALWAYS_SIMPLE_PREFS = false;
 
 	@Override
-	protected void onPostCreate(Bundle savedInstanceState) {
-		super.onPostCreate(savedInstanceState);
-	
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
 		setupSimplePreferencesScreen();
 	}
 
-	/**
-	 * Shows the simplified settings UI if the device configuration if the
-	 * device configuration dictates that a simplified, single-pane UI should be
-	 * shown.
-	 */
 	
 	private void setupSimplePreferencesScreen() {
 		if (!isSimplePreferences(this)) {
 			return;
 		}
 
-		
-		//PreferenceManager.setDefaultValues(context, sharedPreferencesName, sharedPreferencesMode, resId, readAgain)
-		// In the simplified UI, fragments are not used at all and we instead
-		// use the older PreferenceActivity APIs.
 
-		// Add 'general' preferences.
-		
-		
-		addPreferencesFromResource(R.xml.pref_general);
-
-		// Add 'notifications' preferences, and a corresponding header.
 		PreferenceCategory fakeHeader = new PreferenceCategory(this);
-		fakeHeader.setTitle(R.string.pref_header_goal);
-		getPreferenceScreen().addPreference(fakeHeader);
-		addPreferencesFromResource(R.xml.pref_notification);
-
-		// Add 'data and sync' preferences, and a corresponding header.
-		fakeHeader = new PreferenceCategory(this);
-		fakeHeader.setTitle(R.string.pref_header_target);
-		getPreferenceScreen().addPreference(fakeHeader);
-		addPreferencesFromResource(R.xml.pref_target);
-
-
-		// Bind the summaries of EditText/List/Dialog/Ringtone preferences to
-		// their values. When their values change, their summaries are updated
-		// to reflect the new value, per the Android Design guidelines.
+		addPreferencesFromResource(R.xml.pref_general);
+		
+		
 		bindPreferenceSummaryToValue(findPreference("savedScale"));
 		bindPreferenceSummaryToValue(findPreference("savedGoalMajor"));
 		bindPreferenceSummaryToValue(findPreference("savedTarget"));
-			
+		bindPreferenceSummaryToValue(findPreference("resetdialog"));
 	}
 
 	/** {@inheritDoc} */
@@ -116,14 +80,7 @@ public class SettingsActivity extends PreferenceActivity {
 	}
 
 	/** {@inheritDoc} */
-	@Override
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	public void onBuildHeaders(List<Header> target) {
-		if (!isSimplePreferences(this)) {
-			loadHeadersFromResource(R.xml.pref_headers, target);
-		}
-	}
-
+	
 	/**
 	 * A preference value change listener that updates the preference's summary
 	 * to reflect its new value.
@@ -136,19 +93,42 @@ public class SettingsActivity extends PreferenceActivity {
 			String stringValue = value.toString();
 
 			if (preference instanceof ListPreference) {
-				// For list preferences, look up the correct display value in
-				// the preference's 'entries' list.
 				ListPreference listPreference = (ListPreference) preference;
 			
 				int index = listPreference.findIndexOfValue(stringValue);
 				
+				if(!(((ListPreference) preference).getValue().equals(stringValue))&&index==1){
+					
+					final AlertDialog.Builder builder = new AlertDialog.Builder(preference.getContext());
+					builder.setMessage("4.3에서  4.5로 변경시에는\n\n-성적이 0성적으로 변경됩니다.\n\n계속하시겠습니까?")
+						.setCancelable(true).setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+							//-를 0으로 바꾸는거 동의안함
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								// TODO Auto-generated method stub
+								dialog.cancel();
+							}
+						})
+						.setPositiveButton("네", new DialogInterface.OnClickListener() {
+							//-를 0으로 바꾸는거 동의
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								// TODO Auto-generated method stub
+								modifyDB(builder.getContext());
+							}
+						});
+					AlertDialog alert = builder.create();
+					alert.show();
+					
+					
+				}
 				// Set the summary to reflect the new value.
 				preference
 						.setSummary(index >= 0 ? listPreference.getEntries()[index]
 							: "");
 				
 				//4.3만 가능하게 할것이므로 
-				preference.setSummary("4.3");
+				
 
 			} else {
 				// For all other preferences, set the summary to the value's
@@ -160,7 +140,9 @@ public class SettingsActivity extends PreferenceActivity {
 			return true;
 		}
 	};
-
+	private static void modifyDB(Context c){
+		Toast.makeText(c,"바꾸고싶당",Toast.LENGTH_SHORT).show();
+	}
 	/**
 	 * Binds a preference's summary to its value. More specifically, when the
 	 * preference's value is changed, its summary (line of text below the
@@ -201,43 +183,16 @@ public class SettingsActivity extends PreferenceActivity {
 			// updated to reflect the new value, per the Android Design
 			// guidelines.
 			bindPreferenceSummaryToValue(findPreference("savedScale"));
+			bindPreferenceSummaryToValue(findPreference("savedGoalMajor"));
+			bindPreferenceSummaryToValue(findPreference("savedTarget"));
+			bindPreferenceSummaryToValue(findPreference("resetdialog"));
 			
 		}
 	}
-
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	public static class NotificationPreferenceFragment extends
-			PreferenceFragment {
-		@Override
-		public void onCreate(Bundle savedInstanceState) {
-			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.pref_notification);
-
-			// Bind the summaries of EditText/List/Dialog/Ringtone preferences
-			// to their values. When their values change, their summaries are
-			// updated to reflect the new value, per the Android Design
-			// guidelines.
-			bindPreferenceSummaryToValue(findPreference("savedGoalMajor"));
-		}
-	}
-
-	/**
-	 * This fragment shows data and sync preferences only. It is used when the
-	 * activity is showing a two-pane settings UI.
-	 */
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	public static class TargetPreferenceFragment extends PreferenceFragment {
-		@Override
-		public void onCreate(Bundle savedInstanceState) {
-			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.pref_target);
-
-			// Bind the summaries of EditText/List/Dialog/Ringtone preferences
-			// to their values. When their values change, their summaries are
-			// updated to reflect the new value, per the Android Design
-			// guidelines.
-			bindPreferenceSummaryToValue(findPreference("savedTarget"));
-		
-		}
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		NavUtils.navigateUpFromSameTask(this);
 	}
 }
+

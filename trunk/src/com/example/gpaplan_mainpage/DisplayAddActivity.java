@@ -198,48 +198,10 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 		Class_info cl_temp = new Class_info("", "A+", "0", false);
 		classInfo.add(cl_temp);
 		adap.notifyDataSetChanged();
-	
-/*		
-		gpdb.db  = gpdb.dbHelper.getWritableDatabase();
-		gpdb.db.execSQL("DELETE FROM gpa_table;"); //db없애는 명령어
-		gpdb.db.close();
-		*/
-
-	/*	
-======
-		
-		/*
->>>>>>> .r55
-	gpdb.db = gpdb.dbHelper.getWritableDatabase();
-	gpdb.db.execSQL("DELETE FROM gpa_table;"); //db없애기
-	gpdb.db.close();
-	*/
-		/*EditText editgrade=(EditText)findViewById(R.id.editGrade);
-		EditText editcredit=(EditText)findViewById(R.id.editCredit);
-		EditText editsubject=(EditText)findViewById(R.id.editSubject);
-		ToggleButton editMajor=(ToggleButton)findViewById(R.id.button_MajorOr);
-		
-		String inputValue1=editsubject.getText().toString();
-		String inputValue2=editgrade.getText().toString();
-		String inputValue3=editcredit.getText().toString();
-		boolean inputValue4=editMajor.isChecked();
-		
-		refresh(inputValue1,inputValue2,inputValue3,inputValue4);*/
-//		editgrade.setText("");
-//		editcredit.setText("");
-//		editsubject.setText("");
-//		editMajor.setChecked(false);
 		
 	}
 
-	/*private void refresh(String inputValue1,String inputValue2,String inputValue3,boolean inputValue4) {
-			
-		// TODO Auto-generated method stub
-		Class_info cl1 = new Class_info(inputValue1,inputValue2,inputValue3,inputValue4);
-		this.classInfo.add(cl1);
-		adap.notifyDataSetChanged();
-		
-	}*/
+
 
 	@Override
 	public void onClick(View v) {

@@ -64,7 +64,11 @@
             android:theme="@android:style/Theme.NoTitleBar" />
         <activity
             android:name="com.example.gpaplan_mainpage.SettingsActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" 
+            android:parentActivityName="com.example.gpaplan_mainpage.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.gpaplan_mainpage.MainActivity" />
         </activity>
         <activity
             android:name="com.example.gpaplan_mainpage.SettingMain"
