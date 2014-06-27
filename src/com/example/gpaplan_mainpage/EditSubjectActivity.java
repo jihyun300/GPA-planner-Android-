@@ -169,7 +169,7 @@ public class EditSubjectActivity extends Activity {
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
 		case android.R.id.home:
-					NavUtils.navigateUpFromSameTask(this);
+			NavUtils.navigateUpFromSameTask(this);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

@@ -166,4 +166,8 @@ public class GPADao {
 		}
 
 	}
+	public void DeleteAll(){
+		db = dbHelper.getWritableDatabase();
+		
+	}
 }

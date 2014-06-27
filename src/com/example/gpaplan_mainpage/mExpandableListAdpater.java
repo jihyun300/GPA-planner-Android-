@@ -62,6 +62,9 @@ public class mExpandableListAdpater extends BaseExpandableListAdapter{
 		imggrade.put("D", R.drawable.grade_d);
 		imggrade.put("D-", R.drawable.grade_dminus);
 		imggrade.put("F", R.drawable.grade_f);
+		imggrade.put("P", R.drawable.grade_p);
+		imggrade.put("NP", R.drawable.grade_np);
+		
 	}
 	public void addItem(ChildItem citem, GroupItem gitem){
 		grouplist.add(gitem);

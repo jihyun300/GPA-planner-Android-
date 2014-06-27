@@ -30,7 +30,9 @@
         <item>0</item>
         <item>1</item>
     </string-array>
-
+	
+    <string name ="pref_title_reset">모든 데이터 지우기</string>
+    
  
 
    
@@ -40,4 +42,6 @@
     <string name="pref_header_goal">졸업시 요구되는 이수학점</string>
     <string name="pref_header_scale">학점기준</string>
     <string name="pref_header_target">졸업시 달성하고자 하는 평량평균</string>
+    <string name="pref_header_reset">데이터</string>
+    <string name="pref_header_general">일반</string>
 </resources>
