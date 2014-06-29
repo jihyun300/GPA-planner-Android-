@@ -1,20 +1,14 @@
 package com.example.gpaplan_mainpage;
 
-import java.util.List;
-import java.util.logging.Logger;
-
-
-
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -27,11 +21,13 @@ import android.widget.Toast;
 public class SettingsActivity extends PreferenceActivity {
 
 	private static final boolean ALWAYS_SIMPLE_PREFS = false;
-
+	Context context;
+	ListPreference listPreference;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		context = getApplicationContext();
 		setupSimplePreferencesScreen();
 	}
 
@@ -78,6 +74,84 @@ public class SettingsActivity extends PreferenceActivity {
 				|| Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB
 				|| !isXLargeTablet(context);
 	}
+	
+	void showDialog(){
+		
+		DialogFragment newFragment= MyAlertDialogFragment.newInstance(R.string.title_alertdialog);
+		newFragment.show(getFragmentManager(),"dialog");
+	}
+	boolean f;
+	public void doPositiveClick(){
+		f=false;
+		Toast.makeText(getApplicationContext(), "do positive", Toast.LENGTH_SHORT).show();
+		
+	}
+	public void doNegativedClick(){
+		/*취소버튼을 눌렀을때 임의대로 돌리는 기능을함
+		이상한일이..일단 4.5를 선택하면 alert다이얼로그를제외한 프로세스는 진행이된후 그다음에
+		다이얼로그의 네 아니오 응답은 먼저 우선적으로 처리되지가 않는다(wait걸면 될것도 같은데 모르겟음)
+		따라서 아니오를 눌렀을때에는 listPreference의 값을 임의로 4.3으로 되돌린다.
+		summary도 같이 되돌리도록 했다.
+		*/
+		f=true;
+		Toast.makeText(getApplicationContext(), "do negative", Toast.LENGTH_SHORT).show();
+		String stringValue ="0";
+		
+		listPreference.setValue(stringValue);
+		int index = listPreference.findIndexOfValue(stringValue);
+		listPreference.setSummary
+		(index >= 0 ? listPreference.getEntries()[index]
+			: "");	
+	}
+	public boolean isDialogCancled(){
+		return f;
+	}
+	
+	/* 경고창 관련한 다이얼로그 프래그먼트이다.
+	 * 책을 참고해서 만들엇긴햇따. 번들의 사용법 이런걸 잘 알수 있어서 좋앗던듯
+	 * 내맘대로 커스터 마이징 하는게 가능함을 볼수 있다. 
+	 */
+	public static class MyAlertDialogFragment extends DialogFragment{
+		public static MyAlertDialogFragment newInstance(int title){
+			MyAlertDialogFragment frag = new MyAlertDialogFragment();
+			Bundle args = new Bundle();
+			args.putInt("title",title);
+			frag.setArguments(args);
+			return frag;
+		}
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			// TODO Auto-generated method stub
+			int title =  getArguments().getInt("title");
+			return new AlertDialog.Builder(getActivity())
+		
+			.setIconAttribute(android.R.attr.alertDialogIcon)
+			.setTitle(title)
+			.setCancelable(true)
+			.setMessage("4.3에서  4.5로 변경시에는\n\n-성적이 0성적으로 변경됩니다.\n\n계속하시겠습니까?")
+			.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					((SettingsActivity)getActivity()).doNegativedClick();
+				}
+			})
+			.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub					
+				((SettingsActivity)getActivity()).doPositiveClick();
+				}
+			}
+			
+			).create();
+			//return super.onCreateDialog(savedInstanceState);
+			
+		}
+	}
+
 
 	/** {@inheritDoc} */
 	
@@ -85,50 +159,58 @@ public class SettingsActivity extends PreferenceActivity {
 	 * A preference value change listener that updates the preference's summary
 	 * to reflect its new value.
 	 */
-	private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
+	private  Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
+		
+		
 		@Override
-		public boolean onPreferenceChange(Preference preference, Object value) {
+		public boolean onPreferenceChange( Preference preference, Object value) {
 			if(value==null)
 				value="";
 			String stringValue = value.toString();
 
 			if (preference instanceof ListPreference) {
-				ListPreference listPreference = (ListPreference) preference;
+				 listPreference = (ListPreference) preference;
 			
-				int index = listPreference.findIndexOfValue(stringValue);
+				 int index = listPreference.findIndexOfValue(stringValue);
 				
-				if(!(((ListPreference) preference).getValue().equals(stringValue))&&index==1){
+				 f=false;
+				if(!(listPreference.getValue().equals(stringValue))&&index==1){
 					
-					final AlertDialog.Builder builder = new AlertDialog.Builder(preference.getContext());
+					showDialog();
+					/*
+					AlertDialog.Builder builder = new AlertDialog.Builder(preference.getContext());
 					builder.setMessage("4.3에서  4.5로 변경시에는\n\n-성적이 0성적으로 변경됩니다.\n\n계속하시겠습니까?")
 						.setCancelable(true).setNegativeButton("아니오", new DialogInterface.OnClickListener() {
 							//-를 0으로 바꾸는거 동의안함
+							
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 								// TODO Auto-generated method stub
+							get
 								dialog.cancel();
 							}
 						})
 						.setPositiveButton("네", new DialogInterface.OnClickListener() {
+					
 							//-를 0으로 바꾸는거 동의
+							
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 								// TODO Auto-generated method stub
-								modifyDB(builder.getContext());
+								modifyDB();
+								
 							}
 						});
-					AlertDialog alert = builder.create();
-					alert.show();
+					*/
 					
-					
+					 
 				}
 				// Set the summary to reflect the new value.
-				preference
-						.setSummary(index >= 0 ? listPreference.getEntries()[index]
-							: "");
-				
-				//4.3만 가능하게 할것이므로 
-				
+					
+					preference.setSummary
+					(index >= 0 ? listPreference.getEntries()[index]
+						: "");	
+		
 
 			} else {
 				// For all other preferences, set the summary to the value's
@@ -140,9 +222,7 @@ public class SettingsActivity extends PreferenceActivity {
 			return true;
 		}
 	};
-	private static void modifyDB(Context c){
-		Toast.makeText(c,"바꾸고싶당",Toast.LENGTH_SHORT).show();
-	}
+	
 	/**
 	 * Binds a preference's summary to its value. More specifically, when the
 	 * preference's value is changed, its summary (line of text below the
@@ -152,7 +232,7 @@ public class SettingsActivity extends PreferenceActivity {
 	 * 
 	 * @see #sBindPreferenceSummaryToValueListener
 	 */
-	private static void bindPreferenceSummaryToValue(Preference preference) {
+	private void bindPreferenceSummaryToValue(Preference preference) {
 		// Set the listener to watch for value changes.
 		preference
 				.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
@@ -172,7 +252,7 @@ public class SettingsActivity extends PreferenceActivity {
 	 * activity is showing a two-pane settings UI.
 	 */
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	public static class GeneralPreferenceFragment extends PreferenceFragment {
+	public class GeneralPreferenceFragment extends PreferenceFragment {
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
@@ -193,6 +273,9 @@ public class SettingsActivity extends PreferenceActivity {
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
 		NavUtils.navigateUpFromSameTask(this);
+	}
+	private static void modifyDB(){
+		//Toast.makeText(c,"바꾸고싶당",Toast.LENGTH_SHORT).show();
 	}
 }
 

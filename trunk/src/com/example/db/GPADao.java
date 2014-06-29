@@ -166,8 +166,19 @@ public class GPADao {
 		}
 
 	}
-	public void DeleteAll(){
+	public void DeleteAllGpa(){
 		db = dbHelper.getWritableDatabase();
-		
+		try {
+			
+			db.execSQL("DELETE FROM gpa_table;");
+		} catch (Exception e) {
+			System.out.println("SQL오류");
+			e.printStackTrace();
+		} finally {
+			if (db != null) {
+				db.close();
+			}
+
+		}
 	}
 }

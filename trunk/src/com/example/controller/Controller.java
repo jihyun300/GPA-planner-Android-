@@ -41,5 +41,8 @@ public class Controller {
 	public int getGpaAchievement(float targetGpa) {
 		return gpaService.getGpaAchievement(targetGpa);
 	}
+	public void DeleteGpaDb(){
+		gpaService.DeleteGpaDb();
+	}
 	
 }   

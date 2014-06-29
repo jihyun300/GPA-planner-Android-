@@ -4,6 +4,11 @@ package com.example.service;
  * created by doyoon
  * dao에서 정보를 빼내와서  메소드로 필요한 부분 구현
  * Ex) 1-1학기 정보를 빼내서(select query)  1-1학기 평점을 구한다
+ * 
+ * and update by Daehyun 2014 06 29
+ * DeleteGpaDb는 db의 내용을 전부삭제하기위해 작성한 메서드
+ * GPADao.java의 DeleteAllGpa메소드와 연결됨
+ * 
  */
 import java.util.*;
 import com.example.db.GPADao;
@@ -217,5 +222,8 @@ public class GPAService {
 		float currentGpa = getMyTotalGPA();
 		int gpaAchievement = (int)((currentGpa / targetGpa)*100);
 		return gpaAchievement>=100 ? 100 : ( (gpaAchievement<=0) ? 0 : gpaAchievement );
+	}
+	public void DeleteGpaDb(){
+		gpaDao.DeleteAllGpa();
 	}
 }

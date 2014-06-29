@@ -27,6 +27,7 @@
     <string name="savedTarget">savedTarget</string>
 
     <string name="title_activity_setting_activity__target">SettingActivity_Target</string>
+    <string name ="title_alertdialog">경고</string>
 
 
     
