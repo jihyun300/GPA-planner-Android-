@@ -1,5 +1,11 @@
 package com.example.gpaplan_mainpage;
 
+import java.util.Iterator;
+import java.util.List;
+
+import com.example.controller.Controller;
+import com.example.db.GPADto;
+
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -84,6 +90,34 @@ public class SettingsActivity extends PreferenceActivity {
 	public void doPositiveClick(){
 		f=false;
 		Toast.makeText(getApplicationContext(), "do positive", Toast.LENGTH_SHORT).show();
+		Controller controller = new Controller(context);
+		List<GPADto> dtoList;
+		dtoList = controller.gpaService.getAllList();
+		
+		for(GPADto dto_temp : dtoList){
+			String t = dto_temp.getGrade();
+			boolean ischanged=false;
+			if(t.equals("A-")){
+				dto_temp.setGrade("A");
+				ischanged=true;
+			}
+			if(t.equals("B-")){
+				dto_temp.setGrade("B");
+				ischanged=true;
+			}
+			if(t.equals("C-")){
+				dto_temp.setGrade("C");
+				ischanged=true;}
+			if(t.equals("D-")){
+				dto_temp.setGrade("D");
+				ischanged=true;
+			}
+			if(ischanged)
+			controller.gpaService.gpaDao.updateOneGpa(dto_temp.getId(), dto_temp);
+			
+		}
+	
+	 
 		
 	}
 	public void doNegativedClick(){

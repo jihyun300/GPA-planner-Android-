@@ -147,6 +147,9 @@ public class GPADao {
 		}
 	}
 	//
+	
+	
+	//
 	//DELETE
 	public void DeleteOneGpa(int DBid){
 		db = dbHelper.getWritableDatabase();
