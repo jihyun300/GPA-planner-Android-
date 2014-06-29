@@ -518,10 +518,10 @@ public class MainActivity extends FragmentActivity implements
 		
 			try {
 			
-				if(s.getString(getString(R.string.savedScale), "4.3").equals("4.3"))
+				if(s.getString(getString(R.string.savedScale), "0").equals("0"))
 					gservice.setting =0;
 				else
-					gservice.setting =0;//4.3버전만 가능하게 할거라서 이렇게 값을넣어줌.
+					gservice.setting =1;//4.5버전을위해서
 				
 				dtoList = gservice.getAllList();
 			} catch (Exception e) {
