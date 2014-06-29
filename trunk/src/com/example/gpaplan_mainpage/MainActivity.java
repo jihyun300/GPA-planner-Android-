@@ -154,7 +154,7 @@ public class MainActivity extends FragmentActivity implements
 			intent = new Intent(this, DisplayAddActivity.class);
 			 startActivity(intent);
 			 return true;
-
+		
 		case R.id.action_settings:
 			intent = new Intent(this, SettingsActivity.class);
 			startActivity(intent);

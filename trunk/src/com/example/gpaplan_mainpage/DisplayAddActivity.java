@@ -3,6 +3,7 @@ package com.example.gpaplan_mainpage;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -188,6 +189,11 @@ public class DisplayAddActivity extends Activity implements OnClickListener{
 		controller.insertGPADto(dto_temp);
 
 		}
+	
+	NavUtils.navigateUpFromSameTask(this);
+
+	
+	
 	}
 	
 	/**
