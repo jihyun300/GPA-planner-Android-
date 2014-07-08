@@ -14,6 +14,8 @@ import java.util.*;
 import com.example.db.GPADao;
 import com.example.db.GPADbHelper;
 import com.example.db.GPADto;
+import com.example.gpaplan_mainpage.R;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
@@ -31,18 +33,20 @@ public class GPAService {
 	public static final int TOTAL_SCORE = 0;
 	public static final int MAJOR_SCORE = 1;
 	public static final int LIBERALARTS_SCORE = 2;
+	public static final float init43 =4.3f;
 	SharedPreferences s ;
 	public int setting;
 	public GPAService(Context context) {
 		gpaDao = new GPADao(context);
 		s = PreferenceManager.getDefaultSharedPreferences(context);
-		s.getString("savedScale", "4.3");
 		
-		if(s.equals("4.3")){
-			setting=0;
+		float getScale = Float.parseFloat(s.getString(getString(R.string.savedScale), Float.toString(init43)));
+		
+		if(getScale==4.3f){
+			this.setting=0;
 		}
 		else{
-			setting=1;
+			this.setting=1;
 		}
 			
 		
@@ -52,6 +56,11 @@ public class GPAService {
 	}
 
 	// dao 여기서부터 정보빼오기
+
+	private String getString(int savedscale) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	// DB에서 전부 빼오기
 	public List<GPADto> getAllList() {

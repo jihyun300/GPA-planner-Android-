@@ -518,7 +518,7 @@ public class MainActivity extends FragmentActivity implements
 		
 			try {
 			
-				if(s.getString(getString(R.string.savedScale), "0").equals("0"))
+				if(getScale==4.3f)
 					gservice.setting =0;
 				else
 					gservice.setting =1;//4.5버전을위해서
@@ -619,6 +619,7 @@ public class MainActivity extends FragmentActivity implements
 			// ////////--------------------그래프시작
 			 s = PreferenceManager.getDefaultSharedPreferences(getActivity());
 			controller = new Controller(rootView.getContext());
+			
 			TextView tv1 = (TextView) rootView.findViewById(R.id.textView1); // =(View)findViewById(R.id.textView1);
 			tv1.setText("" + controller.getTotalGPA());
 			TextView tv2 = (TextView) rootView.findViewById(R.id.textView2);
